@@ -45,11 +45,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $commentaire = null;
 
     #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: DocumentProprietaire::class)]
+    #[ORM\JoinColumn( nullable: true)]
     private Collection $documentProprietaires;
+
+    #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: Annonce::class)]
+    #[ORM\JoinColumn( nullable: true)]
+    private Collection $annonces;
 
     public function __construct()
     {
         $this->documentProprietaires = new ArrayCollection();
+        $this->annonces = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -206,6 +212,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($documentProprietaire->getIdUser() === $this) {
                 $documentProprietaire->setIdUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Annonce>
+     */
+    public function getAnnonces(): Collection
+    {
+        return $this->annonces;
+    }
+
+    public function addAnnonce(Annonce $annonce): self
+    {
+        if (!$this->annonces->contains($annonce)) {
+            $this->annonces->add($annonce);
+            $annonce->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnnonce(Annonce $annonce): self
+    {
+        if ($this->annonces->removeElement($annonce)) {
+            // set the owning side to null (unless already changed)
+            if ($annonce->getIdUser() === $this) {
+                $annonce->setIdUser(null);
             }
         }
 
