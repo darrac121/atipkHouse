@@ -1,3 +1,7 @@
 controllers:
     resource: ../src/Controller/
     type: attribute
+# the "home" route name is not important yet
+home:
+    path: /
+    controller: App\Controller\Home::home
