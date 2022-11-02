@@ -20,8 +20,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
-    #[ORM\Column]
-    private array $roles = [];
+    private ?int $roles = null;
 
     /**
      * @var string The hashed password
@@ -32,8 +31,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 25)]
     private ?string $telephone = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $status = null;
+    private ?int $status = 0;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $recup_mdp = null;
@@ -52,10 +50,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn( nullable: true)]
     private Collection $annonces;
 
+    #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: Reservation::class)]
+    private Collection $id_user_reservation;
+
     public function __construct()
     {
         $this->documentProprietaires = new ArrayCollection();
         $this->annonces = new ArrayCollection();
+        $this->id_user_reservation = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -90,11 +92,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getRoles(): array
     {
+
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
+        $roles = 1;
 
-        return array_unique($roles);
+        return $roles;
     }
 
     public function setRoles(array $roles): self
@@ -142,6 +145,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getStatus(): ?string
     {
+        if (is_null($this->status)) {
+            $this->setMyField(0);
+        }
         return $this->status;
     }
 
@@ -242,6 +248,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($annonce->getIdUser() === $this) {
                 $annonce->setIdUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Reservation>
+     */
+    public function getIdUserReservation(): Collection
+    {
+        return $this->id_user_reservation;
+    }
+
+    public function addIdUserReservation(Reservation $idUserReservation): self
+    {
+        if (!$this->id_user_reservation->contains($idUserReservation)) {
+            $this->id_user_reservation->add($idUserReservation);
+            $idUserReservation->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdUserReservation(Reservation $idUserReservation): self
+    {
+        if ($this->id_user_reservation->removeElement($idUserReservation)) {
+            // set the owning side to null (unless already changed)
+            if ($idUserReservation->getIdUser() === $this) {
+                $idUserReservation->setIdUser(null);
             }
         }
 

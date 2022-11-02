@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20221021081724 extends AbstractMigration
+final class Version20221028135905 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,12 +20,12 @@ final class Version20221021081724 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TABLE habitat (id INT AUTO_INCREMENT NOT NULL, description VARCHAR(1000) NOT NULL, localisation VARCHAR(500) NOT NULL, photo VARCHAR(1000) NOT NULL, prix INT NOT NULL, surface VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('ALTER TABLE user DROP roles, DROP status');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP TABLE habitat');
+        $this->addSql('ALTER TABLE user ADD roles INT NOT NULL, ADD status INT NOT NULL');
     }
 }

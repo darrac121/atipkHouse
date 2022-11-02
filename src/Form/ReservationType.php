@@ -2,28 +2,31 @@
 
 namespace App\Form;
 
-use App\Entity\Habitat;
+use App\Entity\Reservation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class HabitatType extends AbstractType
+class ReservationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('description')
-            ->add('localisation')
-            ->add('photo')
-            ->add('prix')
-            ->add('surface')
+            ->add('DateDebut')
+            ->add('DateFin')
+            ->add('NbNuit')
+            ->add('Total')
+            ->add('Statue')
+            ->add('StatuePayment')
+            ->add('idAnnonce')
+            ->add('idUser')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Habitat::class,
+            'data_class' => Reservation::class,
         ]);
     }
 }

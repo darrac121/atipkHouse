@@ -55,11 +55,15 @@ class Annonce
     #[ORM\OneToMany(mappedBy: 'idAnnonce', targetEntity: OptionAnnonce::class, orphanRemoval: true)]
     private Collection $idLibelle;
 
+    #[ORM\OneToMany(mappedBy: 'idAnnonce', targetEntity: Reservation::class)]
+    private Collection $id_User;
+
     public function __construct()
     {
         $this->imageAnnonces = new ArrayCollection();
         $this->avisAnnonces = new ArrayCollection();
         $this->idLibelle = new ArrayCollection();
+        $this->id_User = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -259,6 +263,28 @@ class Annonce
             // set the owning side to null (unless already changed)
             if ($idLibelle->getIdAnnonce() === $this) {
                 $idLibelle->setIdAnnonce(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function addIdUser(Reservation $idUser): self
+    {
+        if (!$this->id_User->contains($idUser)) {
+            $this->id_User->add($idUser);
+            $idUser->setIdAnnonce($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdUser(Reservation $idUser): self
+    {
+        if ($this->id_User->removeElement($idUser)) {
+            // set the owning side to null (unless already changed)
+            if ($idUser->getIdAnnonce() === $this) {
+                $idUser->setIdAnnonce(null);
             }
         }
 
