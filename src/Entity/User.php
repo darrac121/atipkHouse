@@ -21,7 +21,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $email = null;
 
     #[ORM\Column]
-    private ?int $roles = null;
+    private ?array $roles = [];
 
     /**
      * @var string The hashed password
@@ -96,7 +96,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
-        $roles = 1;
+        $roles[] = 'User-test';
 
         return $roles;
     }
