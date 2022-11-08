@@ -5,3 +5,6 @@ controllers:
 home:
     path: /
     controller: App\Controller\Home::home
+help:
+    path: /help
+    controller: App\Controller\Help::help

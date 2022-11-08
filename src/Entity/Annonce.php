@@ -71,6 +71,13 @@ class Annonce
         return $this->id;
     }
 
+    
+    public function __toString()
+    {
+        return $this->id;
+    }
+
+
     public function getTitre(): ?string
     {
         return $this->titre;
