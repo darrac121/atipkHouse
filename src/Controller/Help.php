@@ -10,10 +10,11 @@ class Help extends AbstractController
 {
     public function help(): Response
     {
-        $number = random_int(0, 100);
+        // $img = '../public/img_website/logo.png';
+        $img = '/img_website/logo.png';
 
         return $this->render('Help/Help.html.twig', [
-            'number' => $number,
+            'img' => $img,
         ]);
     }
 }
