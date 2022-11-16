@@ -7,17 +7,13 @@
 
 ## Installation
 
-il cloner le repertoire puis tapez la commande 
-
-```bash
-    cd atipikhouse 
-    composer install
-```
+il faut cloner le repertoire
 
 
 modifier la base de donnée dans le env 
 
 ```bash
+    cd atipikhouse 
     php bin/console doctrine:database:create
     php bin/console make:migration
 ```
