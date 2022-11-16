@@ -1,0 +1,136 @@
+*******
+installer Symfony cli grace a scoop:
+scoop install symfony-cli
+https://symfony.com/download
+*******
+(installer Scopp)
+https://scoop.sh/
+********
+php bin/console make:controller
+php bin/console make:entity
+php bin/console make:migration/////php bin/console doctrine:migrations:migrate
+php bin/console make:form
+	
+php bin/console make:crud
+href="{{ path('app_produits_show', {'id' : produit.id })}}"
+<p><a href="{{ path('app_profile_edit', {'id' : user.id }) }}">EDITER</a></p>
+dossier: template, src, public, config
+///*/*/*/
+poste mal pour tester
+******
+composer require api
+******
+cree bundle
+>composer require symfony/maker-bundle --dev
+********
+faire le relation
+php bin/console make:entity Posts
+********
+@Groups({"read:collection","write:item","read:item"})
+*****
+normalizationContext={"groups"={"read"}},
+denormalizationContext={"groups"={"write"}},
+*******************
+#[ORM\Entity(repositoryClass: PostRepository::class)]
+#[ApiResource(
+    normalizationContext: ['groups' => ['read:collection']],
+    denormalizationContext: ['groups' => ['write:collection']],
+    collectionOperations: ['get', 'post'],
+    itemOperations: [
+        'get'=> [
+            'normalization_context' => ['groups' => ['read:item']]
+        ],
+        'put'=> [
+            'denormalization_context' => ['groups' => ['write:item']]
+        ], 
+        'delete'
+        ]
+)]
+#[ApiFilter(SearchFilter::class, properties: ['id' => 'exact', 'title' => 'partial'])]
+class Post
+******************************
+AUTHENTIFICATION :
+
+ 
+
+1. php bin/console make:user
+
+ 
+
+2. php bin/console make:entity
+    On ajoute username et name
+
+ 
+
+3. Rajouter @ApiResource a l'entité User
+
+ 
+
+4. Créer des groupes de lecture/écriture.
+    LECTURE :
+        id, email, username, roles, name
+    ECRITURE:
+        email, username, password, name
+
+ 
+
+    On va appeller ces groupes read:user et write:user
+
+ 
+
+5.     php bin/console make:migration
+    php bin/console doctrine:migrations:migrate
+
+ 
+
+6.    Créez un utilisateur grâce a l'interface d'Api Platform
+Utilisez l'encryptage pour avoir un mdp encrypté
+    php bin/console security:encode-password
+
+ 
+
+7. composer require jwt-auth
+
+ 
+
+8. php bin/console lexik:jwt:generate-keypair
+
+ 
+
+9. Modifiez le security.yaml pour prendre en compte l'authentification en JWT ! (trouvez la config sur le github de JWT)
+
+ 
+
+10. Nous pouvons configurer la route dans security.yaml et créer celle ci dans routes.yaml
+
+ 
+
+    authentication_token:
+        path: /api/login
+        methods: ['POST']
+
+ 
+
+11. Nous allons utiliser Postman pour pouvoir tester, créez une requete post sur /api/login
+dont le corps contient "username" et "password"
+Normalement nous avons "invalid credentials" avec de mauvaises infos, et un token en retour avec les bonnes infos
+
+ 
+
+12. Modifier le fichier api_platform.yaml pour demander une authorization :
+
+ 
+
+    swagger:
+    versions: [3]
+    api_keys:
+      apiKey:
+        name: Authorization
+        type: header
+
+ 
+
+13. Sur la plateforme, grace au bouton "auth"
+on va pouvoir renseigner la valeur "Bearer : " + le token qu'on a reçu, vous apercevrez mtn que lorsque vous faites des requetes, votre token est toujours transmit !
+
+
