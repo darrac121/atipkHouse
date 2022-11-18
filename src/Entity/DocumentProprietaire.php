@@ -65,4 +65,19 @@ class DocumentProprietaire
 
         return $this;
     }
+
+
+
+    // private $brochureFilename;
+
+    // public function getBrochureFilename()
+    // {
+    //     return $this->brochureFilename;
+    // }
+
+    // public function setBrochureFilename($brochureFilename)
+    // {
+    //     $this->brochureFilename = $brochureFilename;
+    //     return $this;
+    // }
 }
