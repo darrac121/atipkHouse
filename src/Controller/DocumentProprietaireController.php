@@ -68,7 +68,8 @@ class DocumentProprietaireController extends AbstractController
                 // $documentProprietaire->setLien($newFilename);
                 // $product->setBrochureFilename($newFilename);
                 // $lien = $newFilename;
-                $documentProprietaire->setLien($this->getParameter('brochures_directory').$newFilename);
+                // $documentProprietaire->setLien($this->getParameter('brochures_directory').$newFilename);
+                $documentProprietaire->setLien($this->getParameter('brochures_directory_for_bdd').$newFilename);
                 // var_dump($documentProprietaire);
                 // die();
                 $documentProprietaireRepository->save($documentProprietaire, true);

@@ -1,49 +1,90 @@
-{% extends 'base.html.twig' %}
+    {% extends 'base.html.twig' %}
 
-{% block title %}Annonce index{% endblock %}
+    {% block title %}Annonce index{% endblock %}
 
-{% block body %}
-    <h1>Annonce index</h1>
+    {% block body %}
+    {#
+        <h1>Annonce index</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Titre</th>
+                    <th>Description</th>
+                    <th>Adresse</th>
+                    <th>Ville</th>
+                    <th>CodePostal</th>
+                    <th>Prix</th>
+                    <th>Datecreation</th>
+                    <th>Status</th>
+                    <th>actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for annonce in annonces %}
+                <tr>
+                    <td>{{ annonce.id }}</td>
+                    <td>{{ annonce.titre }}</td>
+                    <td>{{ annonce.description }}</td>
+                    <td>{{ annonce.adresse }}</td>
+                    <td>{{ annonce.Ville }}</td>
+                    <td>{{ annonce.CodePostal }}</td>
+                    <td>{{ annonce.prix }}</td>
+                    <td>{{ annonce.datecreation ? annonce.datecreation|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ annonce.status }}</td>
+                    <td>
+                        <a href="{{ path('app_annonce_show', {'id': annonce.id}) }}">show</a>
+                        <a href="{{ path('app_annonce_edit', {'id': annonce.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="10">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    #}
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Titre</th>
-                <th>Description</th>
-                <th>Adresse</th>
-                <th>Ville</th>
-                <th>CodePostal</th>
-                <th>Prix</th>
-                <th>Datecreation</th>
-                <th>Status</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for annonce in annonces %}
-            <tr>
-                <td>{{ annonce.id }}</td>
-                <td>{{ annonce.titre }}</td>
-                <td>{{ annonce.description }}</td>
-                <td>{{ annonce.adresse }}</td>
-                <td>{{ annonce.Ville }}</td>
-                <td>{{ annonce.CodePostal }}</td>
-                <td>{{ annonce.prix }}</td>
-                <td>{{ annonce.datecreation ? annonce.datecreation|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ annonce.status }}</td>
-                <td>
-                    <a href="{{ path('app_annonce_show', {'id': annonce.id}) }}">show</a>
-                    <a href="{{ path('app_annonce_edit', {'id': annonce.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="10">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div class="container">
+        <div class="row">
+            {% for annonce in annonces %}
+            <div class="col-4">
+                <div class="card" style="width: 18rem;">
+                    {# <img src="{{  img.annonce.id }}" class="card-img-top" alt="..."> #}
+                    {# <img src="{{  annonce.id|img }}" class="card-img-top" alt="..."> #}
 
-    <a href="{{ path('app_annonce_new') }}">Create new</a>
-{% endblock %}
+    {% set count = 0 %}
+    {% for imag in imgs %}                
+        {% set id_annn = imag.idAnnonce|replace({'   ': ""}) %}
+        {% set annoce_id = annonce.id %}
+        {% if count == 0 %}
+            {% if id_annn == annoce_id %}
+                <img src="{{  imag.lien }}" class="card-img-top" alt="...">
+                {% set count = 1 %}
+            {% endif %} 
+        {% endif %} 
+    {% endfor %}
+        {% if count == 0%}
+                <img src="\img_website\home-outline.svg" class="card-img-top" height="114" alt="...">
+        {% endif %} 
+                    <div class="card-body">
+                        <h5 class="card-title">{{ annonce.titre }}</h5>
+                        <p class="card-text">{{ annonce.description }}
+                        <br>
+                        <div class="">
+                        {{ annonce.prix }} € / par nuit
+                        </div>
+                        </p>
+                        <a href="{{ path('app_annonce_show', {'id': annonce.id}) }}" class="btn btn-primary">Show</a>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+                <div class="text-center h5">no records found</div>
+            {% endfor %}
+    </div>
+        </div>
+        <br>
+        <a href="{{ path('app_annonce_new') }}">Create new</a>
+    {% endblock %}

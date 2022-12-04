@@ -10,14 +10,22 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+use App\Entity\LebelleOptionAnnonce;
+use App\Entity\ImageAnnonce;
+
+use App\Repository\LebelleOptionAnnonceRepository;
+use App\Repository\ImageAnnonceRepository;
+
+
 #[Route('/annonce')]
 class AnnonceController extends AbstractController
 {
     #[Route('/', name: 'app_annonce_index', methods: ['GET'])]
-    public function index(AnnonceRepository $annonceRepository): Response
+    public function index(AnnonceRepository $annonceRepository,ImageAnnonceRepository $im): Response
     {
         return $this->render('annonce/index.html.twig', [
             'annonces' => $annonceRepository->findAll(),
+            'imgs'=>$im->findAll(),
         ]);
     }
 
