@@ -157,6 +157,8 @@ class Annonce
 
     public function setDatecreation(\DateTimeInterface $datecreation): self
     {
+        
+        // $this->datecreation = date('d-m-Y h:i:s');
         $this->datecreation = $datecreation;
 
         return $this;

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ImageAnnonce{% endblock %}
+
+{% block body %}
+    <h1>ImageAnnonce</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ image_annonce.id }}</td>
+            </tr>
+            <tr>
+                <th>Lien</th>
+                <td>{{ image_annonce.lien }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ image_annonce.status }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_image_annonce_index') }}">back to list</a>
+
+    <a href="{{ path('app_image_annonce_edit', {'id': image_annonce.id}) }}">edit</a>
+
+    {{ include('image_annonce/_delete_form.html.twig') }}
+{% endblock %}

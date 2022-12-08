@@ -5,4 +5,14 @@
 {% block body %}
     <h1>Page acceuil</h1>
     {{ number }}
+    {{ last_username }}
+    {% if app.user %}
+     {# {{ app.user.userIdentifier }} #}
+     {{ app.user }}
+    {% endif %}
+
+    {# {% for i in id %}
+      {{ i }}                
+    {% endfor %} #}
+
   {% endblock %}

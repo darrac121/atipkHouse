@@ -5,15 +5,25 @@ namespace App\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+
+
 #[Route('/home')]
 class Home extends AbstractController
 {
-    public function home(): Response
+    public function home(AuthenticationUtils $authenticationUtils): Response
     {
         $number = random_int(0, 100);
-
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+        // $idd = $authenticationUtils;
+        // $id = $authenticationUtils->getAll();
+        // var_dump($authenticationUtils);
+        // die;
         return $this->render('home/home.html.twig', [
             'number' => $number,
+            'last_username' => $lastUsername,
+            // 'id' => $id,
         ]);
     }
 }

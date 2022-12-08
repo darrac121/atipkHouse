@@ -3,9 +3,13 @@
 {% block title %}New Annonce{% endblock %}
 
 {% block body %}
+<div class="container">
     <h1>Create new Annonce</h1>
-
-    {{ include('annonce/_form.html.twig') }}
-
+        <div class="container">
+            <div class="row g-3 align-items-center">
+                {{ include('annonce/_form.html.twig') }}
+            </div>
+        </div>
     <a href="{{ path('app_annonce_index') }}">back to list</a>
+</div>
 {% endblock %}

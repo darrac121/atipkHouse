@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ImageAnnonce{% endblock %}
+
+{% block body %}
+    <h1>Create new ImageAnnonce</h1>
+
+    {{ include('image_annonce/_form.html.twig') }}
+
+    <a href="{{ path('app_image_annonce_index') }}">back to list</a>
+{% endblock %}
