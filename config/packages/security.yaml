@@ -14,12 +14,7 @@ security:
                 class: App\Entity\User
                 property: email
     firewalls:
-        api:
-            pattern:   ^/api
-            stateless: true
-            #guard:
-                #authenticators:
-                    #- lexik_jwt_authentication.jwt_token_authenticator
+        #
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
@@ -29,9 +24,10 @@ security:
                 login_path: app_login
                 check_path: app_login
             json_login:
-                check_path: /api/login_check
-                success_handler: lexik_jwt_authentication.handler.authentication_success
-                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+                # api_login is a route we will create below
+                check_path: api_login
+                #username_path: security.credentials.email
+                #password_path: security.credentials.password
 
             lazy: true
             provider: app_user_provider
