@@ -22,7 +22,7 @@ class ImageAnnonce
     private ?string $status = null;
 
     #[ORM\ManyToOne(inversedBy: 'imageAnnonces')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Annonce $idAnnonce = null;
 
     public function getId(): ?int

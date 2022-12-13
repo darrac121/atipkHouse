@@ -36,9 +36,9 @@ class ImageAnnonceController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $imageAnnonceRepository->save($imageAnnonce, true);
+            /*
 
-
-            /** @var UploadedFile $brochureFile */
+            /** @var UploadedFile $brochureFile 
             $brochureFile = $form->get('lien')->getData();
             
             // var_dump($brochureFile);
@@ -59,7 +59,7 @@ class ImageAnnonceController extends AbstractController
                 }
                 $imageAnnonce->setLien($this->getParameter('imageAnnonce_bdd').$newFilename);
                 $imageAnnonceRepository->save($imageAnnonce, true);
-            }
+            }*/
             return $this->redirectToRoute('app_image_annonce_index', [], Response::HTTP_SEE_OTHER);
         
         }

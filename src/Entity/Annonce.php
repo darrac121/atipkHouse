@@ -43,7 +43,7 @@ class Annonce
     private ?string $status = null;
 
     #[ORM\ManyToOne(inversedBy: 'annonces')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?User $idUser = null;
 
     #[ORM\OneToMany(mappedBy: 'idAnnonce', targetEntity: ImageAnnonce::class, orphanRemoval: true)]
