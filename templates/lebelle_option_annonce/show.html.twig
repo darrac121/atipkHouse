@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}LebelleOptionAnnonce{% endblock %}
+
+{% block body %}
+    <h1>LebelleOptionAnnonce</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ lebelle_option_annonce.id }}</td>
+            </tr>
+            <tr>
+                <th>Value</th>
+                <td>{{ lebelle_option_annonce.value }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ lebelle_option_annonce.status }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_lebelle_option_annonce_index') }}">back to list</a>
+
+    <a href="{{ path('app_lebelle_option_annonce_edit', {'id': lebelle_option_annonce.id}) }}">edit</a>
+
+    {{ include('lebelle_option_annonce/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New LebelleOptionAnnonce{% endblock %}
+
+{% block body %}
+    <h1>Create new LebelleOptionAnnonce</h1>
+
+    {{ include('lebelle_option_annonce/_form.html.twig') }}
+
+    <a href="{{ path('app_lebelle_option_annonce_index') }}">back to list</a>
+{% endblock %}

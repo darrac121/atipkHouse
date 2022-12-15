@@ -23,6 +23,9 @@ class LebelleOptionAnnonce
     #[ORM\Column(length: 255)]
     private ?string $status = null;
 
+    #[ORM\ManyToOne]
+    private ?category $idCompany = null;
+
 
     public function __construct()
     {
@@ -53,6 +56,18 @@ class LebelleOptionAnnonce
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getIdCompany(): ?category
+    {
+        return $this->idCompany;
+    }
+
+    public function setIdCompany(?category $idCompany): self
+    {
+        $this->idCompany = $idCompany;
 
         return $this;
     }
