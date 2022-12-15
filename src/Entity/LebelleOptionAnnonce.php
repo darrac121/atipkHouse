@@ -35,7 +35,10 @@ class LebelleOptionAnnonce
     {
         return $this->id;
     }
-
+    public function __toString()
+    {
+        return $this->id;
+    }
     public function getValue(): ?string
     {
         return $this->value;
