@@ -24,7 +24,7 @@ class LebelleOptionAnnonce
     private ?string $status = null;
 
     #[ORM\ManyToOne]
-    private ?category $idCompany = null;
+    private ?Category $idCategory = null;
 
 
     public function __construct()
@@ -37,8 +37,9 @@ class LebelleOptionAnnonce
     }
     public function __toString()
     {
-        return $this->id;
+        
     }
+
     public function getValue(): ?string
     {
         return $this->value;
@@ -63,14 +64,14 @@ class LebelleOptionAnnonce
         return $this;
     }
 
-    public function getIdCompany(): ?category
+    public function getIdCategory(): ?Category
     {
-        return $this->idCompany;
+        return $this->idCategory;
     }
 
-    public function setIdCompany(?category $idCompany): self
+    public function setIdCategory(?Category $idCategory): self
     {
-        $this->idCompany = $idCompany;
+        $this->idCategory = $idCategory;
 
         return $this;
     }
