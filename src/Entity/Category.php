@@ -21,9 +21,6 @@ class Category
     #[ORM\Column(length: 255)]
     private ?string $status = null;
 
-    #[ORM\ManyToOne(inversedBy: 'idCategory')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?LebelleOptionAnnonce $lebelleOptionAnnonce = null;
 
     public function getId(): ?int
     {
@@ -50,18 +47,6 @@ class Category
     public function setStatus(string $status): self
     {
         $this->status = $status;
-
-        return $this;
-    }
-
-    public function getLebelleOptionAnnonce(): ?LebelleOptionAnnonce
-    {
-        return $this->lebelleOptionAnnonce;
-    }
-
-    public function setLebelleOptionAnnonce(?LebelleOptionAnnonce $lebelleOptionAnnonce): self
-    {
-        $this->lebelleOptionAnnonce = $lebelleOptionAnnonce;
 
         return $this;
     }

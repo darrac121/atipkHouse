@@ -23,16 +23,9 @@ class LebelleOptionAnnonce
     #[ORM\Column(length: 255)]
     private ?string $status = null;
 
-    #[ORM\OneToMany(mappedBy: 'lebelleOptionAnnonce', targetEntity: Category::class)]
-    private Collection $idCategory;
-
-    #[ORM\OneToMany(mappedBy: 'idLibelle', targetEntity: OptionAnnonce::class, orphanRemoval: true)]
-    private Collection $optionAnnonces;
 
     public function __construct()
     {
-        $this->idCategory = new ArrayCollection();
-        $this->optionAnnonces = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -64,63 +57,4 @@ class LebelleOptionAnnonce
         return $this;
     }
 
-    /**
-     * @return Collection<int, Category>
-     */
-    public function getIdCategory(): Collection
-    {
-        return $this->idCategory;
-    }
-
-    public function addIdCategory(Category $idCategory): self
-    {
-        if (!$this->idCategory->contains($idCategory)) {
-            $this->idCategory->add($idCategory);
-            $idCategory->setLebelleOptionAnnonce($this);
-        }
-
-        return $this;
-    }
-
-    public function removeIdCategory(Category $idCategory): self
-    {
-        if ($this->idCategory->removeElement($idCategory)) {
-            // set the owning side to null (unless already changed)
-            if ($idCategory->getLebelleOptionAnnonce() === $this) {
-                $idCategory->setLebelleOptionAnnonce(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, OptionAnnonce>
-     */
-    public function getOptionAnnonces(): Collection
-    {
-        return $this->optionAnnonces;
-    }
-
-    public function addOptionAnnonce(OptionAnnonce $optionAnnonce): self
-    {
-        if (!$this->optionAnnonces->contains($optionAnnonce)) {
-            $this->optionAnnonces->add($optionAnnonce);
-            $optionAnnonce->setIdLibelle($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOptionAnnonce(OptionAnnonce $optionAnnonce): self
-    {
-        if ($this->optionAnnonces->removeElement($optionAnnonce)) {
-            // set the owning side to null (unless already changed)
-            if ($optionAnnonce->getIdLibelle() === $this) {
-                $optionAnnonce->setIdLibelle(null);
-            }
-        }
-
-        return $this;
-    }
 }
