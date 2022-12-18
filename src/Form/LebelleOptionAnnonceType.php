@@ -14,7 +14,7 @@ class LebelleOptionAnnonceType extends AbstractType
         $builder
             ->add('value')
             ->add('status')
-            ->add('idCategory')
+            
         ;
     }
 

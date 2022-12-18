@@ -1,0 +1,30 @@
+{% block body %}
+<table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Value</th>
+                <th>Status</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for lebelle_option_annonce in lebelle_option_annonces %}
+            <tr>
+                <td>{{ lebelle_option_annonce.id }}</td>
+                <td>{{ lebelle_option_annonce.value }}</td>
+                <td>{{ lebelle_option_annonce.status }}</td>
+                <td>
+                    <a href="{{ path('app_lebelle_option_annonce_show', {'id': lebelle_option_annonce.id}) }}">show</a>
+                    <a href="{{ path('app_lebelle_option_annonce_edit', {'id': lebelle_option_annonce.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </table>
+{% endblock %}

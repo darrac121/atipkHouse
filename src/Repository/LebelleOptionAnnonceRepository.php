@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Category;
 use App\Entity\LebelleOptionAnnonce;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -37,6 +38,19 @@ class LebelleOptionAnnonceRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findOneByIdJoinedToCategory(int $categoryId): ?LebelleOptionAnnonce
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT p
+            FROM App\Entity\LebelleOptionAnnonce p
+            WHERE p.id_category_id = :id'
+        )->setParameter('id', $categoryId);
+
+        return $query;
     }
 
 //    /**
