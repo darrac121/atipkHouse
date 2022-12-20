@@ -31,7 +31,7 @@ class Home extends AbstractController
             'last_username' => $lastUsername,
             'annonces' => $annonceRepository->findAll(),
             'imgs'=>$im->findAll(),
-            'avis'=>$avis->findAll(),
+            // 'avis'=>$avis->findAll(),
             
             // 'id' => $id,
         ]);
