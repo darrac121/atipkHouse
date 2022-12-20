@@ -70,10 +70,13 @@
         {% endif %} 
                     <div class="card-body">
                         <h5 class="card-title">{{ annonce.titre }}</h5>
-                        <p class="card-text">{{ annonce.description }}
-                        <br>
+                        <p class="card-text">
+                        <div class="truncate">
+                        {{ annonce.description  }}
+                        </div>
+                        {# <br>
                         {{ annonce.adresse }}
-                        <br>
+                        <br> #}
                         {{ annonce.ville }}
                         <br>
                         <div class="">

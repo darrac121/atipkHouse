@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AccountController!{% endblock %}
+
+{% block body %}
+
+
+<div class="example-wrapper">
+    <h1>Vos information personnel {{ controller_name }} ✅</h1>
+    {{ app.user.name }}
+    {# <a href="{{ path('app_account_edit', {'id': app.user.name.id }) }}">edit</a> #}
+    <ul>
+        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/git_/atipkHouse/src/Controller/AccountController.php'|file_link(0) }}">src/Controller/AccountController.php</a></code></li>
+        <li>Your template at <code><a href="{{ 'C:/wamp64/www/git_/atipkHouse/templates/account/index.html.twig'|file_link(0) }}">templates/account/index.html.twig</a></code></li>
+    </ul>
+</div>
+{% endblock %}

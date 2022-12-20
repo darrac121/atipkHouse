@@ -6,9 +6,89 @@
     <h1>Page acceuil</h1>
     {{ number }}
     {{ last_username }}
+<div class="container">
+<img class="img-fluid" src="/img_website/fuji.jpg" alt="image de la nature">
+<p class="text-center">
+Les logements atipik offrent de nombreux avantages pour ceux qui cherchent quelque chose de différent et de original. Tout d'abord, ils ont souvent des caractéristiques uniques et personnalisées qui les distinguent des logements traditionnels. Par exemple, ils peuvent avoir des formes et des tailles inhabituelles, des matériaux de construction originaux ou des caractéristiques architecturales surprenantes.
+De plus, les logements atipik sont souvent situés dans des emplacements exceptionnels, comme des maisons sur pilotis ou des maisons flottantes, ce qui en fait des endroits idéaux pour ceux qui cherchent à se déconnecter de la ville et à profiter de la nature.
+Vivre dans un logement atipik peut être une expérience très gratifiante pour ceux qui cherchent à sortir de leur zone de confort et à vivre de manière plus originale et créative. En choisissant un logement atipik, vous pourrez vous faire plaisir en vous offrant un lieu de vie unique et sur mesure qui vous ressemble.
+</p>
+<div>
+Si vous cherchez à vivre une expérience de vacances originale et inoubliable, pourquoi ne pas opter pour un logement atipik ? Ces logements uniques offrent tout ce qu'il faut pour des vacances inoubliables : emplacements exceptionnels, caractéristiques architecturales surprenantes et ambiance chaleureuse et accueillante.
+
+Que vous cherchiez une maison sur pilotis, une cabane dans les arbres ou une roulotte vintage, vous trouverez certainement le logement atipik de vos rêves. Et avec leur caractère unique et leur décor personnalisé, ces logements vous permettront de vous déconnecter de la vie quotidienne et de vous ressourcer en toute tranquillité.
+
+Alors pourquoi attendre ? Faites de vos prochaines vacances une expérience inoubliable en choisissant un logement atipik !
+</div>
+
+{{ last_username }}
+<div class="row">
+
+    {% for aviss in avis %}
+        {{ aviss }}
+    {% endfor %}
+    {% for annonce in annonces %}
+            <div class="col-4">
+                <div class="card" style="width: 18rem;">
+                    {# <img src="{{  img.annonce.id }}" class="card-img-top" alt="..."> #}
+                    {# <img src="{{  annonce.id|img }}" class="card-img-top" alt="..."> #}
+
+    {% set count = 0 %}
+    {% for imag in imgs %}                
+        {% set id_annn = imag.idAnnonce|replace({'   ': ""}) %}
+        {% set annoce_id = annonce.id %}
+        {% if count == 0 %}
+            {% if id_annn == annoce_id %}
+                <img src="{{  imag.lien }}" class="card-img-top" alt="...">
+                {% set count = 1 %}
+            {% endif %} 
+        {% endif %} 
+    {% endfor %}
+        {% if count == 0%}
+                <img src="\img_website\home-outline.svg" class="card-img-top" height="114" alt="...">
+        {% endif %} 
+                    <div class="card-body">
+                        <h5 class="card-title">{{ annonce.titre }}</h5>
+                        <p class="card-text">
+                        <div class="truncate">
+                        {{ annonce.description  }}
+                        </div>
+                        {# <br>
+                        {{ annonce.adresse }}
+                        <br> #}
+                        {{ annonce.ville }}
+                        <br>
+                        <div class="">
+                        {{ annonce.prix }} € / par nuit
+                        </div>
+                        </p>
+                        <a href="{{ path('app_annonce_show', {'id': annonce.id}) }}" class="btn btn-primary">Show</a>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+                <div class="text-center h5">no reward</div>
+            {% endfor %}
+    </div>
+</div>
+
+
+
+
+
     {% if app.user %}
      {# {{ app.user.userIdentifier }} #}
      {{ app.user }}
+     {{ app.user.name }}
+     {{ app.user.firstname }}
+     {{ app.user.telephone }}
+     {% if app.user.adresse  %}
+      vous etes proprietaire
+     {% endif %}
+     {% for rol in app.user.roles  %}
+      {{ rol }}
+     {% endfor %}
+     
     {% endif %}
 
     {# {% for i in id %}

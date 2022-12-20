@@ -7,11 +7,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+use App\Repository\LebelleOptionAnnonceRepository;
+use App\Repository\ImageAnnonceRepository;
+use App\Repository\AnnonceRepository;
+use App\Repository\AvisAnnonceRepository;
+
+
 
 #[Route('/home')]
 class Home extends AbstractController
 {
-    public function home(AuthenticationUtils $authenticationUtils): Response
+    public function home(AuthenticationUtils $authenticationUtils,AnnonceRepository $annonceRepository,ImageAnnonceRepository $im,AvisAnnonceRepository $avis): Response
     {
         $number = random_int(0, 100);
         // last username entered by the user
@@ -23,6 +29,10 @@ class Home extends AbstractController
         return $this->render('home/home.html.twig', [
             'number' => $number,
             'last_username' => $lastUsername,
+            'annonces' => $annonceRepository->findAll(),
+            'imgs'=>$im->findAll(),
+            'avis'=>$avis->findAll(),
+            
             // 'id' => $id,
         ]);
     }

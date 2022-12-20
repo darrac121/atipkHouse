@@ -12,13 +12,17 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
-            ->add('telephone')
+            ->add('email',TextType::class,['attr' => ['class' => 'form-control ']])
+            ->add('telephone',TextType::class,['attr' => ['class' => 'form-control ']])
+            ->add('Name',TextType::class,['attr' => ['class' => 'form-control ']])
+            ->add('firstname',TextType::class,['attr' => ['class' => 'form-control ']])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [

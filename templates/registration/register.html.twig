@@ -2,16 +2,36 @@
 
 {% block title %}Register{% endblock %}
 
+
 {% block body %}
+
+<div class="container">
     <h1>Register</h1>
 
+    <div class="row g-3 align-items-center">
     {{ form_start(registrationForm) }}
+        
+    <div class="col-auto">
+        {{ form_row(registrationForm.Name, {label: 'Votre nom'}) }}
+    </div>
+    <div class="col-auto">
+        {{ form_row(registrationForm.firstname) }}
+    </div>
+    <div class="col-auto">
+        {{ form_row(registrationForm.telephone) }}
+    </div>
+    <div class="col-auto">
         {{ form_row(registrationForm.email) }}
+    </div>
+    <div class="col-auto">
         {{ form_row(registrationForm.plainPassword, {
             label: 'Password'
         }) }}
+        </div>
         {{ form_row(registrationForm.agreeTerms) }}
 
         <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
+    </div>
+    </div>
 {% endblock %}
