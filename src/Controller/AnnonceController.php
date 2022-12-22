@@ -23,6 +23,9 @@ use App\Repository\ImageAnnonceRepository;
 use App\Entity\OptionAnnonce;
 use App\Repository\OptionAnnonceRepository;
 
+use App\Entity\User;
+use App\Repository\UserRepository;
+
 
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -32,16 +35,17 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class AnnonceController extends AbstractController
 {
     #[Route('/', name: 'app_annonce_index', methods: ['GET'])]
-    public function index(AnnonceRepository $annonceRepository,ImageAnnonceRepository $im): Response
+    public function index(AnnonceRepository $annonceRepository,ImageAnnonceRepository $im,UserRepository $user): Response
     {
         return $this->render('annonce/index.html.twig', [
             'annonces' => $annonceRepository->findAll(),
             'imgs'=>$im->findAll(),
+            'user'=>$user->findAll(),
         ]);
     }
 
     #[Route('/new', name: 'app_annonce_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, AnnonceRepository $annonceRepository,ImageAnnonceRepository $imageAnnonceRepository): Response
+    public function new(Request $request, AnnoncxeRepository $annonceRepository,ImageAnnonceRepository $imageAnnonceRepository): Response
     {
         $annonce = new Annonce();
         $form = $this->createForm(Annonce2Type::class, $annonce);
@@ -97,13 +101,14 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_annonce_show', methods: ['GET'])]
-    public function show(Annonce $annonce,ImageAnnonceRepository $im,OptionAnnonceRepository $opt,LebelleOptionAnnonceRepository $loannonce): Response
+    public function show(Annonce $annonce,ImageAnnonceRepository $im,OptionAnnonceRepository $opt,LebelleOptionAnnonceRepository $loannonce,UserRepository $user): Response
     {
         return $this->render('annonce/show.html.twig', [
             'annonce' => $annonce,
             'img'=>$im->findAll(),
             'opt'=>$opt->findAll(),
             'loannonce'=>$loannonce->findAll(),
+            'user'=>$user->findAll(),
         ]);
     }
 
