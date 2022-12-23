@@ -51,10 +51,10 @@
         </li>
     {% endif %}
       </ul>
-      <form class="d-flex" role="search">
+      {# <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      </form> #}
     {% if app.user %}
       <span class="nav-item">
           <a class="nav-link" href="{{ path('app_logout') }}">{{ app.user.userIdentifier }} <i class="bi bi-box-arrow-right"></i> &nbsp&nbsp</a>
@@ -86,13 +86,14 @@
 
 
 <!-- Footer -->
-<footer class="text-center text-lg-start bg-light text-muted">
+<footer class="text-center text-lg-start bg-light text-muted" style="color: #000000 !important; background-color: #EDEDED !important);">
   <!-- Section: Social media -->
+{#  
   <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-    {# <!-- Left -->
+    <!-- Left -->
     <div class="me-5 d-none d-lg-block">
       <span>Atipik house</span>
-    </div> #}
+    </div>
     <!-- Left -->
 
     <!-- Right -->
@@ -119,7 +120,7 @@
     <!-- Right -->
   </section>
   <!-- Section: Social media -->
-
+#}
   <!-- Section: Links  -->
   <section class="">
     <div class="container text-center text-md-start mt-5">

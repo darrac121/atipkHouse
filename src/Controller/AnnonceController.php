@@ -45,7 +45,7 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/new', name: 'app_annonce_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, AnnoncxeRepository $annonceRepository,ImageAnnonceRepository $imageAnnonceRepository): Response
+    public function new(Request $request, annonceRepository $annonceRepository,ImageAnnonceRepository $imageAnnonceRepository): Response
     {
         $annonce = new Annonce();
         $form = $this->createForm(Annonce2Type::class, $annonce);

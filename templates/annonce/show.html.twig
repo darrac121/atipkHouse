@@ -31,44 +31,29 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ annonce.id }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
                 <td>{{ annonce.titre }}</td>
             </tr>
             <tr>
-                <th>Description</th>
                 <td>{{ annonce.description }}</td>
             </tr>
             <tr>
-                <th>Adresse</th>
                 <td>{{ annonce.adresse }}</td>
             </tr>
             <tr>
-                <th>Ville</th>
                 <td>{{ annonce.Ville }}</td>
             </tr>
             <tr>
-                <th>CodePostal</th>
                 <td>{{ annonce.CodePostal }}</td>
             </tr>
             <tr>
-                <th>Prix</th>
-                <td>{{ annonce.prix }}</td>
+                <td>{{ annonce.prix }} € / par nuit</td>
             </tr>
             <tr>
-                <th>Datecreation</th>
-                <td>{{ annonce.datecreation ? annonce.datecreation|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td>{{ annonce.status }}</td>
+                <td>Date de fin de disponibiliter {{ annonce.datecreation ? annonce.datecreation|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
         </tbody>
     </table>
-aaa
+{# aaa #}
 
   {# {% for key, value in opt  %} #}
     {# {% for op in opt %}
@@ -90,16 +75,16 @@ aaa
         {{img.id}}
         {{ a.id }}
     {% endfor %} #}
-aaa
+{# aaa #}
 
-    <a href="{{ path('app_annonce_index') }}">back to list</a>
+    <a href="{{ path('app_annonce_index') }}" class="btn btn-outline-secondary"> < back to list</a>
 {% if app.user %}
-{{ app.user }}
-{{ annonce.id_User }}
-{# {% if app.user == annonce.id_User %} #}
+{# {{ app.user }}
+{{ annonce.idUser }} #}
+{% if app.user == annonce.idUser %}
     <a href="{{ path('app_annonce_edit', {'id': annonce.id}) }}">edit</a>
     {{ include('annonce/_delete_form.html.twig') }}
-{# {% endif %} #}
+{% endif %}
 {% endif %}
 
 </div>

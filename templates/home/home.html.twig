@@ -52,21 +52,21 @@ Alors pourquoi attendre ? Faites de vos prochaines vacances une expérience inou
                 <img src="\img_website\home-outline.svg" class="card-img-top" height="114" alt="...">
         {% endif %} 
                     <div class="card-body">
-                        <h5 class="card-title">{{ annonce.titre }}</h5>
+                        <h5 class="card-title text-center">{{ annonce.titre }}</h5>
                         <p class="card-text">
                         <div class="truncate">
-                        {{ annonce.description  }}
+                        {# {{ annonce.description  }} #}
                         </div>
                         {# <br>
                         {{ annonce.adresse }}
                         <br> #}
-                        {{ annonce.ville }}
-                        <br>
-                        <div class="">
+                        <div class="text-center">
                         {{ annonce.prix }} € / par nuit
                         </div>
+                        <br>                        
+                        <div class="text-end">{{ annonce.ville }}</div>
                         </p>
-                        <a href="{{ path('app_annonce_show', {'id': annonce.id}) }}" class="btn btn-primary">Show</a>
+                        <a href="{{ path('app_annonce_show', {'id': annonce.id}) }}" class="btn btn-primary">Voir Plus</a>
                     </div>
                 </div>
             </div>
@@ -94,6 +94,8 @@ Alors pourquoi attendre ? Faites de vos prochaines vacances une expérience inou
      {% endfor %}
      
     {% endif %}
+
+
 
     {# {% for i in id %}
       {{ i }}                
