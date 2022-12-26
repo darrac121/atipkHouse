@@ -3,25 +3,26 @@
 {% block title %}home{% endblock %}
 
 {% block body %}
-    <h1>Page acceuil</h1>
-    {{ number }}
-    {{ last_username }}
-<div class="container">
+    {# <h1>Page acceuil</h1> #}
+    {# {{ number }}
+    {{ last_username }} #}
 <img class="img-fluid" src="/img_website/fuji.jpg" alt="image de la nature">
+
+<div style="margin-top: 5px;margin-bottom: 5px;"></div>
+<div class="container">
+
+<div class="card border-1  shadow-lg">
+<div class="card-body px-3 pt-grid-gutter pb-0">
 <p class="text-center">
 Les logements atipik offrent de nombreux avantages pour ceux qui cherchent quelque chose de différent et de original. Tout d'abord, ils ont souvent des caractéristiques uniques et personnalisées qui les distinguent des logements traditionnels. Par exemple, ils peuvent avoir des formes et des tailles inhabituelles, des matériaux de construction originaux ou des caractéristiques architecturales surprenantes.
 De plus, les logements atipik sont souvent situés dans des emplacements exceptionnels, comme des maisons sur pilotis ou des maisons flottantes, ce qui en fait des endroits idéaux pour ceux qui cherchent à se déconnecter de la ville et à profiter de la nature.
 Vivre dans un logement atipik peut être une expérience très gratifiante pour ceux qui cherchent à sortir de leur zone de confort et à vivre de manière plus originale et créative. En choisissant un logement atipik, vous pourrez vous faire plaisir en vous offrant un lieu de vie unique et sur mesure qui vous ressemble.
 </p>
-<div>
-Si vous cherchez à vivre une expérience de vacances originale et inoubliable, pourquoi ne pas opter pour un logement atipik ? Ces logements uniques offrent tout ce qu'il faut pour des vacances inoubliables : emplacements exceptionnels, caractéristiques architecturales surprenantes et ambiance chaleureuse et accueillante.
-
-Que vous cherchiez une maison sur pilotis, une cabane dans les arbres ou une roulotte vintage, vous trouverez certainement le logement atipik de vos rêves. Et avec leur caractère unique et leur décor personnalisé, ces logements vous permettront de vous déconnecter de la vie quotidienne et de vous ressourcer en toute tranquillité.
-
-Alors pourquoi attendre ? Faites de vos prochaines vacances une expérience inoubliable en choisissant un logement atipik !
 </div>
+</div>
+<div style="margin-top: 5px;margin-bottom: 5px;"></div>
 
-{{ last_username }}
+{# {{ last_username }} #}
 <div class="row">
 
     {# {% for aviss in avis %}
@@ -32,7 +33,8 @@ Alors pourquoi attendre ? Faites de vos prochaines vacances une expérience inou
     {% endfor %}
      #}
     {% for annonce in annonces %}
-            <div class="col-4">
+        <div class="col-sm-6 col-md-4">
+                <article>  
                 <div class="card" style="width: 18rem;">
                     {# <img src="{{  img.annonce.id }}" class="card-img-top" alt="..."> #}
                     {# <img src="{{  annonce.id|img }}" class="card-img-top" alt="..."> #}
@@ -43,16 +45,16 @@ Alors pourquoi attendre ? Faites de vos prochaines vacances une expérience inou
         {% set annoce_id = annonce.id %}
         {% if count == 0 %}
             {% if id_annn == annoce_id %}
-                <img src="{{  imag.lien }}" class="card-img-top" alt="...">
+                <img src="{{  imag.lien }}" class="card-img-top" alt="Photo {{ annonce.titre }}">
                 {% set count = 1 %}
             {% endif %} 
         {% endif %} 
     {% endfor %}
         {% if count == 0%}
-                <img src="\img_website\home-outline.svg" class="card-img-top" height="114" alt="...">
+                <img src="\img_website\home-outline.svg" class="card-img-top" height="114" alt="Pas d'image sur cette annnonces">
         {% endif %} 
                     <div class="card-body">
-                        <h5 class="card-title text-center">{{ annonce.titre }}</h5>
+                        <h1 class="card-title text-center">{{ annonce.titre }}</h1>
                         <p class="card-text">
                         <div class="truncate">
                         {# {{ annonce.description  }} #}
@@ -63,22 +65,42 @@ Alors pourquoi attendre ? Faites de vos prochaines vacances une expérience inou
                         <div class="text-center">
                         {{ annonce.prix }} € / par nuit
                         </div>
-                        <br>                        
+                        <br>  
+                        <small>                                              
                         <div class="text-end">{{ annonce.ville }}</div>
+                        </small>
                         </p>
                         <a href="{{ path('app_annonce_show', {'id': annonce.id}) }}" class="btn btn-primary">Voir Plus</a>
                     </div>
                 </div>
+            </article>
             </div>
             {% else %}
                 <div class="text-center h5">no reward</div>
             {% endfor %}
     </div>
+<div style="margin-top: 5px;margin-bottom: 5px;"></div>
+
+<div class="text-center">
+<div href="/annonce" class="btn btn-outline-primary" >Voir Toute les annonces </div>
 </div>
+<div style="margin-top: 5px;margin-bottom: 5px;"></div>
+
+    <div class="row">
+        <div class="col-sm-12 col-md-6 align-items-center" style="margin-top: 80px;">
+        Si vous cherchez à vivre une expérience de vacances originale et inoubliable, pourquoi ne pas opter pour un logement atipik ? Ces logements uniques offrent tout ce qu'il faut pour des vacances inoubliables : emplacements exceptionnels, caractéristiques architecturales surprenantes et ambiance chaleureuse et accueillante.
+
+        Que vous cherchiez une maison sur pilotis, une cabane dans les arbres ou une roulotte vintage, vous trouverez certainement le logement atipik de vos rêves. Et avec leur caractère unique et leur décor personnalisé, ces logements vous permettront de vous déconnecter de la vie quotidienne et de vous ressourcer en toute tranquillité.
+
+        Alors pourquoi attendre ? Faites de vos prochaines vacances une expérience inoubliable en choisissant un logement atipik !
+        </div>
+        <div class="col-sm-12 col-md-6">
+            <img src="{{ asset('/img_website/lake.jpg') }}" class="img-fluid" alt="photo de lake">
+        </div>
+    </div>
 
 
-
-
+</div>
 
     {% if app.user %}
      {# {{ app.user.userIdentifier }} #}
