@@ -35,7 +35,7 @@ class UserController extends AbstractController
             
             $userRepository->save($user, true);
 
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_document_proprietaire_new', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('/register.html.twig', [

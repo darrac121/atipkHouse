@@ -18,8 +18,6 @@ class ReservationType extends AbstractType
             ->add('Total')
             ->add('Statue')
             ->add('StatuePayment')
-            ->add('idAnnonce')
-            ->add('idUser')
         ;
     }
 
