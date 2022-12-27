@@ -64,7 +64,7 @@ fill="#000000" stroke="none">
         </li>
     {% if app.user %}
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/reservation">Reservation</a>
+          <a class="nav-link active" aria-current="page" href="/reservation"><i class="bi bi-bag"></i> Reservation</a>
         </li>
     {% endif %}
       </ul>
@@ -185,15 +185,21 @@ fill="#000000" stroke="none">
           <h2 class="text-uppercase fw-bold mb-4 h6">
             Compte
           </h2>
+    {% if app.user %}
+          <p>
+            <a href="/account" class="text-reset">Mon espace</a>
+          </p>
+          <p>
+            <a href="/reservation" class="text-reset">Reservation</a>
+          </p>
+    {% else %}
           <p>
             <a href="/register" class="text-reset"><svg data-id="SVG_INVITE__24" focusable="false" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" d="M17.174 14.344v5.322M14.513 17.005h5.322M4.165 19.685a20.536 20.536 0 007.871 1.565M11.944 11.906a7.735 7.735 0 00-2.976.595 7.777 7.777 0 00-4.802 7.184"></path><path stroke="currentColor" d="M16.018 7.837a4.07 4.07 0 01-4.07 4.07h-.01a4.07 4.07 0 01-4.068-4.07V6.82a4.07 4.07 0 014.069-4.069h.01a4.07 4.07 0 014.069 4.07v1.017z" clip-rule="evenodd"></path></svg> Inscription</a>
           </p>
           <p>
             <a href="/login" class="text-reset">Se connecter</a>
           </p>
-          <p>
-            <a href="#!" class="text-reset">Orders</a>
-          </p>
+      {% endif %}
           <p>
             <a href="/help" class="text-reset">Help</a>
           </p>

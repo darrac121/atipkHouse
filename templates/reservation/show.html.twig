@@ -8,16 +8,12 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ reservation.id }}</td>
-            </tr>
-            <tr>
                 <th>DateDebut</th>
-                <td>{{ reservation.DateDebut ? reservation.DateDebut|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ reservation.DateDebut ? reservation.DateDebut|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
                 <th>DateFin</th>
-                <td>{{ reservation.DateFin ? reservation.DateFin|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ reservation.DateFin ? reservation.DateFin|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
                 <th>NbNuit</th>

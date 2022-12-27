@@ -1,14 +1,43 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Reservation index{% endblock %}
-
+ 
 {% block body %}
     <h1>Reservation index</h1>
-
+<div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        Reference
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+        <div class="row">
+        <div class="col-md-6">
+        Paiement
+        <div></div>
+        <i class="bi bi-bag-fill"></i> Paiement accepter
+        <div></div>
+        <i class="bi bi-bag-plus"></i> Paiement non réglée
+        </div>
+        <div class="col-md-6">
+        Statut de la réservation
+        <div></div>
+        <i class="bi bi-bag-check"></i> Valider par le proprietaire
+        <div></div>
+        <i class="bi bi-bag-x"></i> Refuser par le proprietaire
+        <div></div>
+        <i class="bi bi-bag"></i> En attente par le proprietaire
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>DateDebut</th>
                 <th>DateFin</th>
                 <th>NbNuit</th>
@@ -25,13 +54,12 @@
     {% if app.user == reservation.idUser %}
                 
                 {# <td>{{ reservation.idUser }}</td> #}
-                <td>{{ reservation.id }}</td>
-                <td>{{ reservation.DateDebut ? reservation.DateDebut|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ reservation.DateFin ? reservation.DateFin|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ reservation.DateDebut ? reservation.DateDebut|date('d-m-Y') : '' }}</td>
+                <td>{{ reservation.DateFin ? reservation.DateFin|date('d-m-Y') : '' }}</td>
                 <td>{{ reservation.NbNuit }}</td>
-                <td>{{ reservation.Total }}</td>
-                <td>{{ reservation.Statue }}</td>
-                <td>{{ reservation.StatuePayment }}</td>
+                <td>{{ reservation.Total }} € </td>
+                <td>{% if reservation.StatuePayment == 1 %}<i class="bi bi-bag-fill"></i>{% else %}<i class="bi bi-bag-plus"></i>{% endif %}</td>
+                <td>{% if reservation.Statue == 1 %}<i class="bi bi-bag-check"></i>{% elseif reservation.Statue == 2 %}<i class="bi bi-bag-x"></i>{% else %}<i class="bi bi-bag"></i>{% endif %}</td>
                 <td>
                     <a href="{{ path('app_reservation_show', {'id': reservation.id}) }}">show</a>
                     <a href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">edit</a>
