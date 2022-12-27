@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 
-#[Route('/document/proprietaire')]
+#[Route('/document')]
 class DocumentProprietaireController extends AbstractController
 {
     #[Route('/', name: 'app_document_proprietaire_index', methods: ['GET'])]
