@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fr" xml:lang="fr" xmlns="http://www.w3.org/1999/xhtml">
-
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
@@ -42,7 +41,7 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="/"><img src="/img_website/logo.png" alt="Logo hatipik House " /></a>
+    <a class="navbar-brand" href="/"><img src="/img_website/zyro-image.png" style="height: 80px;" alt="Logo hatipik House " /></a>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
@@ -66,7 +65,13 @@ fill="#000000" stroke="none">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/reservation"><i class="bi bi-bag"></i> Reservation</a>
         </li>
+     {% if app.user.roles[0] == 'ROLE_PRO'  %}
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/annonce/new"><i class="bi bi-house-add"></i> Cree une annonce</a>
+      </li>
+     {% endif %}
     {% endif %}
+
       </ul>
       {# <form class="d-flex" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

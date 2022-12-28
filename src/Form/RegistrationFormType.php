@@ -19,10 +19,41 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email',TextType::class,['attr' => ['class' => 'form-control ']])
-            ->add('telephone',TextType::class,['attr' => ['class' => 'form-control ']])
-            ->add('Name',TextType::class,['attr' => ['class' => 'form-control ']])
-            ->add('firstname',TextType::class,['attr' => ['class' => 'form-control ']])
+            ->add('email',TextType::class,['attr' => ['class' => 'form-control '],
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'Vous devait remplire se champ.',
+                    ]),
+                ],
+                'required' => true,])
+            ->add('telephone',TextType::class,['attr' => ['class' => 'form-control '],
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'Vous devait remplire se champ.',
+                    ]),
+                ],
+                'required' => true,])
+            ->add('Name',TextType::class,['attr' => ['class' => 'form-control '],
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'Vous devait remplire se champ.',
+                    ]),
+                ],
+                'required' => true,])
+            ->add('adresse',TextType::class,['attr' => ['class' => 'form-control '],
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'Vous devait remplire se champ.',
+                    ]),
+                ],
+                'required' => false,])
+            ->add('firstname',TextType::class,['attr' => ['class' => 'form-control '],
+                'constraints' => [
+                    new IsTrue([
+                        'message' => 'Vous devait remplire se champ.',
+                    ]),
+                ],
+                'required' => true,])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'attr' => ['class' => 'form-check-input'],

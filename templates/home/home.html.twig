@@ -112,12 +112,10 @@ Vivre dans un logement atipik peut être une expérience très gratifiante pour 
      {{ app.user.name }}
      {{ app.user.firstname }}
      {{ app.user.telephone }}
-     {% if app.user.adresse  %}
+     {% if app.user.roles[0] == 'ROLE_PRO'  %}
       vous etes proprietaire
      {% endif %}
-     {% for rol in app.user.roles  %}
-      {{ rol }}
-     {% endfor %}
+     {# {{ app.user.roles[0] }} #}
      
     {% endif %}
 
