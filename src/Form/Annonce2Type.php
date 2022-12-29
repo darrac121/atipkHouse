@@ -34,9 +34,7 @@ class Annonce2Type extends AbstractType
             // ->add('lien',FileType::class)
             ->add('idUser')
             ->add('imageFile', FileType::class, [
-                'mapped' => false,
-                'multiple'=>true,
-                'label'=>'Selectionner une ou plusieurs image'
+                'mapped' => false
             ])
             
             

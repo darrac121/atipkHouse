@@ -11,24 +11,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-use App\Entity\LebelleOptionAnnonce;
-
 
 use App\Form\ImageAnnonceType;
 
 use App\Repository\LebelleOptionAnnonceRepository;
 use App\Repository\ImageAnnonceRepository;
-use Gedmo\Sluggable\Util\Urlizer;
-
-use App\Entity\OptionAnnonce;
+//use Gedmo\Sluggable\Util\Urlizer;
+use App\Controller\Urlizer;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use App\Repository\OptionAnnonceRepository;
-
-use App\Entity\User;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use App\Repository\UserRepository;
 
-
-
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 
 #[Route('/annonce')]
@@ -45,7 +39,7 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/new', name: 'app_annonce_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, annonceRepository $annonceRepository,ImageAnnonceRepository $imageAnnonceRepository): Response
+    public function new(Request $request, annonceRepository $annonceRepository,ImageAnnonceRepository $imageAnnonceRepository,SluggerInterface $slugger): Response
     {
         $annonce = new Annonce();
         $form = $this->createForm(Annonce2Type::class, $annonce);
@@ -94,14 +88,15 @@ class AnnonceController extends AbstractController
             die;
 
             $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
-            $newFilename = Urlizer::urlize($originalFilename).'-'.uniqid().'.'.$uploadedFile->guessExtension();
+            $safeFilename = $slugger->slug($originalFilename);
+            $newFilename = $safeFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
             $uploadedFile->move(
                 $destination,
                 $newFilename
             );
             //create new entity image
             $image = new ImageAnnonce();
-            $image->setIdAnnonce($annonce);
+            //$image->setIdAnnonce($annonce);
             $image->setLien($newFilename);
             $image->handleRequest($request);
 */
@@ -127,13 +122,27 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_annonce_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Annonce $annonce, AnnonceRepository $annonceRepository): Response
+    public function edit(Request $request, Annonce $annonce, AnnonceRepository $annonceRepository,SluggerInterface $slugger): Response
     {
         $form = $this->createForm(Annonce2Type::class, $annonce);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $annonceRepository->save($annonce, true);
+            $uploadedFile = $form['imageFile']->getData();
+            $destination = $this->getParameter('kernel.project_dir').'/public/img_annonces';
+
+            $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $safeFilename = $slugger->slug($originalFilename);
+            $newFilename = $safeFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
+            $uploadedFile->move(
+                $destination,
+                $newFilename
+            );
+            //create new entity image
+            $image = new ImageAnnonce();
+            $image->setIdAnnonce($annonce);
+            $image->setLien($newFilename);
 
             return $this->redirectToRoute('app_annonce_index', [], Response::HTTP_SEE_OTHER);
         }
