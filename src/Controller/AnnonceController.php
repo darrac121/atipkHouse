@@ -57,9 +57,41 @@ class AnnonceController extends AbstractController
         // $form2->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
             $annonceRepository->save($annonce, true);
-            $uploadedFile = $form['imageFile']->getData();
-            $destination = $this->getParameter('kernel.project_dir').'/public/img_annonces';
+            
+            
+            $uploadedFiles = $form['imageFile']->getData();
+            $destination = $this->getParameter('kernel.project_dir').'/public/img_annonces/';
+            $bdddes = "/img_annonces/";
+            // var_dump($uploadedFiles);
+            foreach($uploadedFiles as $uploadedFile){
+                // var_dump($);
+                $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+                // var_dump($originalFilename);
+                $cat = array(" ", "_", "-", "1", "2", "3", "4", "5", "6", "7", "8", "9");
+                $name = str_replace($cat,'',$originalFilename);
+                $newFilename = $name.'-'.uniqid().'.'.$uploadedFile->guessExtension();
+                $uploadedFile->move(
+                    $destination,
+                    $newFilename
+                );
+                // var_dump($newFilename);
+                $image = new ImageAnnonce();
+                $image->setIdAnnonce($annonce);
+                $image->setLien($bdddes.$newFilename);
+                $image->setStatus('1');
+                $imageAnnonceRepository->save($image,true);
+                // $image->save();
+                // $image->handleRequest($request);    
+                // echo "<br>";
+                // echo "<br>";
+                // echo "<br>";
+                // echo "<br>";
+                // echo "<br>";
+            }
+/*
+            die;
 
             $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
             $newFilename = Urlizer::urlize($originalFilename).'-'.uniqid().'.'.$uploadedFile->guessExtension();
@@ -71,8 +103,8 @@ class AnnonceController extends AbstractController
             $image = new ImageAnnonce();
             $image->setIdAnnonce($annonce);
             $image->setLien($newFilename);
-
-
+            $image->handleRequest($request);
+*/
             return $this->redirectToRoute('app_annonce_index', [], Response::HTTP_SEE_OTHER);
 
         }
