@@ -71,9 +71,9 @@ Vivre dans un logement atipik peut être une expérience très gratifiante pour 
                         <div class="text-end">{{ annonce.ville }}</div>
                         </small>
                         </p>
-                        <div class="text-center">
+                        {# <div class="text-center">
                             <a href="{{ path('app_annonce_show', {'id': annonce.id}) }}" class="btn btn-primary">Voir Plus</a>
-                        </div>
+                        </div> #}
                     </div>
                 </div>
             </article>
@@ -124,5 +124,38 @@ Vivre dans un logement atipik peut être une expérience très gratifiante pour 
     {# {% for i in id %}
       {{ i }}                
     {% endfor %} #}
+<div style="background:rgba(136, 209, 138, 1);">
+            <div class="row pb-3">
+              <div class="col-md-3 col-sm-6 mb-4">
+                <div class="d-flex"><i class="ci-rocket noir" style="font-size: 1.25rem;"></i>
+                  <div class="ps-3">
+                    <h6 class="fs-base mb-1 noir">worldwide express delivery with DHL</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 mb-4">
+                <div class="d-flex"><i class="bi bi-currency-exchange" style="font-size: 1.25rem;"></i>
+                  <div class="ps-3">
+                    <h6 class="fs-base mb-1 noir">Paiement sécurisé</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 mb-4">
+                <div class="d-flex"><i class="bi bi-card-checklist" style="font-size: 1.25rem;"></i>
+                  <div class="ps-3">
+                    <h6 class="fs-base mb-1 noir">Des proprietaires certifier par nos soins</h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-6 mb-4">
+                <div class="d-flex"><i class="ci-package noir" style="font-size: 1.25rem;"></i>
+                  <div class="ps-3">
+                    <h6 class="fs-base mb-1 noir">More than 3000 Models Available</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
 
   {% endblock %}

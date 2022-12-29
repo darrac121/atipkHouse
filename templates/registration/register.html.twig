@@ -4,9 +4,31 @@
 
 
 {% block body %}
+{# 
+{{ app.request.uri }}
+{{ app.request.pathinfo }}
+{{ app.request.requesturi }} #}
+{% if app.request.pathinfo == '/register' %}
+{% set re = 1 %}
+{% else %}
+{% set re = 2 %}
+{% endif %}
+{# /register #}
 
 <div class="container">
-    <h1>Register</h1>
+    <h1>Inscription 
+    {% if re == 1 %}
+    client
+    {% else %}
+    professionnel
+    {% endif %}
+    </h1>
+    {% if re == 1 %}
+    <a href="user/proprietaire/">Devenir professionnel</a>
+    {% else %}
+    <a href="/register">Devenir client</a>
+    {% endif %}
+    
 {# <div class="position-relative m-4">
   <div class="progress" style="height: 1px;">
     <div class="progress-bar" role="progressbar" aria-label="Progress" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
@@ -19,7 +41,7 @@
     {{ form_start(registrationForm) }}
         
     <div class="col-auto">
-        {{ form_row(registrationForm.Name, {label: 'Votre nom'}) }}
+        {{ form_row(registrationForm.Name, {label: 'Votre nom '}) }}
     </div>
     <div class="col-auto">
         {{ form_row(registrationForm.firstname) }}
@@ -41,7 +63,7 @@
 
         {{ form_row(registrationForm.agreeTerms, { label: "Termes et conditions " }) }}
 
-        <button type="submit" class="btn btn-outline-success">Register</button>
+        <button type="submit" class="btn btn-outline-success">Inscription</button>
     {{ form_end(registrationForm) }}
     </div>
     </div>
