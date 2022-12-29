@@ -15,11 +15,16 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Form\ImageAnnonceType;
 
 use App\Repository\LebelleOptionAnnonceRepository;
+// use App\Entity\LebelleOptionAnnonce;
 use App\Repository\ImageAnnonceRepository;
 //use Gedmo\Sluggable\Util\Urlizer;
 use App\Controller\Urlizer;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use App\Repository\OptionAnnonceRepository;
+use App\Repository\CategoryRepository;
+
+// use App\Repository\OptionAnnonce;
+use App\Entity\OptionAnnonce;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use App\Repository\UserRepository;
 
@@ -39,8 +44,9 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/new', name: 'app_annonce_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, annonceRepository $annonceRepository,ImageAnnonceRepository $imageAnnonceRepository,SluggerInterface $slugger): Response
+    public function new(Request $request, annonceRepository $annonceRepository,ImageAnnonceRepository $imageAnnonceRepository,LebelleOptionAnnonceRepository $LebelleOptionAnnonceRepository,OptionAnnonceRepository $OptionAnnonceRepository,CategoryRepository $CategoryRepository,SluggerInterface $slugger): Response
     {
+
         $annonce = new Annonce();
         $form = $this->createForm(Annonce2Type::class, $annonce);
         $form->handleRequest($request);
@@ -76,29 +82,49 @@ class AnnonceController extends AbstractController
                 $image->setLien($bdddes.$newFilename);
                 $image->setStatus('1');
                 $imageAnnonceRepository->save($image,true);
-            }
-/*
-            die;
 
-            $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
-            $safeFilename = $slugger->slug($originalFilename);
-            $newFilename = $safeFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
-            $uploadedFile->move(
-                $destination,
-                $newFilename
-            );
-            //create new entity image
-            $image = new ImageAnnonce();
-            //$image->setIdAnnonce($annonce);
-            $image->setLien($newFilename);
-            $image->handleRequest($request);
-*/
+
+                // 'OptionAnnonceRepository'=>$LebelleOptionAnnonceRepository->findAll(),
+            
+            }
+            
+$host = "localhost";
+$username = "root";
+$password = "";
+$database = "atypikhouse";
+
+$conn = mysqli_connect($host, $username, $password, $database);
+
+if (!$conn) {
+  // Gérez les erreurs de connexion ici
+}
+
+        for ($i = 1; $i <= count($_POST['values']); $i++) {
+            if ($_POST['values'][$i]) {
+                $val = $_POST['values'][$i];
+                $id_a= $annonce;
+                $inse = "INSERT INTO `option_annonce`(`id_annonce_id`, `id_libelle_id`, `valeur`) VALUES ($id_a,$i,'$val')";
+                // var_dump($inse);
+                mysqli_query($conn, $inse);
+                // $pdo->query($inse);            
+                // var_dump($i);
+                // $OptionAnnonce = new OptionAnnonce();
+                // $OptionAnnonce->setIdLibelle_id($i);
+                // $OptionAnnonce->setIdAnnonce($annonce);
+                // $OptionAnnonce->setValeur($_POST['values'][$i]);
+                // $OptionAnnonceRepository->save($OptionAnnonce,true);
+            }
+          }
+          
+
             return $this->redirectToRoute('app_annonce_index', [], Response::HTTP_SEE_OTHER);
 
         }
         return $this->renderForm('annonce/new.html.twig', [
             'annonce' => $annonce,
             'form' => $form,
+            'CategoryRepository'=>$CategoryRepository->findAll(),
+            'LebelleOptionAnnonceRepository'=>$LebelleOptionAnnonceRepository->findAll(),
         ]);
     }
 
