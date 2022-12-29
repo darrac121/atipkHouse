@@ -20,39 +20,14 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email',TextType::class,['attr' => ['class' => 'form-control '],
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'Vous devait remplire se champ.',
-                    ]),
-                ],
                 'required' => true,])
             ->add('telephone',TextType::class,['attr' => ['class' => 'form-control '],
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'Vous devait remplire se champ.',
-                    ]),
-                ],
                 'required' => true,])
             ->add('Name',TextType::class,['attr' => ['class' => 'form-control '],
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'Vous devait remplire se champ.',
-                    ]),
-                ],
                 'required' => true,])
             ->add('adresse',TextType::class,['attr' => ['class' => 'form-control '],
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'Vous devait remplire se champ.',
-                    ]),
-                ],
                 'required' => false,])
             ->add('firstname',TextType::class,['attr' => ['class' => 'form-control '],
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'Vous devait remplire se champ.',
-                    ]),
-                ],
                 'required' => true,])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
