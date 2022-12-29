@@ -76,13 +76,6 @@ class AnnonceController extends AbstractController
                 $image->setLien($bdddes.$newFilename);
                 $image->setStatus('1');
                 $imageAnnonceRepository->save($image,true);
-                // $image->save();
-                // $image->handleRequest($request);    
-                // echo "<br>";
-                // echo "<br>";
-                // echo "<br>";
-                // echo "<br>";
-                // echo "<br>";
             }
 /*
             die;
