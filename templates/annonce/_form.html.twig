@@ -2,6 +2,53 @@
     <div class="col-auto">
     {{ form_widget(form) }}
     </div>
+
+    
+<select name='categorie' id="selec">
+    {% for cat in CategoryRepository %}
+      {{ cat.libelle }}
+   <option value="{{ cat.id }}">{{ cat.libelle }}</option>
+    {% endfor %}
+</select>
+    {% set ii = 0 %}
+    {% for LebelleOptionAnnonceRepos in LebelleOptionAnnonceRepository %}
+      <div class="id-{{ LebelleOptionAnnonceRepos.idCategory }}" {% if ii != 0 %}style="display:none" {% endif %}>
+      <label>
+      {{ LebelleOptionAnnonceRepos.value }} {% if LebelleOptionAnnonceRepos.status == 1 %} * {% endif %}
+      <input type="text" id="values" class="form-control" name="values[{{ LebelleOptionAnnonceRepos.id }}]" placeholder="Saisissez encore une valeur">
+      </label>
+      {# {{ LebelleOptionAnnonceRepos.id }} #}
+      
+      </div>
+      {% set ii = ii + 1 %}
+    {% endfor %}
+<div id="tot" style="display:none">
+{{ ii }}
+</div> 
+
+
+<script>
+
+const tot = document.querySelector('#tot');
+var selectElement = document.querySelector('#selec');
+selectElement.addEventListener('change', () => {
+  // alert(`You selected: ${selectElement.value}`);
+  // console.log(tot.textContent);
+  
+  for (let i = 1; i <= tot.textContent; i++) {
+  if( selectElement.value != i){
+  const element = document.querySelector(".id-"+i);
+  element.style.display = 'none';
+    }
+  }
+
+  
+  const element = document.querySelector(".id-"+selectElement.value);
+  element.style.display = 'block';
+
+});
+</script>    
+<br>
       {# <input type="file" id="files" name="files" multiple> #}
       
     <button class="btn">{{ button_label|default('Save') }}</button>

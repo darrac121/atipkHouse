@@ -43,6 +43,25 @@ class OptionAnnonce
         return $this;
     }
 
+    public function getIdLibelle(): ?LebelleOptionAnnonce
+    {
+        return $this->idLibelle;
+    }
+
+    public function setIdLibelle(?LebelleOptionAnnonce $idLibelle): self
+    {
+        $this->idLibelle = $idLibelle;
+
+        return $this;
+    }
+
+    public function setIdLibelle_id($idLibelle)
+    {
+        $this->idLibelle = $idLibelle;
+
+        return $this;
+    }
+
     public function getIdAnnonce(): ?Annonce
     {
         return $this->idAnnonce;
@@ -55,15 +74,4 @@ class OptionAnnonce
         return $this;
     }
 
-    public function getIdLibelle(): ?LebelleOptionAnnonce
-    {
-        return $this->idLibelle;
-    }
-
-    public function setIdLibelle(?LebelleOptionAnnonce $idLibelle): self
-    {
-        $this->idLibelle = $idLibelle;
-
-        return $this;
-    }
 }
