@@ -54,7 +54,7 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/new', name: 'app_annonce_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, annonceRepository $annonceRepository,ImageAnnonceRepository $imageAnnonceRepository, DoctrineManagerRegistry $doctrine): Response
+    public function new(Request $request, annonceRepository $annonceRepository,ImageAnnonceRepository $imageAnnonceRepository, DoctrineManagerRegistry $doctrine,LebelleOptionAnnonceRepository $LebelleOptionAnnonceRepository,OptionAnnonceRepository $OptionAnnonceRepository,CategoryRepository $CategoryRepository,): Response
     {
 
         $annonce = new Annonce();
