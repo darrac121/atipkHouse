@@ -77,6 +77,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->id_user_reservation = new ArrayCollection();
     }
 
+    /**
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
+     */
     public function getId(): ?int
     {
         return $this->id;
@@ -343,4 +348,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+    
+    
 }

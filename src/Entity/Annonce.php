@@ -43,7 +43,7 @@ class Annonce
     private ?string $status = null;
 
     #[ORM\ManyToOne(inversedBy: 'annonces')]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn(nullable: false)]
     private ?User $idUser = null;
 
     #[ORM\OneToMany(mappedBy: 'idAnnonce', targetEntity: ImageAnnonce::class, orphanRemoval: true)]
@@ -63,7 +63,7 @@ class Annonce
         $this->imageAnnonces = new ArrayCollection();
         $this->avisAnnonces = new ArrayCollection();
         $this->idLibelle = new ArrayCollection();
-        $this->id_User = new ArrayCollection();
+        //$this->id_User = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -181,9 +181,10 @@ class Annonce
         return $this->idUser;
     }
 
-    public function setIdUser(?User $idUser): self
+
+    public function setIdUser(User $Userid): self
     {
-        $this->idUser = $idUser;
+        $this->idUser = $Userid;
 
         return $this;
     }
@@ -299,4 +300,5 @@ class Annonce
 
         return $this;
     }
+
 }

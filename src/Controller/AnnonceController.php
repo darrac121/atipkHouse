@@ -4,30 +4,40 @@ namespace App\Controller;
 
 use App\Entity\Annonce;
 use App\Entity\ImageAnnonce;
+use App\Entity\User;
 use App\Form\Annonce2Type;
 use App\Repository\AnnonceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
+use Doctrine\Persistence\ManagerRegistry as DoctrineManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+
 
 
 use App\Form\ImageAnnonceType;
 
 use App\Repository\LebelleOptionAnnonceRepository;
 use App\Repository\ImageAnnonceRepository;
-//use Gedmo\Sluggable\Util\Urlizer;
-use App\Controller\Urlizer;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use App\Repository\OptionAnnonceRepository;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use App\Repository\UserRepository;
-
+use Psr\Log\LoggerInterface;
+use SebastianBergmann\Environment\Console;
+use Symfony\Component\HttpKernel\Log\Logger;
 
 
 #[Route('/annonce')]
 class AnnonceController extends AbstractController
 {
+    
+
     #[Route('/', name: 'app_annonce_index', methods: ['GET'])]
     public function index(AnnonceRepository $annonceRepository,ImageAnnonceRepository $im,UserRepository $user): Response
     {
@@ -39,12 +49,17 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/new', name: 'app_annonce_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, annonceRepository $annonceRepository,ImageAnnonceRepository $imageAnnonceRepository,SluggerInterface $slugger): Response
+    public function new(Request $request, annonceRepository $annonceRepository, ImageAnnonceRepository $imageAnnonceRepository, UserRepository $userresp, DoctrineManagerRegistry $doctrine): Response
     {
         $annonce = new Annonce();
         $form = $this->createForm(Annonce2Type::class, $annonce);
         $form->handleRequest($request);
-
+        //$id= $request->query->get('id');        
+        $repository = $doctrine->getRepository(User::class);
+        //$user = $repository->find($id);
+        $email = $this->getUser()->getUserIdentifier();
+        $user = $repository->findOneBy(array('email' => $email));
+        $user->addAnnonce($annonce);
         
         // $imageAnnonce = new ImageAnnonce();
         // $form2 = $this->createForm(ImageAnnonceType::class, $imageAnnonce);
@@ -58,6 +73,7 @@ class AnnonceController extends AbstractController
             $uploadedFiles = $form['imageFile']->getData();
             $destination = $this->getParameter('kernel.project_dir').'/public/img_annonces/';
             $bdddes = "/img_annonces/";
+
             // var_dump($uploadedFiles);
             foreach($uploadedFiles as $uploadedFile){
                 // var_dump($);
@@ -71,28 +87,20 @@ class AnnonceController extends AbstractController
                     $newFilename
                 );
                 // var_dump($newFilename);
-                $image = new ImageAnnonce();
-                $image->setIdAnnonce($annonce);
-                $image->setLien($bdddes.$newFilename);
-                $image->setStatus('1');
-                $imageAnnonceRepository->save($image,true);
+               
+                      
+                    
             }
-/*
-            die;
-
-            $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
-            $safeFilename = $slugger->slug($originalFilename);
-            $newFilename = $safeFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
-            $uploadedFile->move(
-                $destination,
-                $newFilename
-            );
-            //create new entity image
             $image = new ImageAnnonce();
-            //$image->setIdAnnonce($annonce);
-            $image->setLien($newFilename);
-            $image->handleRequest($request);
-*/
+            $image->setIdAnnonce($annonce);
+            $image->setLien($bdddes.$newFilename);
+            $image->setStatus('1');
+            $imageAnnonceRepository->save($image,true);
+
+            
+                
+                
+
             return $this->redirectToRoute('app_annonce_index', [], Response::HTTP_SEE_OTHER);
 
         }
@@ -132,10 +140,7 @@ class AnnonceController extends AbstractController
                 $destination,
                 $newFilename
             );
-            //create new entity image
-            $image = new ImageAnnonce();
-            $image->setIdAnnonce($annonce);
-            $image->setLien($newFilename);
+
 
             return $this->redirectToRoute('app_annonce_index', [], Response::HTTP_SEE_OTHER);
         }

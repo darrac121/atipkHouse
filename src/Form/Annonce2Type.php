@@ -32,7 +32,7 @@ class Annonce2Type extends AbstractType
             ->add('datecreation',DateTimeType::class)
             ->add('status',TextType::class,['data' => 1,'attr' => ['class' => 'invisible'],'label' =>' '])
             // ->add('lien',FileType::class)
-            ->add('idUser')
+            //->add('idUser')
             ->add('imageFile', FileType::class, [
                 'mapped' => false,
                 'multiple'=>true,
