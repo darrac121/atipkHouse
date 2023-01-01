@@ -33,6 +33,7 @@ class Annonce2Type extends AbstractType
             ->add('status',TextType::class,['data' => 1,'attr' => ['class' => 'invisible'],'label' =>' '])
             // ->add('lien',FileType::class)
             //->add('idUser')
+            ->add('nbmax')
             ->add('imageFile', FileType::class, [
                 'mapped' => false,
                 'multiple'=>true,

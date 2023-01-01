@@ -58,6 +58,9 @@ class Annonce
     #[ORM\OneToMany(mappedBy: 'idAnnonce', targetEntity: Reservation::class)]
     private Collection $id_User;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $nbmax = null;
+
     public function __construct()
     {
         $this->imageAnnonces = new ArrayCollection();
@@ -297,6 +300,18 @@ class Annonce
                 $idUser->setIdAnnonce(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNbmax(): ?string
+    {
+        return $this->nbmax;
+    }
+
+    public function setNbmax(?string $nbmax): self
+    {
+        $this->nbmax = $nbmax;
 
         return $this;
     }
