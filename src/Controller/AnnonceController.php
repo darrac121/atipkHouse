@@ -60,9 +60,10 @@ class AnnonceController extends AbstractController
         $annonce = new Annonce();
         $form = $this->createForm(Annonce2Type::class, $annonce);
         $form->handleRequest($request);
-        //$id= $request->query->get('id');        
+        
+        //user
         $repository = $doctrine->getRepository(User::class);
-        //$user = $repository->find($id);
+        
         $email = $this->getUser()->getUserIdentifier();
         $user = $repository->findOneBy(array('email' => $email));
         $user->addAnnonce($annonce);
