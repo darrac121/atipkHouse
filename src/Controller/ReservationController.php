@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Annonce;
+use App\Entity\User;
 use App\Entity\Reservation;
 use App\Form\ReservationType;
 use App\Repository\ReservationRepository;
@@ -36,9 +37,9 @@ class ReservationController extends AbstractController
         $repository = $doctrine->getRepository(Annonce::class);
         $annonce = $repository->find($idannonce);
         $reservation->setIdAnnonce($annonce);
+
         //set user annonce 
         $repository2 = $doctrine->getRepository(User::class);
-        
         $email = $this->getUser()->getUserIdentifier();
         $user = $repository2->findOneBy(array('email' => $email));
         $user->addIdUserReservation($reservation);

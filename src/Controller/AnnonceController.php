@@ -52,6 +52,21 @@ class AnnonceController extends AbstractController
             'user'=>$user->findAll(),
         ]);
     }
+    #[Route('/mesannonces')]
+    public function mesAnnonces(AnnonceRepository $annonceRepository,ImageAnnonceRepository $im,UserRepository $user, DoctrineManagerRegistry $doctrine): Response
+    {
+        /*$repository = $doctrine->getRepository(User::class);
+        $email = $this->getUser()->getUserIdentifier();
+        $user = $repository->findOneBy(array('email' => $email));
+        */
+        
+        return $this->render('annonce/mesannonces.html.twig', [
+            //'annonces' => $annonceRepository->findBy(['id_User', $user]),
+            'annonces' => $annonceRepository->findAll(),
+            'imgs'=>$im->findAll(),
+            'user'=>$user->findAll(),
+        ]);
+    }
 
     #[Route('/new', name: 'app_annonce_new', methods: ['GET', 'POST'])]
     public function new(Request $request, annonceRepository $annonceRepository,ImageAnnonceRepository $imageAnnonceRepository, DoctrineManagerRegistry $doctrine,LebelleOptionAnnonceRepository $LebelleOptionAnnonceRepository,OptionAnnonceRepository $OptionAnnonceRepository,CategoryRepository $CategoryRepository,): Response
