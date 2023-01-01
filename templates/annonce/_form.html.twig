@@ -3,16 +3,24 @@
     {{ form_widget(form) }}
     </div>
 
-    
-<select name='categorie' id="selec">
+    {% set catcont = 0 %}
+<select name='categorie' id="selection">
     {% for cat in CategoryRepository %}
-      {{ cat.libelle }}
+      {# {{ cat.libelle }} #}
    <option value="{{ cat.id }}">{{ cat.libelle }}</option>
+      {% set catcont = catcont + 1 %}
+
     {% endfor %}
 </select>
     {% set ii = 0 %}
+    {% set first = 0 %}
+    {# first #}
     {% for LebelleOptionAnnonceRepos in LebelleOptionAnnonceRepository %}
-      <div class="id-{{ LebelleOptionAnnonceRepos.idCategory }}" {% if ii != 0 %}style="display:none" {% endif %}>
+
+    {# {% set tab ~ LebelleOptionAnnonceRepos.idCategory =[LebelleOptionAnnonceRepos.value] %} #}
+    {# {% set tab[LebelleOptionAnnonceRepos.idCategory] = tab[LebelleOptionAnnonceRepos.idCategory]|merge([LebelleOptionAnnonceRepos.value]) %} #}
+    {% if ii == 0 %}{% set first = LebelleOptionAnnonceRepos.idCategory %}{% endif %}
+      <div class="id-{{ LebelleOptionAnnonceRepos.idCategory }}" {% if LebelleOptionAnnonceRepos.idCategory == first %}style="display:none"{% endif %}>
       <label>
       {{ LebelleOptionAnnonceRepos.value }} {% if LebelleOptionAnnonceRepos.status == 1 %} * {% endif %}
       <input type="text" id="values" class="form-control" name="values[{{ LebelleOptionAnnonceRepos.id }}]" placeholder="Saisissez encore une valeur">
@@ -25,27 +33,40 @@
 <div id="tot" style="display:none">
 {{ ii }}
 </div> 
-
+<div id="catcount" style="display:none;">
+{{ catcont }}
+</div>
 
 <script>
 
-const tot = document.querySelector('#tot');
-var selectElement = document.querySelector('#selec');
+var tot = document.querySelector('#tot');
+var catcount = document.querySelector('#catcount');
+var selectElement = document.querySelector('#selection');
 selectElement.addEventListener('change', () => {
   // alert(`You selected: ${selectElement.value}`);
-  // console.log(tot.textContent);
-  
-  for (let i = 1; i <= tot.textContent; i++) {
-  if( selectElement.value != i){
-  const element = document.querySelector(".id-"+i);
-  element.style.display = 'none';
+  //console.log(tot.textContent);
+  //console.log(selectElement.value);
+  // console.log(catcount.textContent);
+  //for (let i = 1; i <= tot.textContent; i++) {
+  for (let cat = 1; cat <= catcount.textContent; cat++) {
+  if(selectElement.value != cat){
+  var elements = document.querySelectorAll(".id-"+cat);
+  elements.forEach(element => {
+  element.style.display = 'none'; });
     }
+    else{
+    var elements = document.querySelectorAll(".id-"+selectElement.value);
+    // element.style.display = 'block'; 
+  elements.forEach(element => {
+    element.style.display = 'block';
+});
+    }
+  console.log('fai'+cat);
+
   }
+  //}
 
   
-  const element = document.querySelector(".id-"+selectElement.value);
-  element.style.display = 'block';
-
 });
 </script>    
 <br>

@@ -115,22 +115,40 @@ class AnnonceController extends AbstractController
                 $image->setStatus('1');
                 $imageAnnonceRepository->save($image,true);
             }
-/*
-            die;
 
-            $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
-            $safeFilename = $slugger->slug($originalFilename);
-            $newFilename = $safeFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
-            $uploadedFile->move(
-                $destination,
-                $newFilename
-            );
-            //create new entity image
-            $image = new ImageAnnonce();
-            //$image->setIdAnnonce($annonce);
-            $image->setLien($newFilename);
-            $image->handleRequest($request);
-*/
+            $host = "localhost";
+            $username = "root";
+            $password = "";
+            $database = "atypikhouse";
+            
+            $conn = mysqli_connect($host, $username, $password, $database);
+            
+            if (!$conn) {
+              // Gérez les erreurs de connexion ici
+            }
+            
+                    for ($i = 1; $i <= sizeof($_POST['values']); $i++) {
+                        // var_dump(sizeof($_POST['values']));
+                        // var_dump(!is_null($_POST['values'][$i]));
+                        // die;
+                        if ($_POST['values'][$i]) {
+                            $val = $_POST['values'][$i];
+                            $id_a= $annonce;
+                            $inse = "INSERT INTO `option_annonce`(`id_annonce_id`, `id_libelle_id`, `valeur`) VALUES ($id_a,$i,'$val')";
+                            // var_dump($inse);
+                            
+                            mysqli_query($conn, $inse);
+                            
+                            // $pdo->query($inse);            
+                            // var_dump($i);
+                            // $OptionAnnonce = new OptionAnnonce();
+                            // $OptionAnnonce->setIdLibelle_id($i);
+                            // $OptionAnnonce->setIdAnnonce($annonce);
+                            // $OptionAnnonce->setValeur($_POST['values'][$i]);
+                            // $OptionAnnonceRepository->save($OptionAnnonce,true);
+                        }
+                      }
+                    //   die;
             return $this->redirectToRoute('app_annonce_index', [], Response::HTTP_SEE_OTHER);
 
         }
