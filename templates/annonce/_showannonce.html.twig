@@ -1,0 +1,43 @@
+
+{% block body %}
+<h1>Annonce</h1>
+
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ annonce.id }}</td>
+        </tr>
+        <tr>
+            <th>Titre</th>
+            <td>{{ annonce.titre }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ annonce.description }}</td>
+        </tr>
+        <tr>
+            <th>Adresse</th>
+            <td>{{ annonce.adresse }}</td>
+        </tr>
+        <tr>
+            <th>Ville</th>
+            <td>{{ annonce.Ville }}</td>
+        </tr>
+        <tr>
+            <th>CodePostal</th>
+            <td>{{ annonce.CodePostal }}</td>
+        </tr>
+        <tr>
+            <th>Prix</th>
+            <td id="prix">{{ annonce.prix }}</td>
+        </tr>
+        <tr>
+            <th>Datecreation</th>
+            <td>{{ annonce.datecreation ? annonce.datecreation|date('Y-m-d H:i:s') : '' }}</td>
+        </tr>
+
+    </tbody>
+</table>
+{% endblock %}
+

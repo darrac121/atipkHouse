@@ -68,6 +68,19 @@ class AnnonceController extends AbstractController
         ]);
     }
 
+#[Route('/showannonce')]
+  public function showannonce(AnnonceRepository $annonceRepository, int $id): Response
+  {
+    $querryresult = $annonceRepository->find($id);
+
+    // render
+    return $this->render('annonce/_showannonce.html.twig', [
+      'annonce' => $querryresult,
+    ]);
+  }
+
+
+
     #[Route('/new', name: 'app_annonce_new', methods: ['GET', 'POST'])]
     public function new(Request $request, annonceRepository $annonceRepository,ImageAnnonceRepository $imageAnnonceRepository, DoctrineManagerRegistry $doctrine,LebelleOptionAnnonceRepository $LebelleOptionAnnonceRepository,OptionAnnonceRepository $OptionAnnonceRepository,CategoryRepository $CategoryRepository,): Response
     {

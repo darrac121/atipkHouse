@@ -11,6 +11,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
+
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+
+
 class ReservationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -32,3 +36,5 @@ class ReservationType extends AbstractType
         ]);
     }
 }
+
+
