@@ -23,7 +23,7 @@ Vivre dans un logement atipik peut être une expérience très gratifiante pour 
 <div style="margin-top: 5px;margin-bottom: 5px;"></div>
 
 {# {{ last_username }} #}
-<div class="row">
+<div class="row row-cols-auto">
 
     {# {% for aviss in avis %}
         {{ aviss.id }}
@@ -33,7 +33,8 @@ Vivre dans un logement atipik peut être une expérience très gratifiante pour 
     {% endfor %}
      #}
     {% for annonce in annonces %}
-        <div class="col-sm-6 col-md-4">
+        {# <div class="col-sm-6 col-md-4"> #}
+        <div class="col">
                 <a href="{{ path('app_annonce_show', {'id': annonce.id}) }}" class="btn">
                 <article>  
                 <div class="card" style="width: 18rem;">

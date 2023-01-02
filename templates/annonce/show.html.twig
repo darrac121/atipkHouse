@@ -78,14 +78,31 @@
     {% endfor %} #}
 {# aaa #}
 
-    <a href="{{ path('app_annonce_index') }}" class="btn btn-outline-secondary"> < back to list</a>
+    
 {% if app.user %}
+<a href="{{ path('app_annonce_index') }}" class="btn btn-outline-secondary"> < back to list</a>
+<div class="p-2"></div>
+<a href="/reservation/new?idannonce={{ annonce.id }}" class="btn btn-outline-success">Reserver maintenant</a>
+<div class="p-3"></div>
+
 {# {{ app.user }}
 {{ annonce.idUser }} #}
 {% if app.user == annonce.idUser %}
-    <a href="{{ path('app_annonce_edit', {'id': annonce.id}) }}">edit</a>
-    {{ include('annonce/_delete_form.html.twig') }}
+<div class="btn-group" role="group">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+      modifier
+    </button>
+    <ul class="dropdown-menu">
+      <li>
+        <a class="btn" href="{{ path('app_annonce_edit', {'id': annonce.id}) }}">edit</a>
+    </li>
+      <li>{{ include('annonce/_delete_form.html.twig') }}</li>
+    </ul>
+  </div>
+    
 {% endif %}
+{% else %}
+<a href="{{ path('app_annonce_index') }}" class="btn btn-outline-secondary"> < back to list</a>
 {% endif %}
 
 </div>

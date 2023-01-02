@@ -6,9 +6,10 @@
 
 
     <div class="container">
-        <div class="row">
+        <div class="row row-cols-auto">
             {% for annonce in annonces %}
-            <div class="col-sm-6 col-4">
+            {# <div class="col-sm-6 col-md-3"> #}
+            <div class="col">
                 <div class="card" style="width: 18rem;">
                     {# <img src="{{  img.annonce.id }}" class="card-img-top" alt="..."> #}
                     {# <img src="{{  annonce.id|img }}" class="card-img-top" alt="..."> #}
@@ -52,5 +53,5 @@
     </div>
         </div>
         <br>
-        <a href="{{ path('app_annonce_new') }}">Create new</a>
+        {# <a href="{{ path('app_annonce_new') }}">Create new</a> #}
     {% endblock %}

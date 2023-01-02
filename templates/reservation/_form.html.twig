@@ -1,4 +1,84 @@
 {{ form_start(form) }}
+    <div class="d-none">
+    {{ form_row(form.NbNuit) }}
+    </div>
+     <div class="d-none">
+    {{ form_row(form.Statue) }}
+    </div>
     {{ form_widget(form) }}
+    nombre de nuit
+    <div id="nb">
+    0
+    </div>
+    <script>
+function getDateDifference(date1, date2) {
+  let diffInMilliseconds = Math.abs(date1.getTime() - date2.getTime());
+  let diffInDays = Math.ceil(diffInMilliseconds / 86400000);
+  return diffInDays;
+}
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+function numberToMonth(number) {
+  return months[number - 1];
+}
+function te(){
+var debut_month_id = document.querySelector('#reservation_DateDebut_month').value;
+var debut_day = document.querySelector('#reservation_DateDebut_day').value;
+var debut_yaer = document.querySelector('#reservation_DateDebut_year').value;
+
+var Fin_month_id = document.querySelector('#reservation_DateFin_month').value;
+var Fin_day = document.querySelector('#reservation_DateFin_day').value;
+var Fin_yaer = document.querySelector('#reservation_DateFin_year').value;
+
+var debut_month =numberToMonth(debut_month_id);
+var Fin_month =numberToMonth(Fin_month_id);
+//console.log(debut_month);
+
+let date1 = new Date("'"+debut_month+debut_day+','+debut_yaer+"'");
+let date2 = new Date("'"+Fin_month+Fin_day+','+Fin_yaer+"'");
+// let date2 = new Date('January 1, 2022');
+// console.log(date1);
+let difference = getDateDifference(date1, date2);
+console.log(difference);
+
+var nb = document.querySelector('.nb');
+nb.value = difference;
+var nbid = document.querySelector('#nb');
+nbid.textContent = difference;
+
+}
+
+
+
+var selectElement = document.querySelector('#reservation_DateDebut_month');
+selectElement.addEventListener('change', () => {
+te();
+});
+
+var selectElement = document.querySelector('#reservation_DateDebut_day');
+selectElement.addEventListener('change', () => {
+te();
+});
+var selectElement = document.querySelector('#reservation_DateDebut_year');
+selectElement.addEventListener('change', () => {
+te();
+});
+var selectElement = document.querySelector('#reservation_DateFin_month');
+selectElement.addEventListener('change', () => {
+te();
+});
+var selectElement = document.querySelector('#reservation_DateFin_day');
+selectElement.addEventListener('change', () => {
+te();
+});
+
+var selectElement = document.querySelector('#reservation_DateFin_year');
+selectElement.addEventListener('change', () => {
+te();
+});
+
+
+
+</script>
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
