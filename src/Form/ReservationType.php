@@ -21,7 +21,7 @@ class ReservationType extends AbstractType
         ->add('NbNuit',IntegerType::class,['attr' => ['class' => 'form-control nb d-none','min' => 1,'value' => '0']])
         ->add('Total',IntegerType::class,['attr' => ['class' => '','min' => 1,'value' => '1']])
         ->add('Statue',IntegerType::class,['attr' => ['class' => 'd-none','value' => '0']])
-        ->add('StatuePayment',IntegerType::class,['attr' => ['class' => 'disabled','min' => 1,'value' => '1']])
+        ->add('StatuePayment',IntegerType::class,['attr' => ['class' => 'disabled','min' => 0,'value' => '1']])
         ;
     }
 

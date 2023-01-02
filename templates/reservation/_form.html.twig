@@ -1,15 +1,21 @@
+<div class="container">
 {{ form_start(form) }}
     <div class="d-none">
     {{ form_row(form.NbNuit) }}
-    </div>
-     <div class="d-none">
     {{ form_row(form.Statue) }}
+    {{ form_row(form.StatuePayment) }}
     </div>
     {{ form_widget(form) }}
     nombre de nuit
     <div id="nb">
     0
     </div>
+
+    <select name="reservation[StatuePayment]">
+      <option value="0">Payment Plus tard</option>
+      <option value="1">Payment Par paypal</option>
+      <option value="2">Payment Par cheque ou espece</option>
+    </select>
     <script>
 function getDateDifference(date1, date2) {
   let diffInMilliseconds = Math.abs(date1.getTime() - date2.getTime());
@@ -80,5 +86,7 @@ te();
 
 
 </script>
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<br>
+    <button class="btn btn-outline-success">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
+</div>
