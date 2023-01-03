@@ -37,12 +37,12 @@ class Annonce2Type extends AbstractType
             ->add('adresse',TextType::class,['attr' => ['class' => 'form-control']])
             ->add('Ville',TextType::class,['attr' => ['class' => 'form-control']])
             ->add('CodePostal',TextType::class,['attr' => ['class' => 'form-control']])
-            ->add('prix',TextType::class,['attr' => ['class' => 'form-control']])
+            ->add('prix',TextType::class,['attr' => ['class' => 'form-control prix'],'label' => 'Prix ( 15% sera ajouter pour la comition )'])
+            ->add('nbmax',TextType::class,['attr' => ['class' => 'form-control']])
             ->add('datecreation',DateTimeType::class)
-            ->add('status',TextType::class,['data' => 1,'attr' => ['class' => 'invisible'],'label' =>' '])
+            ->add('status',HiddenType::class,['data' => 1,'attr' => ['class' => 'invisible','value' => '1'],'label' =>' '])
             // ->add('lien',FileType::class)
             //->add('idUser')
-            ->add('nbmax',TextType::class,['attr' => ['class' => 'form-control']])
             
             
             // form-control

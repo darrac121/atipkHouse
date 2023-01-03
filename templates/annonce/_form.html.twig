@@ -1,8 +1,10 @@
 {{ form_start(form) }}
+    
+    {# {{ form_widget(form.prix) }} #}
+
     <div class="col-auto">
     {{ form_widget(form) }}
     </div>
-
     {% set catcont = 0 %}
 <select name='categorie' id="selection">
     {% for cat in CategoryRepository %}
@@ -38,6 +40,29 @@
 </div>
 
 <script>
+
+function add_15_prix(){
+var selectElement = document.getElementById('annonce2_prix');
+
+selectElement.value = selectElement.value * 1.15;
+
+}
+
+var input = document.getElementById('annonce2_prix');
+input.onchange = function() {
+  add_15_prix();
+}
+
+
+
+
+
+
+var selectElement = document.querySelector('#reservation_DateDebut_day');
+selectElement.addEventListener('change', () => {
+te();
+});
+
 
 var tot = document.querySelector('#tot');
 var catcount = document.querySelector('#catcount');
