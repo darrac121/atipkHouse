@@ -41,6 +41,27 @@
 
 <script>
 
+function te(){
+   for (let cat = 1; cat <= catcount.textContent; cat++) {
+  if(selectElement.value != cat){
+  var elements = document.querySelectorAll(".id-"+cat);
+  elements.forEach(element => {
+  element.style.display = 'none';
+   });
+    }
+    else{
+    var elements = document.querySelectorAll(".id-"+selectElement.value);
+    // element.style.display = 'block'; 
+  elements.forEach(element => {
+    element.style.display = 'block';
+});
+    }
+
+  }
+  //}
+
+ 
+}
 function add_15_prix(){
 var selectElement = document.getElementById('annonce2_prix');
 
@@ -57,41 +78,18 @@ input.onchange = function() {
 
 
 
-
+/*
 var selectElement = document.querySelector('#reservation_DateDebut_day');
 selectElement.addEventListener('change', () => {
 te();
-});
+});*/
 
 
 var tot = document.querySelector('#tot');
 var catcount = document.querySelector('#catcount');
 var selectElement = document.querySelector('#selection');
 selectElement.addEventListener('change', () => {
-  // alert(`You selected: ${selectElement.value}`);
-  //console.log(tot.textContent);
-  //console.log(selectElement.value);
-  // console.log(catcount.textContent);
-  //for (let i = 1; i <= tot.textContent; i++) {
-  for (let cat = 1; cat <= catcount.textContent; cat++) {
-  if(selectElement.value != cat){
-  var elements = document.querySelectorAll(".id-"+cat);
-  elements.forEach(element => {
-  element.style.display = 'none'; });
-    }
-    else{
-    var elements = document.querySelectorAll(".id-"+selectElement.value);
-    // element.style.display = 'block'; 
-  elements.forEach(element => {
-    element.style.display = 'block';
-});
-    }
-  console.log('fai'+cat);
-
-  }
-  //}
-
-  
+ te(); 
 });
 </script>    
 <br>
