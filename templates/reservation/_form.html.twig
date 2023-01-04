@@ -50,21 +50,34 @@ Total
     </div>
 
     </div>
-    <select name="reservation[StatuePayment]">
+    <select name="reservation[StatuePayment]" id="statpay">
       <option value="0">Payment Plus tard</option>
       <option value="1">Payment Par paypal</option>
       <option value="2">Payment Par cheque ou espece</option>
     </select>
-<div id="smart-button-container">
-    <div style="text-align: center"><label for="description">Nom du titulaire </label><input type="text" name="descriptionInput" id="description" maxlength="127" value=""></div>
+
+
+
+<div class="paypal" style="display:none;">
+    <div id="smart-button-container">
+    <div style="text-align: center"><label for="description"> </label><input type="text" name="descriptionInput" id="description" maxlength="127" value=""></div>
       <p id="descriptionError" style="visibility: hidden; color:red; text-align: center;">Please enter a description</p>
-    <div style="text-align: center"><label for="amount">Total </label><input name="amountInput" type="number" id="amount" value="" ><span> EUR</span></div>
+    <div style="text-align: center"><label for="amount"> </label><input name="amountInput" type="number" id="amount" value="" ><span> USD</span></div>
       <p id="priceLabelError" style="visibility: hidden; color:red; text-align: center;">Please enter a price</p>
     <div id="invoiceidDiv" style="text-align: center; display: none;"><label for="invoiceid"> </label><input name="invoiceid" maxlength="127" type="text" id="invoiceid" value="" ></div>
       <p id="invoiceidError" style="visibility: hidden; color:red; text-align: center;">Please enter an Invoice ID</p>
     <div style="text-align: center; margin-top: 0.625rem;" id="paypal-button-container"></div>
   </div>
-  <script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=EUR" data-sdk-integration-source="button-factory"></script>
+
+  </div>
+
+
+  
+<br>
+<div class="alert" id='message'>
+</div>
+    <button class="btn btn-outline-success" id="success">{{ button_label|default('Save') }}</button>
+  <script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
   <script>
   function initPayPalButton() {
     var description = document.querySelector('#smart-button-container #description');
@@ -91,10 +104,10 @@ Total
 
     paypal.Buttons({
       style: {
-        color: 'white',
+        color: 'blue',
         shape: 'pill',
         label: 'paypal',
-        layout: 'horizontal',
+        layout: 'vertical',
         
       },
 
@@ -174,17 +187,51 @@ Total
   initPayPalButton();
   </script>
   
+   
     <script>
+
+var satpayement = document.querySelector('#statpay');
+satpayement.addEventListener('change', () => {
+if (satpayement.value == 1){
+  var paypal = document.getElementsByClassName('paypal');
+  paypal[0].style.display = 'block';
+}
+else{
+  var paypal = document.getElementsByClassName('paypal');
+  paypal[0].style.display = 'none';
+}
+});
+ // paypal
+
+/*
+function add_15_prix(){
+var selectElement = document.getElementById('annonce2_prix');
+selectElement.value = selectElement.value * 1.15;
+}
+
+var input = document.getElementById('annonce2_prix');
+input.onchange = function() {
+  add_15_prix();
+}
+*/
+
+
 function getDateDifference(date1, date2) {
-  let diffInMilliseconds = Math.abs(date1.getTime() - date2.getTime());
-  let diffInDays = Math.ceil(diffInMilliseconds / 86400000);
+  // On calcule la différence en milisecondes
+  var diff = Math.abs(date1.getTime() - date2.getTime());
+  // On calcule la différence en jours en divisant la différence en milisecondes par la longueur d'un jour en milisecondes
+  var diffInDays = diff / (1000 * 60 * 60 * 24);
   return diffInDays;
 }
+
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 function numberToMonth(number) {
   return months[number - 1];
 }
+// console.log(numberToMonth(1));
+
+
 function te(){
 var debut_month_id = document.querySelector('#reservation_DateDebut_month').value;
 var debut_day = document.querySelector('#reservation_DateDebut_day').value;
@@ -194,16 +241,51 @@ var Fin_month_id = document.querySelector('#reservation_DateFin_month').value;
 var Fin_day = document.querySelector('#reservation_DateFin_day').value;
 var Fin_yaer = document.querySelector('#reservation_DateFin_year').value;
 
-var debut_month =numberToMonth(debut_month_id);
-var Fin_month =numberToMonth(Fin_month_id);
-//console.log(debut_month);
+//var debut_month =numberToMonth(debut_month_id);
+//var Fin_month =numberToMonth(Fin_month_id);
 
-let date1 = new Date("'"+debut_month+debut_day+','+debut_yaer+"'");
-let date2 = new Date("'"+Fin_month+Fin_day+','+Fin_yaer+"'");
+var debut_month =debut_month_id;
+var Fin_month =Fin_month_id;
+//console.log(debut_month);
+//console.log("'"+debut_month+' '+debut_day+','+debut_yaer+"'");
+//console.log("'"+Fin_month+' '+Fin_day+','+Fin_yaer+"'");
+//let date1 = new Date("'"+debut_month+' '+debut_day+','+debut_yaer+"'");
+//let date2 = new Date("'"+Fin_month+' '+Fin_day+','+Fin_yaer+"'");
 // let date2 = new Date('January 1, 2022');
 // console.log(date1);
+// console.log(date2);
+
+var date1 = new Date(debut_yaer, debut_month, debut_day);
+var date2 = new Date(Fin_yaer, Fin_month, Fin_day);
+
+var dateofmax = document.getElementById('dateofmax');
+var datejour=new Date();
+
+
+// btn-outline-success
+var btn_valide = document.getElementById('success');
+var message = document.getElementById('message');
+
+if(date1 > date2){
+  message.textContent ="la date n'est pas valide"; 
+  btn_valide.disabled = true;
+}
+else if(dateofmax <= date2){
+  message.textContent ="la date n'est plus disponible pour se bien"; 
+  btn_valide.disabled = true;
+}
+else if(date1 <= datejour){
+  message.textContent ="la date est deja passer"; 
+  btn_valide.disabled = true;
+}
+else{
+message.textContent =""; 
+btn_valide.disabled = false;
+  
+// console.log(getDateDifference(date1, date2)); // affiche 14
+
 let difference = getDateDifference(date1, date2);
-console.log(difference);
+// console.log(difference);
 
 var nb = document.querySelector('.nb');
 nb.value = difference;
@@ -211,7 +293,7 @@ var nbid = document.querySelector('#nb');
 nbid.textContent = difference;
 
 var prix = document.querySelector('#prix').textContent;
-console.log(prix);
+// console.log(prix);
 var reservation_Total = document.querySelector('#reservation_Total');
 var Total = document.querySelector('#Total');
 var paypal = document.querySelector('#amount');
@@ -220,7 +302,7 @@ reservation_Total.value = difference * prix;
 Total.textContent = difference * prix;
 paypal.value = difference * prix;
 
-
+}
 }
 
 
@@ -256,7 +338,6 @@ te();
 
 </script>
 
-<br>
-    <button class="btn btn-outline-success">{{ button_label|default('Save') }}</button>
+
 {{ form_end(form) }}
 </div>
