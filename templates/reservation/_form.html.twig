@@ -74,7 +74,7 @@ Total
 
   
 <br>
-<div class="alert" id='message'>
+<div class="alert alert-danger" id='message' style="display:none;">
 </div>
     <button class="btn btn-outline-success" id="success">{{ button_label|default('Save') }}</button>
   <script src="https://www.paypal.com/sdk/js?client-id=sb&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
@@ -267,18 +267,22 @@ var btn_valide = document.getElementById('success');
 var message = document.getElementById('message');
 
 if(date1 > date2){
+  message.style.display ="block";
   message.textContent ="la date n'est pas valide"; 
   btn_valide.disabled = true;
 }
 else if(dateofmax <= date2){
+  message.style.display ="block";
   message.textContent ="la date n'est plus disponible pour se bien"; 
   btn_valide.disabled = true;
 }
 else if(date1 <= datejour){
+  message.style.display ="block";
   message.textContent ="la date est deja passer"; 
   btn_valide.disabled = true;
 }
 else{
+  message.style.display ="none";
 message.textContent =""; 
 btn_valide.disabled = false;
   
