@@ -43,8 +43,34 @@ body {
   font-family: "Open Sans", sans-serif;
   margin: 0;
 }
+#main_connection {
+  height: 100vh;
+  background: url("/img_website/fond_connection.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+#info {
+  width: 40%;
+  height: 460px;
+  border-radius: 5px;
+  color: var(--bs-white);
+  background-color: rgba(0,0,0, 0.35);
+  left: 50%;
+  top: 40%;
+  position: absolute;
+  transform: translate(-50%,-50%);
+  font-size: 12px;
+}
+
+
+
+
 .truncate {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
