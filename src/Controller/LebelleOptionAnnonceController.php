@@ -57,7 +57,9 @@ class LebelleOptionAnnonceController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $lebelleOptionAnnonceRepository->save($lebelleOptionAnnonce, true);
 
-            return $this->redirectToRoute('app_lebelle_option_annonce_index', [], Response::HTTP_SEE_OTHER);
+            return $this->render('category/show.html.twig', [
+                'category' => $category,
+            ]);
         }
 
         return $this->renderForm('lebelle_option_annonce/new.html.twig', [
