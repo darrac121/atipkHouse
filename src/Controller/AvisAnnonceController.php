@@ -6,6 +6,7 @@ use App\Entity\Annonce;
 use App\Entity\AvisAnnonce;
 use App\Form\AvisAnnonceType;
 use App\Repository\AvisAnnonceRepository;
+use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,7 +36,7 @@ class AvisAnnonceController extends AbstractController
     }
 
     #[Route('/new', name: 'app_avis_annonce_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, AvisAnnonceRepository $avisAnnonceRepository, ManagerRegistry $doctrine): Response
+    public function new(Request $request, AvisAnnonceRepository $avisAnnonceRepository, ManagerRegistry $doctrine,UserRepository $userRepository): Response
     {
        $idannonce = $request->query->get('idannonce');
        $repository = $doctrine->getRepository(Annonce::class);
@@ -45,10 +46,9 @@ class AvisAnnonceController extends AbstractController
 
         $avisAnnonce->setIdAnnonce($annonce);
         //user
-        $repository = $doctrine->getRepository(User::class);
         
         $email = $this->getUser()->getUserIdentifier();
-        $user = $repository->findOneBy(array('email' => $email));
+        $user = $userRepository->findOneBy(array('email' => $email));
         $avisAnnonce->setIdUser($user);
 
         $form = $this->createForm(AvisAnnonceType::class, $avisAnnonce);
