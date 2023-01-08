@@ -14,8 +14,6 @@ class AvisAnnonceType extends AbstractType
         $builder
             ->add('message')
             ->add('rating')
-            ->add('idUser')
-            ->add('idAnnonce')
         ;
     }
 
