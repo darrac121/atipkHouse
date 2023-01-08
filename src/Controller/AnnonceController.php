@@ -146,28 +146,15 @@ class AnnonceController extends AbstractController
             if (!$conn) {
               // Gérez les erreurs de connexion ici
             }
-            
-                    for ($i = 1; $i <= sizeof($_POST['values']); $i++) {
-                        // var_dump(sizeof($_POST['values']));
-                        // var_dump(!is_null($_POST['values'][$i]));
-                        // die;
-                        if ($_POST['values'][$i]) {
-                            $val = $_POST['values'][$i];
-                            $id_a= $annonce;
-                            $inse = "INSERT INTO `option_annonce`(`id_annonce_id`, `id_libelle_id`, `valeur`) VALUES ($id_a,$i,'$val')";
-                            // var_dump($inse);
-                            
-                            mysqli_query($conn, $inse);
-                            
-                            // $pdo->query($inse);            
-                            // var_dump($i);
-                            // $OptionAnnonce = new OptionAnnonce();
-                            // $OptionAnnonce->setIdLibelle_id($i);
-                            // $OptionAnnonce->setIdAnnonce($annonce);
-                            // $OptionAnnonce->setValeur($_POST['values'][$i]);
-                            // $OptionAnnonceRepository->save($OptionAnnonce,true);
-                        }
-                      }
+            foreach($_POST['values'] as $key => $value){
+                if ($_POST['values'][$key]) {
+                    $val = $_POST['values'][$key];
+                    $id_a= $annonce;
+                    $inse = "INSERT INTO `option_annonce`(`id_annonce_id`, `id_libelle_id`, `valeur`) VALUES ($id_a,$key,'$val')";
+                    // var_dump($inse);
+                    mysqli_query($conn, $inse);
+                }
+            }
                     //   die;
             return $this->redirectToRoute('app_annonce_index', [], Response::HTTP_SEE_OTHER);
 
