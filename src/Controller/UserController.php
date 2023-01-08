@@ -23,6 +23,7 @@ class UserController extends AbstractController
             'users' => $userRepository->findAll(),
         ]);
     }
+    
 
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
     public function new(Request $request, UserRepository $userRepository): Response
