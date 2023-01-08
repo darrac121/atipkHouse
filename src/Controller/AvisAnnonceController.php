@@ -35,9 +35,22 @@ class AvisAnnonceController extends AbstractController
     }
 
     #[Route('/new', name: 'app_avis_annonce_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, AvisAnnonceRepository $avisAnnonceRepository): Response
+    public function new(Request $request, AvisAnnonceRepository $avisAnnonceRepository, ManagerRegistry $doctrine): Response
     {
+       $idannonce = $request->query->get('idannonce');
+       $repository = $doctrine->getRepository(Annonce::class);
+       $annonce = $repository->find($idannonce);
+
         $avisAnnonce = new AvisAnnonce();
+
+        $avisAnnonce->setIdAnnonce($annonce);
+        //user
+        $repository = $doctrine->getRepository(User::class);
+        
+        $email = $this->getUser()->getUserIdentifier();
+        $user = $repository->findOneBy(array('email' => $email));
+        $avisAnnonce->setIdUser($user);
+
         $form = $this->createForm(AvisAnnonceType::class, $avisAnnonce);
         $form->handleRequest($request);
 

@@ -105,6 +105,8 @@
         'App\\Controller\\AvisAnnonceController::avisannonce', {id: annonce.id }
     )) }}
 
+    <a href="{{ path('app_avis_annonce_new')}}?idannonce={{ annonce.id }}">ajouter avis</a>
+
 {% else %}
 <a href="{{ path('app_annonce_index') }}" class="btn btn-outline-secondary"> < back to list</a>
 {% endif %}
