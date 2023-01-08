@@ -169,13 +169,14 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_annonce_show', methods: ['GET'])]
-    public function show(Annonce $annonce,ImageAnnonceRepository $im,OptionAnnonceRepository $opt,LebelleOptionAnnonceRepository $loannonce,UserRepository $user): Response
+    public function show(Annonce $annonce,ImageAnnonceRepository $im,OptionAnnonceRepository $opt,LebelleOptionAnnonceRepository $loannonce,UserRepository $user,CategoryRepository $CategoryRepository): Response
     {
         return $this->render('annonce/show.html.twig', [
             'annonce' => $annonce,
             'img'=>$im->findAll(),
             'opt'=>$opt->findAll(),
             'loannonce'=>$loannonce->findAll(),
+            'CategoryRepository'=>$CategoryRepository->findAll(),
             'user'=>$user->findAll(),
         ]);
     }

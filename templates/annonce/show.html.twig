@@ -54,29 +54,45 @@
             </tr>
         </tbody>
     </table>
-{# aaa #}
+    <table class="table">
+    {% set count_for_cat = 0 %}
 
-  {# {% for key, value in opt  %} #}
-    {# {% for op in opt %}
-        {{ op.idAnnonce }}
-        {{ op.idLibelle }}
-        {{ dump(op) }}
-        {{ op.valeur }}
-        {{ key }}
-    {% endfor %} #}
-    {# {% for libel in loannonce %}
-        {{ libel.id }}
-        {{ libel.value }}
-        {{ libel.optionAnnonces }}
-        {% for optionAnnonces in libel.optionAnnonces %}
-            {{ optionAnnonces.optionAnnonces }}
-        {% endfor %}
-    {% endfor %} #}
-    {# {% for a in img %}
-        {{img.id}}
-        {{ a.id }}
-    {% endfor %} #}
-{# aaa #}
+    {% for opts in opt %}
+        {% if opts.idAnnonce == annonce %}
+    {% for loannonces in loannonce %}
+  
+    
+    {% if loannonces == opts.idLibelle %}
+    {% for CategoryRepositorys in CategoryRepository %}
+                {% if CategoryRepositorys == loannonces.idCategory %}
+                    {# {{ count_for_cat }} #}
+                    {% if count_for_cat == 0 %}
+                    <tr>
+                        <td>Category</td>
+                        <td>{{ CategoryRepositorys.libelle }}</td>
+                    </tr>
+                    {% else %}
+                    {% endif %}
+                    {% set count_for_cat = 1 %}
+                {% endif %}
+            {% endfor %}
+
+    <tr>
+
+            <td>{{ loannonces.value }}</td>
+            <td>{{ opts.valeur }}</td>
+    </tr>
+    {% endif %}
+    {% endfor %}
+            {# {{ opts.idLibelle }} #}
+        {% else %}
+        {% endif %}
+    {% endfor %}
+    {# 'opt'=>$opt->findAll(),
+    'loannonce'=>$loannonce->findAll(),
+    'CategoryRepository'=>$CategoryRepository->findAll(), #}
+    </table>
+
 
     
 {% if app.user %}
