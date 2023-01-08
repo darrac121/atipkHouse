@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New AvisAnnonce{% endblock %}
+
+{% block body %}
+    <h1>Create new AvisAnnonce</h1>
+
+    {{ include('avis_annonce/_form.html.twig') }}
+
+    <a href="{{ path('app_avis_annonce_index') }}">back to list</a>
+{% endblock %}

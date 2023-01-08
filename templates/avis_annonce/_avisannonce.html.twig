@@ -1,0 +1,23 @@
+{% block body %}
+    <h1>Avis</h1>
+
+    <table class="table">
+        <tbody>
+        {% for avis_annonce in avis_annonces %}
+            <tr>
+                <td>{{ avis_annonce.message }}</td>
+                <td>{{ avis_annonce.rating }}</td>
+                
+                {#% if avis_annonce.id_user == app.user %}
+                <td>
+                      <a href="{{ path('app_avis_annonce_edit', {'id': avis_annonce.id}) }}">edit</a>
+                </td>  
+                {% endif %#}
+                
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_avis_annonce_new') }}">Create new</a>
+{% endblock %}

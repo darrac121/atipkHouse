@@ -101,6 +101,10 @@
   </div>
     
 {% endif %}
+{{ render(controller(
+        'App\\Controller\\AvisAnnonceController::avisannonce', {id: annonce.id }
+    )) }}
+
 {% else %}
 <a href="{{ path('app_annonce_index') }}" class="btn btn-outline-secondary"> < back to list</a>
 {% endif %}

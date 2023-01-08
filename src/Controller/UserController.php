@@ -26,7 +26,7 @@ class UserController extends AbstractController
     
 
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, UserRepository $userRepository): Response
+    public function new(Request $request, UserRepository $userRepository, UserPasswordHasherInterface $userPasswordHasher,): Response
     {
         $user = new User();
         $form = $this->createForm(User1Type::class, $user);
@@ -35,6 +35,12 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             
             $userRepository->save($user, true);
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
 
             return $this->redirectToRoute('app_document_proprietaire_new', [], Response::HTTP_SEE_OTHER);
         }

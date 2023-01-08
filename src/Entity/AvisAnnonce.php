@@ -26,6 +26,9 @@ class AvisAnnonce
     #[ORM\JoinColumn(nullable: false)]
     private ?Annonce $idAnnonce = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $rating = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -63,6 +66,18 @@ class AvisAnnonce
     public function setIdAnnonce(?Annonce $idAnnonce): self
     {
         $this->idAnnonce = $idAnnonce;
+
+        return $this;
+    }
+
+    public function getRating(): ?int
+    {
+        return $this->rating;
+    }
+
+    public function setRating(?int $rating): self
+    {
+        $this->rating = $rating;
 
         return $this;
     }

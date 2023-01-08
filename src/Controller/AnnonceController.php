@@ -95,6 +95,7 @@ class AnnonceController extends AbstractController
         $annonce = new Annonce();
         $form = $this->createForm(Annonce2Type::class, $annonce);
         $form->handleRequest($request);
+        $annonce->setStatus("0");
         
         //user
         $repository = $doctrine->getRepository(User::class);

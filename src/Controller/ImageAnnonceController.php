@@ -26,7 +26,7 @@ class ImageAnnonceController extends AbstractController
             'image_annonces' => $imageAnnonceRepository->findAll(),
         ]);
     }
-
+    
     #[Route('/new', name: 'app_image_annonce_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ImageAnnonceRepository $imageAnnonceRepository): Response
     {
