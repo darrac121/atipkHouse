@@ -57,7 +57,7 @@ class AvisAnnonceController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $avisAnnonceRepository->save($avisAnnonce, true);
 
-            return $this->redirectToRoute('app_avis_annonce_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_annonce_show', [ 'id' => $idannonce ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('avis_annonce/new.html.twig', [
