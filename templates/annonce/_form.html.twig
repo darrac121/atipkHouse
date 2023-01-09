@@ -16,18 +16,14 @@
 </select>
     {% set ii = 0 %}
     {% set first = 0 %}
-    {# first #}
     {% for LebelleOptionAnnonceRepos in LebelleOptionAnnonceRepository %}
 
-    {# {% set tab ~ LebelleOptionAnnonceRepos.idCategory =[LebelleOptionAnnonceRepos.value] %} #}
-    {# {% set tab[LebelleOptionAnnonceRepos.idCategory] = tab[LebelleOptionAnnonceRepos.idCategory]|merge([LebelleOptionAnnonceRepos.value]) %} #}
     {% if ii == 0 %}{% set first = LebelleOptionAnnonceRepos.idCategory %}{% endif %}
-      <div class="id-{{ LebelleOptionAnnonceRepos.idCategory }}" {% if LebelleOptionAnnonceRepos.idCategory == first %}style="display:none"{% endif %}>
+      <div class="id-{{ LebelleOptionAnnonceRepos.idCategory }}" {% if first != LebelleOptionAnnonceRepos.idCategory %} style="display:none"{% endif %}>
       <label>
       {{ LebelleOptionAnnonceRepos.value }} {% if LebelleOptionAnnonceRepos.status == 1 %} * {% endif %}
       <input type="text" id="values" class="form-control" name="values[{{ LebelleOptionAnnonceRepos.id }}]" placeholder="Saisissez encore une valeur">
       </label>
-      {# {{ LebelleOptionAnnonceRepos.id }} #}
       
       </div>
       {% set ii = ii + 1 %}
@@ -58,7 +54,6 @@ function te(){
     }
 
   }
-  //}
 
  
 }
@@ -74,17 +69,6 @@ input.onchange = function() {
   add_15_prix();
 }
 
-
-
-
-
-/*
-var selectElement = document.querySelector('#reservation_DateDebut_day');
-selectElement.addEventListener('change', () => {
-te();
-});*/
-
-
 var tot = document.querySelector('#tot');
 var catcount = document.querySelector('#catcount');
 var selectElement = document.querySelector('#selection');
@@ -95,5 +79,5 @@ selectElement.addEventListener('change', () => {
 <br>
       {# <input type="file" id="files" name="files" multiple> #}
       
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    <button class="btn btn-outline-success">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

@@ -43,12 +43,12 @@
                         {{ annonce.prix }} € / par nuit
                         </div>
                         </p>
-                        <a href="{{ path('app_annonce_show', {'id': annonce.id}) }}" class="btn btn-primary">Voir Plus</a>
+                        <a href="{{ path('app_annonce_show', {'id': annonce.id}) }}" class="btn btn-outline-primary">Voir Plus</a>
                     </div>
                 </div>
             </div>
             {% else %}
-                <div class="text-center h5">no records found</div>
+                <div class="text-center h5">Pas d'annonces</div>
             {% endfor %}
     </div>
         </div>

@@ -215,6 +215,7 @@ class AnnonceController extends AbstractController
             'CategoryRepository'=>$CategoryRepository->findAll(),
             'user'=>$user->findAll(),
             'LebelleOptionAnnonceRepository'=>$LebelleOptionAnnonceRepository->findAll(),
+            // 'LebelleOptionAnnonceRepository'=>$LebelleOptionAnnonceRepository->findAll(),
         ]);
     }
 
