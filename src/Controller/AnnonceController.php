@@ -182,7 +182,8 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_annonce_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Annonce $annonce, AnnonceRepository $annonceRepository,SluggerInterface $slugger): Response
+    public function edit(Request $request, Annonce $annonce, AnnonceRepository $annonceRepository,SluggerInterface $slugger,ImageAnnonceRepository $im,OptionAnnonceRepository $opt,LebelleOptionAnnonceRepository $loannonce,UserRepository $user,CategoryRepository $CategoryRepository
+    ): Response
     {
         $form = $this->createForm(Annonce2Type::class, $annonce);
         $form->handleRequest($request);
@@ -207,6 +208,11 @@ class AnnonceController extends AbstractController
         return $this->renderForm('annonce/edit.html.twig', [
             'annonce' => $annonce,
             'form' => $form,
+            'img'=>$im->findAll(),
+            'opt'=>$opt->findAll(),
+            'loannonce'=>$loannonce->findAll(),
+            'CategoryRepository'=>$CategoryRepository->findAll(),
+            'user'=>$user->findAll(),
         ]);
     }
 
