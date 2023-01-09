@@ -89,7 +89,7 @@ class AnnonceController extends AbstractController
 
 
     #[Route('/new', name: 'app_annonce_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, annonceRepository $annonceRepository,ImageAnnonceRepository $imageAnnonceRepository, DoctrineManagerRegistry $doctrine,LebelleOptionAnnonceRepository $LebelleOptionAnnonceRepository,OptionAnnonceRepository $OptionAnnonceRepository,CategoryRepository $CategoryRepository,): Response
+    public function new(Request $request, annonceRepository $annonceRepository,ImageAnnonceRepository $imageAnnonceRepository, DoctrineManagerRegistry $doctrine,LebelleOptionAnnonceRepository $LebelleOptionAnnonceRepository,OptionAnnonceRepository $OptionAnnonceRepository,CategoryRepository $CategoryRepository): Response
     {
 
         $annonce = new Annonce();
@@ -170,6 +170,7 @@ class AnnonceController extends AbstractController
 
     #[Route('/{id}', name: 'app_annonce_show', methods: ['GET'])]
     public function show(Annonce $annonce,ImageAnnonceRepository $im,OptionAnnonceRepository $opt,LebelleOptionAnnonceRepository $loannonce,UserRepository $user,CategoryRepository $CategoryRepository): Response
+    
     {
         return $this->render('annonce/show.html.twig', [
             'annonce' => $annonce,
@@ -178,11 +179,12 @@ class AnnonceController extends AbstractController
             'loannonce'=>$loannonce->findAll(),
             'CategoryRepository'=>$CategoryRepository->findAll(),
             'user'=>$user->findAll(),
+            'LebelleOptionAnnonceRepository'=>$LebelleOptionAnnonceRepository->findAll(),
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_annonce_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Annonce $annonce, AnnonceRepository $annonceRepository,SluggerInterface $slugger,ImageAnnonceRepository $im,OptionAnnonceRepository $opt,LebelleOptionAnnonceRepository $loannonce,UserRepository $user,CategoryRepository $CategoryRepository
+    public function edit(Request $request, Annonce $annonce, AnnonceRepository $annonceRepository,SluggerInterface $slugger,ImageAnnonceRepository $im,OptionAnnonceRepository $opt,LebelleOptionAnnonceRepository $LebelleOptionAnnonceRepository,UserRepository $user,CategoryRepository $CategoryRepository
     ): Response
     {
         $form = $this->createForm(Annonce2Type::class, $annonce);
@@ -210,9 +212,9 @@ class AnnonceController extends AbstractController
             'form' => $form,
             'img'=>$im->findAll(),
             'opt'=>$opt->findAll(),
-            'loannonce'=>$loannonce->findAll(),
             'CategoryRepository'=>$CategoryRepository->findAll(),
             'user'=>$user->findAll(),
+            'LebelleOptionAnnonceRepository'=>$LebelleOptionAnnonceRepository->findAll(),
         ]);
     }
 
