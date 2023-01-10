@@ -14,6 +14,7 @@
             {% else %}
             {# <div class="col-sm-6 col-md-3"> #}
             <div class="col">
+            <article>
                 <div class="card" style="width: 18rem;">
                     {# <img src="{{  img.annonce.id }}" class="card-img-top" alt="..."> #}
                     {# <img src="{{  annonce.id|img }}" class="card-img-top" alt="..."> #}
@@ -33,7 +34,7 @@
                 <img src="\img_website\home-outline.svg" class="card-img-top" height="114" alt="...">
         {% endif %} 
                     <div class="card-body">
-                        <h5 class="card-title">{{ annonce.titre }}</h5>
+                        <div class="card-title">{{ annonce.titre }}</div>
                         <p class="card-text">
                         <div class="truncate">
                         {{ annonce.description  }}
@@ -58,6 +59,7 @@
 
             {% endfor %}
     </div>
+    </article>
         </div>
         <br>
         {# <a href="{{ path('app_annonce_new') }}">Create new</a> #}
