@@ -1,0 +1,12 @@
+{% block body %}
+
+        <div>
+        {% for category in categories %}
+        {% if category.status == 1 %}
+                <a href="{{ path('app_annonce_filter')}}?idcategory={{category.id}}">{{ category.libelle }}</a></br>
+        {% else %}
+                <p colspan="4">no records found</p>
+        {% endif %}
+        {% endfor %}
+        </div>
+{% endblock %}

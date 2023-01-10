@@ -42,7 +42,7 @@ class Annonce2Type extends AbstractType
             ->add('datecreation',DateTimeType::class)
             ->add('status',HiddenType::class,['data' => 1,'attr' => ['class' => 'invisible','value' => '1'],'label' =>' '])
             // ->add('lien',FileType::class)
-            //->add('idUser')
+            
             
             
             // form-control

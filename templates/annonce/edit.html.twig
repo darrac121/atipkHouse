@@ -5,7 +5,7 @@
 {% block body %}
     <h1>Edit Annonce</h1>
 {% if app.user %}
-{% if app.user == annonce.idUser %}
+{% if app.user == annonce.idUser or  app.user.roles[0] == 'ROLE_ADMIN' %}
 
     {{ include('annonce/_form.html.twig', {'button_label': 'Update'}) }}
 

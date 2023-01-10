@@ -59,6 +59,17 @@ class AnnonceController extends AbstractController
             'annonces' => $annonceRepository->findAll(),
         ]);
     }
+    #[Route('/annoncefilter', name: 'app_annonce_filter')]
+    public function annoncebycategory(Request $request,AnnonceRepository $annonceRepository, CategoryRepository $categoryRepository,ImageAnnonceRepository $im,UserRepository $user): Response
+    {
+        $id = $request->query->get('idcategory');
+        
+        return $this->render('annonce/category.html.twig', [
+            'annonces' => $annonceRepository->findBy(["idCategory"=> $id]),
+            'imgs'=>$im->findAll(),
+            'user'=>$user->findAll(),
+        ]);
+    }
     #[Route('/admin')]
     public function showannonceattente(AnnonceRepository $annonceRepository,ImageAnnonceRepository $im,UserRepository $user): Response
     {
@@ -116,7 +127,7 @@ class AnnonceController extends AbstractController
         // $form2->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
+            $annonce->setIdCategory($_POST['categorie']);
             $annonceRepository->save($annonce, true);
             
             
@@ -163,6 +174,7 @@ class AnnonceController extends AbstractController
                     mysqli_query($conn, $inse);
                 }
             }
+            
                     //   die;
             return $this->redirectToRoute('app_annonce_index', [], Response::HTTP_SEE_OTHER);
 
@@ -176,7 +188,7 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_annonce_show', methods: ['GET'])]
-    public function show(Annonce $annonce,ImageAnnonceRepository $im,OptionAnnonceRepository $opt,LebelleOptionAnnonceRepository $loannonce,UserRepository $user,CategoryRepository $CategoryRepository): Response
+    public function show(Annonce $annonce,ImageAnnonceRepository $im,OptionAnnonceRepository $opt,LebelleOptionAnnonceRepository $loannonce,UserRepository $user,CategoryRepository $CategoryRepository, LebelleOptionAnnonceRepository $LebelleOptionAnnonceRepository): Response
     
     {
         return $this->render('annonce/show.html.twig', [
@@ -191,8 +203,8 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_annonce_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Annonce $annonce, AnnonceRepository $annonceRepository,SluggerInterface $slugger,ImageAnnonceRepository $im,OptionAnnonceRepository $opt,LebelleOptionAnnonceRepository $LebelleOptionAnnonceRepository,UserRepository $user,CategoryRepository $CategoryRepository
-    ): Response
+    public function edit(Request $request, Annonce $annonce, AnnonceRepository $annonceRepository,SluggerInterface $slugger
+    ,OptionAnnonceRepository $opt,LebelleOptionAnnonceRepository $LebelleOptionAnnonceRepository,UserRepository $user,CategoryRepository $CategoryRepository): Response
     {
         $form = $this->createForm(Annonce2Type::class, $annonce);
         $form->handleRequest($request);
@@ -217,12 +229,10 @@ class AnnonceController extends AbstractController
         return $this->renderForm('annonce/edit.html.twig', [
             'annonce' => $annonce,
             'form' => $form,
-            'img'=>$im->findAll(),
             'opt'=>$opt->findAll(),
+            'LebelleOptionAnnonceRepository'=>$LebelleOptionAnnonceRepository->findAll(),
             'CategoryRepository'=>$CategoryRepository->findAll(),
             'user'=>$user->findAll(),
-            'LebelleOptionAnnonceRepository'=>$LebelleOptionAnnonceRepository->findAll(),
-            // 'LebelleOptionAnnonceRepository'=>$LebelleOptionAnnonceRepository->findAll(),
         ]);
     }
 

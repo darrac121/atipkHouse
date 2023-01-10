@@ -59,6 +59,9 @@ class Annonce
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $nbmax = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $idCategory = null;
+
     public function __construct()
     {
         $this->imageAnnonces = new ArrayCollection();
@@ -310,6 +313,18 @@ class Annonce
     public function setNbmax(?string $nbmax): self
     {
         $this->nbmax = $nbmax;
+
+        return $this;
+    }
+
+    public function getIdCategory(): ?int
+    {
+        return $this->idCategory;
+    }
+
+    public function setIdCategory(?int $idCategory): self
+    {
+        $this->idCategory = $idCategory;
 
         return $this;
     }

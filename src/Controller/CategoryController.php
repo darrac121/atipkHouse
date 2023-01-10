@@ -21,6 +21,13 @@ class CategoryController extends AbstractController
         ]);
     }
 
+    public function filter(CategoryRepository $categoryRepository): Response
+    {
+        return $this->render('category/_filtercategory.html.twig', [
+            'categories' => $categoryRepository->findAll(),
+        ]);
+    }
+
     #[Route('/new', name: 'app_category_new', methods: ['GET', 'POST'])]
     public function new(Request $request, CategoryRepository $categoryRepository): Response
     {
