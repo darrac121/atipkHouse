@@ -1,12 +1,31 @@
 {% block body %}
 
-        <div>
+        <div class="container">
+        <div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#one" aria-expanded="false" aria-controls="collapseTwo">
+        Type d'hébergement 
+      </button>
+    </h2>
+    <div id="one" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+      <div class="accordion-body" >
+      <div class="row row-cols-auto">
         {% for category in categories %}
         {% if category.status == 1 %}
-                <a href="{{ path('app_annonce_filter')}}?idcategory={{category.id}}">{{ category.libelle }}</a></br>
+                <div class="col" style="border-color: black;border-left-width: 1px;border-left-style: solid;border-top-width: 1px;border-top-style: solid;border-right-width: 1px;border-right-style: solid;border-bottom-width: 1px;border-bottom-style: solid;border-radius: 20px;padding-right: 0px;padding-left: 0px;margin-right: 5px;margin-left: 5px;">
+                        <a class="btn" href="{{ path('app_annonce_filter')}}?idcategory={{category.id}}">
+                        {{ category.libelle }} 
+                        </a>
+                </div>
         {% else %}
                 <p colspan="4">no records found</p>
         {% endif %}
         {% endfor %}
+         </div>
+         </div>
+         </div>
+    </div>
+  </div>
         </div>
 {% endblock %}

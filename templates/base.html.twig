@@ -50,7 +50,7 @@ fill="#000000" stroke="none">
 106 12 26 24 44 28 40 5 -4 28 -52 53 -105z m-33 -90 c0 -4 -11 -8 -25 -8 -23
 0 -24 2 -13 26 11 24 13 25 25 8 7 -10 13 -21 13 -26z"/>
 </g>
-</svg> Annonce</a>
+</svg> Hébergements</a>
         </li>
     {% if app.user %}
         <li class="nav-item">
@@ -58,20 +58,20 @@ fill="#000000" stroke="none">
         </li>
      {% if (app.user.roles[0] == 'ROLE_PRO') or (app.user.roles[0] == 'ROLE_ADMIN')  %}
       <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/annonce/new"><i class="bi bi-house-add"></i> Cree une annonce</a>
+        <a class="nav-link active" aria-current="page" href="/annonce/new"><i class="bi bi-house-add"></i> Crée un Hébergement</a>
       </li> <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/annonce/mesannonces"><i class="bi bi-house-door"></i> Mes annonce</a>
+        <a class="nav-link active" aria-current="page" href="/annonce/mesannonces"><i class="bi bi-house-door"></i> Mes Hébergements</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/annonce/commande"><i class="bi bi-house-door"></i> Reservation en attente</a>
+        <a class="nav-link active" aria-current="page" href="/annonce/commande"><i class="bi bi-house-door"></i> Réservation en attente</a>
       </li>
      {% endif %}
      {% if app.user.roles[0] == 'ROLE_ADMIN'  %}
       <li class="nav-item">
-        <a class="nav-link active dropdown-toggle" data-bs-toggle="dropdown" aria-current="page" href="/annonce/new"><i class="bi bi-house-add"></i> Admintrateur</a>
+        <a class="nav-link active dropdown-toggle" data-bs-toggle="dropdown" aria-current="page" href="/annonce/new"><i class="bi bi-house-add"></i> Administré</a>
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/category">Category</a></li>
-            <li><a class="dropdown-item" href="/annonce/admin">Annonces</a></li>
+            <li><a class="dropdown-item" href="/category">Catégorie</a></li>
+            <li><a class="dropdown-item" href="/annonce/admin">Hébergements</a></li>
             <li><a class="dropdown-item" href="/user/">Utilisateurs</a></li>
           </ul>
       </li>
