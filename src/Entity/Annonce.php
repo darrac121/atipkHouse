@@ -55,8 +55,6 @@ class Annonce
     #[ORM\OneToMany(mappedBy: 'idAnnonce', targetEntity: OptionAnnonce::class, orphanRemoval: true)]
     private Collection $idLibelle;
 
-    #[ORM\OneToMany(mappedBy: 'idAnnonce', targetEntity: Reservation::class)]
-    private Collection $id_User;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $nbmax = null;
