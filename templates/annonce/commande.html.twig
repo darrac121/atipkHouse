@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonce index{% endblock %}
+
+{% block body %}
+    <h1>Reservation en attente</h1>
+
+
+        {% for annonce in annonces %}
+            {% if annonce.iduser == app.user %}
+                {% if annonce.status == 1 %}
+                    <h2>{{ annonce.titre }}</h2>
+                    {{ render(controller(
+                        'App\\Controller\\ReservationController::commande', {id: annonce.id }
+                    )) }}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+{% endblock %}

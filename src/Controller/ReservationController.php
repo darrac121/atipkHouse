@@ -6,6 +6,7 @@ use App\Entity\Annonce;
 use App\Entity\User;
 use App\Entity\Reservation;
 use App\Form\ReservationType;
+use App\Repository\AnnonceRepository;
 use App\Repository\ReservationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,6 +22,14 @@ class ReservationController extends AbstractController
     {
         return $this->render('reservation/index.html.twig', [
             'reservations' => $reservationRepository->findAll(),
+        ]);
+    }
+
+    public function commande(ReservationRepository $reservationRepository, AnnonceRepository $annonceRepository, int $id): Response
+    {
+        $annonce = $annonceRepository->find($id);
+        return $this->render('reservation/_commande.html.twig', [
+            'reservations' => $reservationRepository->findBy(["idAnnonce"=>$annonce]),
         ]);
     }
 

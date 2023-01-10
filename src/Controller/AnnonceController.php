@@ -52,6 +52,13 @@ class AnnonceController extends AbstractController
             'user'=>$user->findAll(),
         ]);
     }
+    #[Route('/commande')]
+    public function commande(AnnonceRepository $annonceRepository,ImageAnnonceRepository $im,UserRepository $user): Response
+    {
+        return $this->render('annonce/commande.html.twig', [
+            'annonces' => $annonceRepository->findAll(),
+        ]);
+    }
     #[Route('/admin')]
     public function showannonceattente(AnnonceRepository $annonceRepository,ImageAnnonceRepository $im,UserRepository $user): Response
     {
