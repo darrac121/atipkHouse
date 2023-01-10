@@ -17,6 +17,19 @@ class Help extends AbstractController
             'img' => $img,
         ]);
     }
+
+    public function info(): Response
+    {
+        // $img = '../public/img_website/logo.png';
+        $img1 = '/img_website/logo.png';
+        $img1 = '/img_website/logo.png';
+        $img1 = '/img_website/logo.png';
+        $img1 = '/img_website/logo.png';
+        
+        return $this->render('info/index.html.twig', [
+            'img' => $img,
+        ]);
+    }
 }
 
 

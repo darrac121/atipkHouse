@@ -8,6 +8,9 @@ home:
 help:
     path: /help
     controller: App\Controller\Help::help
+info:
+    path: /info
+    controller: App\Controller\Help::info
 api_login_check:
     path: /api/login_check
 
