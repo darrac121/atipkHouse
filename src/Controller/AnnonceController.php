@@ -33,6 +33,7 @@ use App\Repository\CategoryRepository;
 use App\Entity\OptionAnnonce;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use SebastianBergmann\Environment\Console;
 use Symfony\Component\HttpKernel\Log\Logger;
@@ -50,6 +51,15 @@ class AnnonceController extends AbstractController
             'annonces' => $annonceRepository->findAll(),
             'imgs'=>$im->findAll(),
             'user'=>$user->findAll(),
+        ]);
+    }
+    #[Route('/attente', name: 'app_annonce_attente', methods: ['GET'])]
+    public function attente(AnnonceRepository $annonceRepository,ImageAnnonceRepository $im,Annonce $annonce): Response
+    {
+        
+        
+        return $this->render('annonce/index.html.twig', [
+            'annonces' => $annonceRepository->findAll(),
         ]);
     }
     #[Route('/commande')]
@@ -70,7 +80,7 @@ class AnnonceController extends AbstractController
             'user'=>$user->findAll(),
         ]);
     }
-    #[Route('/admin')]
+    #[Route('/admin', name: 'app_annonce_attente' )]
     public function showannonceattente(AnnonceRepository $annonceRepository,ImageAnnonceRepository $im,UserRepository $user): Response
     {
         return $this->render('annonce/admin.html.twig', [
@@ -234,6 +244,17 @@ class AnnonceController extends AbstractController
             'CategoryRepository'=>$CategoryRepository->findAll(),
             'user'=>$user->findAll(),
         ]);
+    }
+    #[Route('/{id}/active', name: 'app_annonce_active', methods: ['GET', 'POST'])]
+    public function active(Request $request, Annonce $annonce, AnnonceRepository $annonceRepository, EntityManagerInterface $em): Response
+    {
+
+        $annonce->setStatus(1);
+        $em->flush();
+        return $this->redirectToRoute('app_user_attente', [], Response::HTTP_SEE_OTHER);
+        
+
+
     }
 
     #[Route('/{id}', name: 'app_annonce_delete', methods: ['POST'])]

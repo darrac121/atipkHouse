@@ -22,7 +22,6 @@
         </thead>
         <tbody>
         {% for annonce in annonces %}
-        {% if annonce.status  == 0 %}
             <tr>
                 <td>{{ annonce.id }}</td>
                 <td>{{ annonce.titre }}</td>
@@ -34,15 +33,17 @@
                 <td>{{ annonce.datecreation ? annonce.datecreation|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ annonce.status }}</td>
                 <td>
-                    <a href="{{ path('app_annonce_active', {'id': annonce.id}) }}">activer</a>
+                    <a href="{{ path('app_annonce_attente', {'id': annonce.id}) }}">activer</a>
                     <a href="{{ path('app_annonce_show', {'id': annonce.id}) }}">show</a>
                     <a href="{{ path('app_annonce_edit', {'id': annonce.id}) }}">edit</a>
                 </td>
             </tr>
-            {% endif %} 
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_annonce_new') }}">Create new</a>
 {% endblock %}
