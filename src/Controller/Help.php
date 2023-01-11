@@ -21,13 +21,14 @@ class Help extends AbstractController
     public function info(): Response
     {
         // $img = '../public/img_website/logo.png';
-        $img1 = '/img_website/logo.png';
-        $img1 = '/img_website/logo.png';
-        $img1 = '/img_website/logo.png';
-        $img1 = '/img_website/logo.png';
+        $img1 = '/img_website/image_info_page/image1.webp';
+        $img2 = '/img_website/image_info_page/image2.webp';
+        $img3 = '/img_website/image_info_page/image3.webp';
         
         return $this->render('info/index.html.twig', [
-            'img' => $img,
+            'img1' => $img1,
+            'img2' => $img2,
+            'img3' => $img3,
         ]);
     }
 }

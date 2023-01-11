@@ -46,7 +46,7 @@ Total
     </div>
 
 <div class="col">
-    €
+    € / tva incluse (20 %)
     </div>
 
     </div>
@@ -60,9 +60,9 @@ Total
 
 <div class="paypal" style="display:none;">
 <div id="smart-button-container">
-    <div style="text-align: center"><label for="description"> </label><input type="text" name="descriptionInput" id="description" maxlength="127" value=""></div>
+    <div style="text-align: center;" ><label for="description"> </label><input type="text" name="descriptionInput" id="description" maxlength="127" value="atipik"></div>
       <p id="descriptionError" style="visibility: hidden; color:red; text-align: center;">Please enter a description</p>
-    <div style="text-align: center"><label for="amount"> </label><input name="amountInput" type="number" id="amount" value="" ><span> EUR</span></div>
+    <div style="text-align: center;"><label for="amount"> </label><input name="amountInput" type="number" id="amount" value="" ></div>
       <p id="priceLabelError" style="visibility: hidden; color:red; text-align: center;">Please enter a price</p>
     <div id="invoiceidDiv" style="text-align: center; display: none;"><label for="invoiceid"> </label><input name="invoiceid" maxlength="127" type="text" id="invoiceid" value="" ></div>
       <p id="invoiceidError" style="visibility: hidden; color:red; text-align: center;">Please enter an Invoice ID</p>
@@ -246,14 +246,6 @@ var Fin_yaer = document.querySelector('#reservation_DateFin_year').value;
 
 var debut_month =debut_month_id;
 var Fin_month =Fin_month_id;
-//console.log(debut_month);
-//console.log("'"+debut_month+' '+debut_day+','+debut_yaer+"'");
-//console.log("'"+Fin_month+' '+Fin_day+','+Fin_yaer+"'");
-//let date1 = new Date("'"+debut_month+' '+debut_day+','+debut_yaer+"'");
-//let date2 = new Date("'"+Fin_month+' '+Fin_day+','+Fin_yaer+"'");
-// let date2 = new Date('January 1, 2022');
-// console.log(date1);
-// console.log(date2);
 
 var date1 = new Date(debut_yaer, debut_month, debut_day);
 var date2 = new Date(Fin_yaer, Fin_month, Fin_day);
@@ -302,9 +294,10 @@ var reservation_Total = document.querySelector('#reservation_Total');
 var Total = document.querySelector('#Total');
 var paypal = document.querySelector('#amount');
 
-reservation_Total.value = difference * prix;
-Total.textContent = difference * prix;
-paypal.value = difference * prix;
+var calcule = Math.round((difference * prix)*1.20);
+reservation_Total.value = calcule;
+Total.textContent = calcule;
+paypal.value = calcule;
 
 }
 }

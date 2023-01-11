@@ -52,6 +52,17 @@ fill="#000000" stroke="none">
 </g>
 </svg> Hébergements</a>
         </li>
+        
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/info">
+<i class="bi bi-info-circle"></i>
+</svg> information</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/help">
+<i class="bi bi-envelope"></i>
+</svg> Contact</a>
+        </li>
     {% if app.user %}
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/reservation"><i class="bi bi-bag"></i> Reservation</a>
@@ -63,20 +74,21 @@ fill="#000000" stroke="none">
         <a class="nav-link active" aria-current="page" href="/annonce/mesannonces"><i class="bi bi-house-door"></i> Mes Hébergements</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/annonce/commande"><i class="bi bi-house-door"></i> Réservation en attente</a>
+        <a class="nav-link active" aria-current="page" href="/annonce/commande"><i class="bi bi-basket3"></i> Réservation en attente</a>
       </li>
      {% endif %}
      {% if app.user.roles[0] == 'ROLE_ADMIN'  %}
-      <li class="nav-item">
-        <a class="nav-link active dropdown-toggle" data-bs-toggle="dropdown" aria-current="page" href="/annonce/new"><i class="bi bi-house-add"></i> Administré</a>
-        <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/category">Catégorie</a></li>
+             <li class="nav-item dropdown">
+          <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+            <i class="bi bi-building-gear"></i> Administré
+          </a>
+          <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/annonce/admin">Hébergements</a></li>
-            <li><a class="dropdown-item" href="/user/">Utilisateurs</a></li>
             <li><a class="dropdown-item" href="/user/attente">Propriétaire en attente</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/category">Catégorie</a></li>
+            <li><a class="dropdown-item" href="/user">Utilisateurs</a></li>
           </ul>
-      </li>
-
      {% endif %}
     {% endif %}
 

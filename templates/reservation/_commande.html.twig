@@ -1,10 +1,8 @@
 {% block body %}
-      <table>
+      <table class="table">
         {% for reservation in reservations %}
-            <tr>
-            
+            <tr>   
     {% if reservation.statue == 0 %}
-                
                 {# <td>{{ reservation.idUser }}</td> #}
                 <td>{{ reservation.DateDebut ? reservation.DateDebut|date('d-m-Y') : '' }}</td>
                 <td>{{ reservation.DateFin ? reservation.DateFin|date('d-m-Y') : '' }}</td>
