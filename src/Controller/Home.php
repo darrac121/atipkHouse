@@ -11,12 +11,12 @@ use App\Repository\LebelleOptionAnnonceRepository;
 use App\Repository\ImageAnnonceRepository;
 use App\Repository\AnnonceRepository;
 use App\Repository\AvisAnnonceRepository;
-
-
+use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/home')]
 class Home extends AbstractController
 {
+    #[Route('/')]
     public function home(AuthenticationUtils $authenticationUtils,AnnonceRepository $annonceRepository,ImageAnnonceRepository $im,AvisAnnonceRepository $avis): Response
     {
         $number = random_int(0, 100);

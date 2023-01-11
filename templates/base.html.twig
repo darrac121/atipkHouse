@@ -96,7 +96,14 @@ fill="#000000" stroke="none">
       
     {% if app.user %}
       <span class="nav-item">
-          <a class="nav-link" href="{{ path('app_logout') }}">{{ app.user.userIdentifier }} <i class="bi bi-box-arrow-right"></i> &nbsp&nbsp</a>
+      <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+      <i class="bi bi-building-gear"></i> Profil
+      </a>
+      <ul class="dropdown-menu">
+            <li><a href="/account" class="text-reset">Compte</a></li>
+            <li><a class="nav-link" href="{{ path('app_logout') }}">Deconnexion <i class="bi bi-box-arrow-right"></i> &nbsp&nbsp</a></li>
+          </ul>
+
         </span>
       {% else %}
         <span class="nav-item dropdown">
