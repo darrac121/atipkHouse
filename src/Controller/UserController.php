@@ -23,6 +23,13 @@ class UserController extends AbstractController
             'users' => $userRepository->findAll(),
         ]);
     }
+    #[Route('/attente', name: 'app_user_attente')]
+    public function proprietaireattente(UserRepository $userRepository): Response
+    {
+        return $this->render('user/propietaireattente.html.twig', [
+            'users' => $userRepository->findAll(),
+        ]);
+    }
     
 
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
@@ -67,6 +74,7 @@ class UserController extends AbstractController
                 )
             );
             $user->setRoles(["ROLE_PRO"]);
+            $user->setStatus(0);
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email
@@ -102,6 +110,16 @@ class UserController extends AbstractController
             'user' => $user,
             'form' => $form,
         ]);
+    }
+    #[Route('/{id}/active', name: 'app_user_active', methods: ['GET', 'POST'])]
+    public function active(Request $request, User $user, UserRepository $userRepository, EntityManagerInterface $em): Response
+    {
+
+        $user->setStatus(1);
+        $em->flush();
+        return $this->redirectToRoute('app_user_attente', [], Response::HTTP_SEE_OTHER);
+
+
     }
 
     #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]

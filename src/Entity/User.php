@@ -37,7 +37,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 25)]
     private ?string $telephone = null;
 
-    private ?int $status = 0;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $recup_mdp = null;
@@ -65,6 +64,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $firstname = null;
+
+    #[ORM\Column]
+    private ?int $status = null;
 
 
     // #[ORM\Column(type: 'boolean')]
@@ -169,20 +171,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getStatus(): ?string
-    {
-        if (is_null($this->status)) {
-            $this->setMyField(0);
-        }
-        return $this->status;
-    }
-
-    public function setStatus(string $status): self
-    {
-        $this->status = $status;
-
-        return $this;
-    }
+    
 
     public function getRecupMdp(): ?string
     {
@@ -345,6 +334,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setFirstname(?string $firstname): self
     {
         $this->firstname = $firstname;
+
+        return $this;
+    }
+
+    public function getStatus(): ?int
+    {
+        return $this->status;
+    }
+
+    public function setStatus(int $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
