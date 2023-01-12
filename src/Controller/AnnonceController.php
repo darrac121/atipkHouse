@@ -6,6 +6,7 @@ use App\Entity\Annonce;
 use App\Entity\ImageAnnonce;
 use App\Entity\User;
 use App\Form\Annonce2Type;
+use App\Form\AnnonceType;
 use App\Repository\AnnonceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -85,7 +86,7 @@ class AnnonceController extends AbstractController
             'annonces' => $annonceRepository->findAll(),
         ]);
     }
-    #[Route('/mesannonces')]
+    #[Route('/mesannonces', name: 'app_annonce_mesannonce')]
     public function mesAnnonces(AnnonceRepository $annonceRepository,ImageAnnonceRepository $im,UserRepository $user, DoctrineManagerRegistry $doctrine): Response
     {
         /*$repository = $doctrine->getRepository(User::class);
@@ -222,27 +223,38 @@ class AnnonceController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_annonce_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Annonce $annonce, AnnonceRepository $annonceRepository,SluggerInterface $slugger
-    ,OptionAnnonceRepository $opt,LebelleOptionAnnonceRepository $LebelleOptionAnnonceRepository,UserRepository $user,CategoryRepository $CategoryRepository): Response
+    public function edit(Request $request,LebelleOptionAnnonceRepository $loannonce, Annonce $annonce, AnnonceRepository $annonceRepository,SluggerInterface $slugger
+    ,OptionAnnonceRepository $opt,ImageAnnonceRepository $im, LebelleOptionAnnonceRepository $LebelleOptionAnnonceRepository,UserRepository $user,CategoryRepository $CategoryRepository): Response
     {
-        $form = $this->createForm(Annonce2Type::class, $annonce);
+        $form = $this->createForm(AnnonceType::class, $annonce);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $annonceRepository->save($annonce, true);
             $uploadedFile = $form['imageFile']->getData();
-            $destination = $this->getParameter('kernel.project_dir').'/public/img_annonces';
+            if($uploadedFile != null){
+                $destination = $this->getParameter('kernel.project_dir').'/public/img_annonces';
 
-            $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
-            $safeFilename = $slugger->slug($originalFilename);
-            $newFilename = $safeFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
-            $uploadedFile->move(
-                $destination,
-                $newFilename
-            );
+                $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
+                $uploadedFile->move(
+                    $destination,
+                    $newFilename
+                );
+            }
+            
 
 
-            return $this->redirectToRoute('app_annonce_index', [], Response::HTTP_SEE_OTHER);
+            return $this->render('annonce/show.html.twig', [
+                'annonce' => $annonce,
+                'opt'=>$opt->findAll(),
+                'img'=>$im->findAll(),
+                'loannonce'=>$loannonce->findAll(),
+                'CategoryRepository'=>$CategoryRepository->findAll(),
+                'user'=>$user->findAll(),
+                'LebelleOptionAnnonceRepository'=>$LebelleOptionAnnonceRepository->findAll(),
+            ]);
         }
 
         return $this->renderForm('annonce/edit.html.twig', [

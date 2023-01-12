@@ -81,6 +81,9 @@
 
             <td>{{ loannonces.value }}</td>
             <td>{{ opts.valeur }}</td>
+            {% if app.user == annonce.idUser or app.user.roles[0] == 'ROLE_ADMIN'%}
+            <td><a href="{{ path('app_option_annonce_edit', {'id': opts.id}) }}">modifier</a></td>
+            {% endif %}
     </tr>
     {% endif %}
     {% endfor %}
@@ -103,7 +106,7 @@
 
 {# {{ app.user }}
 {{ annonce.idUser }} #}
-{% if app.user == annonce.idUser %}
+{% if app.user == annonce.idUser or app.user.roles[0] == 'ROLE_ADMIN'%}
 <div class="btn-group" role="group">
     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
       Modifier

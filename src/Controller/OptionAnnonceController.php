@@ -57,7 +57,7 @@ class OptionAnnonceController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $optionAnnonceRepository->save($optionAnnonce, true);
 
-            return $this->redirectToRoute('app_option_annonce_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_annonce_mesannonce', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('option_annonce/edit.html.twig', [

@@ -7,9 +7,9 @@
 {% if app.user %}
 {% if app.user == annonce.idUser or  app.user.roles[0] == 'ROLE_ADMIN' %}
 
-    {{ include('annonce/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('annonce/_form2.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_annonce_index') }}"> < Retour</a>
+    <a href="{{ path('app_annonce_show', {'id': annonce.id}) }}"> < Retour</a>
 
     {{ include('annonce/_delete_form.html.twig') }}
 {% endif %}

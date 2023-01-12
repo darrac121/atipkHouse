@@ -13,8 +13,6 @@ class OptionAnnonceType extends AbstractType
     {
         $builder
             ->add('valeur')
-            ->add('idAnnonce')
-            ->add('idLibelle')
         ;
     }
 
