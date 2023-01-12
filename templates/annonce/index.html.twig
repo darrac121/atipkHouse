@@ -10,8 +10,7 @@
     <div class="container">
         <div class="row row-cols-auto">
             {% for annonce in annonces %}
-            {% if annonce.status == 0 %}
-            {% else %}
+            {% if annonce.status == 1 %}
             {# <div class="col-sm-6 col-md-3"> #}
             <div class="col">
             <article>
