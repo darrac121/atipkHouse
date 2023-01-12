@@ -14,6 +14,7 @@ use ApiPlatform\Metadata\ApiResource;
 #[ApiResource]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -68,9 +69,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $status = null;
 
+    #[ORM\Column(type: 'boolean')]
+    private $isVerified = false;
 
-    // #[ORM\Column(type: 'boolean')]
-    // private $isVerified = false;
+
 
     public function __construct()
     {
@@ -300,19 +302,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 
-    /*
-    public function isVerified(): bool
-    {
-        return $this->isVerified;
-    }
-
-    public function setIsVerified(bool $isVerified): self
-    {
-        $this->isVerified = $isVerified;
-
-        return $this;
-    }
-    */
 
     public function getName(): ?string
     {
@@ -346,6 +335,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setStatus(int $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
 
         return $this;
     }

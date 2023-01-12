@@ -13,9 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Security;
 use Doctrine\Persistence\ManagerRegistry as DoctrineManagerRegistry;
-use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Symfony\Component\Mime\Email;
 
 
 
@@ -37,7 +35,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use SebastianBergmann\Environment\Console;
 use Symfony\Component\HttpKernel\Log\Logger;
-
+use Symfony\Component\Mailer\MailerInterface;
 
 #[Route('/annonce')]
 class AnnonceController extends AbstractController
@@ -117,7 +115,7 @@ class AnnonceController extends AbstractController
 
 
     #[Route('/new', name: 'app_annonce_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, annonceRepository $annonceRepository,ImageAnnonceRepository $imageAnnonceRepository, DoctrineManagerRegistry $doctrine,LebelleOptionAnnonceRepository $LebelleOptionAnnonceRepository,OptionAnnonceRepository $OptionAnnonceRepository,CategoryRepository $CategoryRepository): Response
+    public function new(Request $request, annonceRepository $annonceRepository,ImageAnnonceRepository $imageAnnonceRepository, DoctrineManagerRegistry $doctrine,LebelleOptionAnnonceRepository $LebelleOptionAnnonceRepository,MailerInterface $mailer,CategoryRepository $CategoryRepository): Response
     {
 
         $annonce = new Annonce();
@@ -184,6 +182,17 @@ class AnnonceController extends AbstractController
                     mysqli_query($conn, $inse);
                 }
             }
+            $email = (new Email())
+            ->from('atipikhouse@dev3-g3-lz-es-zt-fb.go.yj.fr')
+            ->to('atipikdev3g3@gmail.com')
+            //->cc('cc@example.com')
+            //->bcc('bcc@example.com')
+            //->replyTo('fabien@example.com')
+            //->priority(Email::PRIORITY_HIGH)
+            ->subject('Nouvelle annonce en attente')
+            ->html('<p>Une nouvelle annonce a été créé.</br>Allez sur le site <a href="dev3-g3-lz-es-zt-fb.go.yj.fr">AtipikHouse</p></br></br>Bien à vous,</br>AtipikHouse');
+
+            $mailer->send($email);
             
                     //   die;
             return $this->redirectToRoute('app_annonce_index', [], Response::HTTP_SEE_OTHER);
