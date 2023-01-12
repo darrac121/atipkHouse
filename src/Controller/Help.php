@@ -18,6 +18,27 @@ class Help extends AbstractController
         ]);
     }
 
+    public function cgu(): Response
+    {
+        // $img = '../public/img_website/logo.png';
+        $img = '/img_website/logo.png';
+
+        return $this->render('cgu/index.html.twig', [
+            'img' => $img,
+        ]);
+    }
+
+    
+    public function mentionlegal(): Response
+    {
+        // $img = '../public/img_website/logo.png';
+        $img = '/img_website/logo.png';
+
+        return $this->render('mentionlegal/index.html.twig', [
+            'img' => $img,
+        ]);
+    }
+
     public function info(): Response
     {
         // $img = '../public/img_website/logo.png';

@@ -11,6 +11,16 @@ help:
 info:
     path: /info
     controller: App\Controller\Help::info
+
+mentionlegal:
+    path: /mention-legale
+    controller: App\Controller\Help::mentionlegal
+    
+cgu:
+    path: /cgu
+    controller: App\Controller\Help::cgu
+
+
 api_login_check:
     path: /api/login_check
 

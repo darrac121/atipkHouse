@@ -27,7 +27,7 @@
 <header class="site-header">
 {# 3C91E6
 #88D18A #}
-<nav class="navbar navbar-expand-lg bg-light" style="background:rgba(60, 145, 230, 0.3) !important" >
+<nav class="navbar navbar-expand-lg bg-light" >
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -68,22 +68,24 @@ fill="#000000" stroke="none">
           <a class="nav-link active" aria-current="page" href="/reservation"><i class="bi bi-bag"></i> Reservation</a>
         </li>
      {% if (app.user.roles[0] == 'ROLE_PRO') or (app.user.roles[0] == 'ROLE_ADMIN')  %}
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/annonce/new"><i class="bi bi-house-add"></i> Crée un Hébergement</a>
-      </li> <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/annonce/mesannonces"><i class="bi bi-house-door"></i> Mes Hébergements</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="/annonce/commande"><i class="bi bi-basket3"></i> Réservation en attente</a>
-      </li>
+         <li class="nav-item dropdown">
+          <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
+            <i class="bi bi-house-gear"></i> Gestion des logements
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/annonce/new">Crée un Hébergement</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/annonce/mesannonces">Mes Hébergements</a></li>
+            <li><a class="dropdown-item" href="/annonce/commande">Réservation en attente</a></li>
+          </ul>
      {% endif %}
      {% if app.user.roles[0] == 'ROLE_ADMIN'  %}
              <li class="nav-item dropdown">
           <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-            <i class="bi bi-building-gear"></i> Administré
+            <i class="bi bi-building-gear"></i> Administrateur
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/annonce/admin">Hébergements</a></li>
+            <li><a class="dropdown-item" href="/annonce/admin">Hébergements en attente</a></li>
             <li><a class="dropdown-item" href="/user/attente">Propriétaire en attente</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="/category">Catégorie</a></li>
@@ -95,16 +97,14 @@ fill="#000000" stroke="none">
       </ul>
       
     {% if app.user %}
-      <span class="nav-item">
-      <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-      <i class="bi bi-building-gear"></i> Profil
-      </a>
-      <ul class="dropdown-menu">
-            <li><a href="/account" class="text-reset">Compte</a></li>
-            <li><a class="nav-link" href="{{ path('app_logout') }}">Deconnexion <i class="bi bi-box-arrow-right"></i> &nbsp&nbsp</a></li>
+        <span class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="bi bi-person-gear"></i> {{ app.user.userIdentifier }}  </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/account">Compte</a></li>
+            <li><a class="dropdown-item" href="{{ path('app_logout') }}"><i class="bi bi-box-arrow-right"></i> Deconnection</a></li>
           </ul>
-
         </span>
+
       {% else %}
         <span class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><svg data-id="SVG_INVITE__24" focusable="false" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" d="M17.174 14.344v5.322M14.513 17.005h5.322M4.165 19.685a20.536 20.536 0 007.871 1.565M11.944 11.906a7.735 7.735 0 00-2.976.595 7.777 7.777 0 00-4.802 7.184"></path><path stroke="currentColor" d="M16.018 7.837a4.07 4.07 0 01-4.07 4.07h-.01a4.07 4.07 0 01-4.068-4.07V6.82a4.07 4.07 0 014.069-4.069h.01a4.07 4.07 0 014.069 4.07v1.017z" clip-rule="evenodd"></path></svg> Inscription  </a>
@@ -133,7 +133,6 @@ fill="#000000" stroke="none">
 
 
 
-{# <img src="/img_website/logo.png" /> #}
         {% block body %}{% endblock %}
 
 
@@ -190,6 +189,27 @@ fill="#000000" stroke="none">
           </h2>
           <p>
             Les habitats les plus Atipik de France
+          </p>
+        </div>
+        <!-- Grid column -->
+
+        <!-- Grid column -->
+        <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+          <!-- Links -->
+          <h2 class="text-uppercase fw-bold mb-4 h6">
+            Informations
+          </h2>
+          <p>
+            <a href="/info" class="text-reset">Qui sommes nous</a>
+          </p>
+          <p>
+            <a href="/help" class="text-reset">Contact</a>
+          </p>
+          <p>
+            <a href="/cgu" class="text-reset">Conditions generale d'utilisation</a>
+          </p>
+          <p>
+            <a href="/mention-legale" class="text-reset">mention legale</a>
           </p>
         </div>
         <!-- Grid column -->
