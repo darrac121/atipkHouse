@@ -3,8 +3,8 @@
 {% block title %}Annonce{% endblock %}
 
 {% block body %}
-    <h1>Annonce</h1>
 <div class="container">
+    <h1>{{ annonce.titre }}</h1>
 <div class="row">
 <div class="col-md-6">
 <div class="row">
@@ -16,41 +16,38 @@
         {# {% if count == 0 %} #}
             {% if id_annn == annoce_id %}
             <div class="col{% if count == 0 %}-12{% endif %} ">
-                <img src="{{  imag.lien }}" class="card-img-top"  alt="..." onclick="window.open(this.src)">
+                <img src="{{  imag.lien }}" class="card-img-top"  alt="{{ annonce.titre }}" height="114" onclick="window.open(this.src)">
             </div>
                 {% set count = 1 %}
             {% endif %} 
         {# {% endif %}  #}
     {% endfor %}
         {% if count == 0%}
-                <img src="\img_website\home-outline.svg" class="card-img-top" height="114" alt="...">
+                <img src="\img_website\home-outline.svg" class="card-img-top" height="114" alt="image annonce">
         {% endif %} 
 </div>
 </div>
 {# </div> #}
 <div class="col-md-6">
+<div class="row">
+<div class="col-md-6">
     <table class="table">
         <tbody>
-            <tr>
-                <td>{{ annonce.titre }}</td>
-            </tr>
             <tr>
                 <td>{{ annonce.description }}</td>
             </tr>
             <tr>
-                <td>{{ annonce.adresse }}</td>
+                <td>{{ annonce.adresse }}  {{ annonce.Ville }}  {{ annonce.CodePostal }}</td>
             </tr>
             <tr>
-                <td>{{ annonce.Ville }}</td>
+                <td><i class="bi bi-person-fill"></i> {{ annonce.nbmax }}</td>
             </tr>
+            
             <tr>
-                <td>{{ annonce.CodePostal }}</td>
-            </tr>
+                <td>Debu de disponibiliter {{ annonce.datedebut ? annonce.datedebut|date('Y-m-d') : '' }}</td>
+            </tr>     
             <tr>
-                <td>{{ annonce.prix }} € / par nuit</td>
-            </tr>
-            <tr>
-                <td>Date de fin de disponibiliter {{ annonce.datecreation ? annonce.datecreation|date('Y-m-d H:i:s') : '' }}</td>
+                <td>Fin de disponibiliter {{ annonce.dateFin ? annonce.dateFin|date('Y-m-d') : '' }}</td>
             </tr>
         </tbody>
     </table>
@@ -65,7 +62,6 @@
     {% if loannonces == opts.idLibelle %}
     {% for CategoryRepositorys in CategoryRepository %}
                 {% if CategoryRepositorys == loannonces.idCategory %}
-                    {# {{ count_for_cat }} #}
                     {% if count_for_cat == 0 %}
                     <tr>
                         <td>Category</td>
@@ -81,8 +77,10 @@
 
             <td>{{ loannonces.value }}</td>
             <td>{{ opts.valeur }}</td>
-            {% if app.user == annonce.idUser or app.user.roles[0] == 'ROLE_ADMIN'%}
-            <td><a href="{{ path('app_option_annonce_edit', {'id': opts.id}) }}">modifier</a></td>
+            {% if app.user %}
+                {% if app.user == annonce.idUser or app.user.roles[0] == 'ROLE_ADMIN'%}
+                <td><a href="{{ path('app_option_annonce_edit', {'id': opts.id}) }}">modifier</a></td>
+                {% endif %}
             {% endif %}
     </tr>
     {% endif %}
@@ -95,11 +93,13 @@
     'loannonce'=>$loannonce->findAll(),
     'CategoryRepository'=>$CategoryRepository->findAll(), #}
     </table>
-
-
+    </div>
+    <div class="col-md-6 text-center">
+{{ annonce.prix }} € / par nuit
+    </div>
+    </div>
     
 {% if app.user %}
-<a href="{{ path('app_annonce_index') }}" class="btn btn-outline-secondary"> < back to list</a>
 <div class="p-2"></div>
 <a href="/reservation/new?idannonce={{ annonce.id }}" class="btn btn-outline-success">Reserver maintenant</a>
 <div class="p-3"></div>
@@ -127,7 +127,6 @@
     <a href="{{ path('app_avis_annonce_new')}}?idannonce={{ annonce.id }}">ajouter avis</a>
 
 {% else %}
-<a href="{{ path('app_annonce_index') }}" class="btn btn-outline-secondary"> < back to list</a>
 <a href="/login" class="btn btn-outline-success">Reserver maintenant</a>
 
 {% endif %}
@@ -135,6 +134,16 @@
 </div>
 
 </div>
+</div>
+
+
+<div>
+<iframe id="inlineFrameExample"
+    title="Inline Frame Example"
+    width="100%"
+    height="100%"
+    src="{{ path('app_annonce_filter')}}?idcategory={{ annonce.idCategory }}">
+</iframe>
 </div>
 
 {% endblock %}
