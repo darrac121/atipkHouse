@@ -124,6 +124,24 @@ class UserController extends AbstractController
             'form' => $form,
         ]);
     }
+
+
+    public function emailcheck(Request $request, User $user, UserRepository $userRepository): Response
+    {
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $userRepository->save($user, true);
+
+            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('user/edit.html.twig', [
+            'user' => $user,
+            'form' => $form,
+        ]);
+    }
     #[Route('/{id}/active', name: 'app_user_active', methods: ['GET', 'POST'])]
     public function active(Request $request, User $user, UserRepository $userRepository, EntityManagerInterface $em): Response
     {
