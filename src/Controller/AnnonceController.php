@@ -56,13 +56,12 @@ class AnnonceController extends AbstractController
     public function attente(AnnonceRepository $annonceRepository,ImageAnnonceRepository $im,Annonce $annonce): Response
     {
         
-        
         return $this->render('annonce/index.html.twig', [
             'annonces' => $annonceRepository->findAll(),
         ]);
     }
     #[Route('/commande')]
-    public function commande(AnnonceRepository $annonceRepository,ImageAnnonceRepository $im,UserRepository $user): Response
+    public function commande(AnnonceRepository $annonceRepository): Response
     {
         return $this->render('annonce/commande.html.twig', [
             'annonces' => $annonceRepository->findAll(),
@@ -79,7 +78,7 @@ class AnnonceController extends AbstractController
             'user'=>$user->findAll(),
         ]);
     }
-    #[Route('/admin', name: 'app_annonce_attente' )]
+    #[Route('/admin', name: 'app_annonce_admin' )]
     public function showannonceattente(AnnonceRepository $annonceRepository,ImageAnnonceRepository $im,UserRepository $user): Response
     {
         return $this->render('annonce/admin.html.twig', [
@@ -272,7 +271,18 @@ class AnnonceController extends AbstractController
 
         $annonce->setStatus(1);
         $em->flush();
-        return $this->redirectToRoute('app_user_attente', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_annonce_admin', [], Response::HTTP_SEE_OTHER);
+        
+
+
+    }
+    #[Route('/{id}/desactive', name: 'app_annonce_desactive', methods: ['GET', 'POST'])]
+    public function desactive(Request $request, Annonce $annonce, AnnonceRepository $annonceRepository, EntityManagerInterface $em): Response
+    {
+
+        $annonce->setStatus(0);
+        $em->flush();
+        return $this->redirectToRoute('app_annonce_admin', [], Response::HTTP_SEE_OTHER);
         
 
 

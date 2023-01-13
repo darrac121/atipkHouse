@@ -22,7 +22,6 @@
         </thead>
         <tbody>
         {% for annonce in annonces %}
-        {% if annonce.status  == 0 %}
             <tr>
                 <td>{{ annonce.id }}</td>
                 <td>{{ annonce.titre }}</td>
@@ -34,12 +33,16 @@
                 <td>{{ annonce.datecreation ? annonce.datecreation|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ annonce.status }}</td>
                 <td>
+                {% if annonce.status == 0 %}
                     <a href="{{ path('app_annonce_active', {'id': annonce.id}) }}">activer</a>
+                    {% else %}
+                    <a href="{{ path('app_annonce_desactive', {'id': annonce.id}) }}">desactiver</a>
+                {% endif %}
+                    
                     <a href="{{ path('app_annonce_show', {'id': annonce.id}) }}">show</a>
                     <a href="{{ path('app_annonce_edit', {'id': annonce.id}) }}">edit</a>
                 </td>
             </tr>
-            {% endif %} 
         {% endfor %}
         </tbody>
     </table>
