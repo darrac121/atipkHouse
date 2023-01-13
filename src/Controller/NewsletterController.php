@@ -40,6 +40,24 @@ class NewsletterController extends AbstractController
         ]);
     }
 
+    public function footer(Request $request, NewsletterRepository $newsletterRepository): Response
+    {
+        $newsletter = new Newsletter();
+        $form = $this->createForm(NewsletterType::class, $newsletter);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $newsletterRepository->save($newsletter, true);
+
+            return $this->redirectToRoute('app_newsletter_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('newsletter/_footer.html.twig', [
+            'newsletter' => $newsletter,
+            'form' => $form,
+        ]);
+    }
+
     #[Route('/{id}', name: 'app_newsletter_show', methods: ['GET'])]
     public function show(Newsletter $newsletter): Response
     {
