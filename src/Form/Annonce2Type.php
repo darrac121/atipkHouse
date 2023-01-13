@@ -43,6 +43,7 @@ class Annonce2Type extends AbstractType
             ->add('dateFin',DateType::class)
             ->add('datecreation',DateTimeType::class)
             ->add('status',HiddenType::class,['data' => 1,'attr' => ['class' => 'invisible','value' => '1'],'label' =>' '])
+            ->add('pays')
             // ->add('lien',FileType::class)
             
             

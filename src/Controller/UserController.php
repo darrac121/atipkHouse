@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\User1Type;
 use App\Security\EmailVerifier;
 use App\Form\RegistrationFormType;
+use App\Form\TokenType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use App\Repository\UserRepository;
@@ -128,11 +129,17 @@ class UserController extends AbstractController
 
     public function emailcheck(Request $request, User $user, UserRepository $userRepository): Response
     {
-        $form = $this->createForm(UserType::class, $user);
+        
+        $form = $this->createForm(TokenType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $userRepository->save($user, true);
+            $email = $form->getData('email');
+            
+            $user = $userRepository->findOneBy(["email"=> $email]);
+            //$userRepository->save($user, true);
+            //create token
+            
 
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }

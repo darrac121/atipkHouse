@@ -12,7 +12,9 @@ class TokenType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
+        ->add('token', HiddenType::class, [
+            'data' => 'abcdef',
+        ])
         ;
     }
 

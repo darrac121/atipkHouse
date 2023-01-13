@@ -68,6 +68,9 @@ class Annonce
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $dateFin = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $Pays = null;
+
     public function __construct()
     {
         $this->imageAnnonces = new ArrayCollection();
@@ -355,6 +358,18 @@ class Annonce
     public function setDateFin(?\DateTimeInterface $dateFin): self
     {
         $this->dateFin = $dateFin;
+
+        return $this;
+    }
+
+    public function getPays(): ?string
+    {
+        return $this->Pays;
+    }
+
+    public function setPays(string $Pays): self
+    {
+        $this->Pays = $Pays;
 
         return $this;
     }
