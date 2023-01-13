@@ -138,12 +138,8 @@
 
 
 <div>
-<iframe id="inlineFrameExample"
-    title="Inline Frame Example"
-    width="100%"
-    height="100%"
-    src="{{ path('app_annonce_filter')}}?idcategory={{ annonce.idCategory }}">
-</iframe>
-</div>
+    {{ render(controller(
+        'App\\Controller\\AnnonceController::sugestion', {id: annonce.idCategory }
+    )) }}
 
 {% endblock %}

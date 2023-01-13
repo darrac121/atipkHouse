@@ -78,6 +78,16 @@ class AnnonceController extends AbstractController
             'user'=>$user->findAll(),
         ]);
     }
+    #[Route( name: 'app_annonce_sugestion')]
+    public function sugestion(Request $request,AnnonceRepository $annonceRepository, CategoryRepository $categoryRepository,ImageAnnonceRepository $im,UserRepository $user,int $id): Response
+    {
+        
+        return $this->render('annonce/sugestion.html.twig', [
+            'annonces' => $annonceRepository->findBy(["idCategory"=> $id]),
+            'imgs'=>$im->findAll(),
+            'user'=>$user->findAll(),
+        ]);
+    }
     #[Route('/admin', name: 'app_annonce_admin' )]
     public function showannonceattente(AnnonceRepository $annonceRepository,ImageAnnonceRepository $im,UserRepository $user): Response
     {
