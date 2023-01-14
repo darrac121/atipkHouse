@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Annonce{% endblock %}
+{% block title %}Hébergements{% endblock %}
 
 {% block body %}
 <div class="container">
@@ -39,19 +39,14 @@
 <div class="col-md-6">
 <div class="row">
 <div class="col-md-6">
-    <table class="table">
-            <tr>
-                <td>{{ annonce.adresse }}  {{ annonce.Ville }}  {{ annonce.CodePostal }} {{ annonce.Pays }}</td>
-            </tr>
-            <tr>
-                <td><i class="bi bi-person-fill"></i> {{ annonce.nbmax }}</td>
-            </tr>
-            <tr>
-                <td>Debut Disponibiliter {{ annonce.datedebut ? annonce.datedebut|date('d/m/Y') : '' }}</td>
-                <td> ==> </td>
-                <td>Fin Disponibiliter {{ annonce.dateFin ? annonce.dateFin|date('d/m/Y') : '' }}</td>
-            </tr>
-    </table>
+    <div class="row">
+    <div><i class="bi bi-geo-alt-fill"></i> {{ annonce.adresse }}  {{ annonce.Ville }}  {{ annonce.CodePostal }} {{ annonce.Pays }}</div>
+    <hr>
+<div><i class="bi bi-person-fill"></i> {{ annonce.nbmax }}</div>
+<hr>
+<div>Debut Disponibiliter {{ annonce.datedebut ? annonce.datedebut|date('d/m/Y') : '' }}  ==> Fin Disponibiliter {{ annonce.dateFin ? annonce.dateFin|date('d/m/Y') : '' }}</div>
+<hr>
+    </div>
     <table class="table">
     {% set count_for_cat = 0 %}
 
@@ -95,7 +90,7 @@
     'CategoryRepository'=>$CategoryRepository->findAll(), #}
     </table>
     </div>
-    <div class="col-md-6 text-center">
+    <div class="col-md-6 text-center h2">
 {{ annonce.prix }} € / par nuit
     </div>
     </div>
