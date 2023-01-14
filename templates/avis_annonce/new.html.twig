@@ -3,9 +3,11 @@
 {% block title %}New AvisAnnonce{% endblock %}
 
 {% block body %}
+<div class="container">
     <h1>Create new AvisAnnonce</h1>
 
     {{ include('avis_annonce/_form.html.twig') }}
 
     <a href="javascript:history.back()">retour a l'annonce</a>
+</div>
 {% endblock %}

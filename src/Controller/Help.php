@@ -27,7 +27,17 @@ class Help extends AbstractController
             'img' => $img,
         ]);
     }
+    
+    public function motdepasseoublie(): Response
+    {
+        // $img = '../public/img_website/logo.png';
+        $img = '/img_website/logo.png';
 
+        return $this->render('mot_de_passe_oublier/index.html.twig', [
+            'img' => $img,
+        ]);
+    }
+    
     
     public function mentionlegal(): Response
     {

@@ -15,6 +15,10 @@ info:
 mentionlegal:
     path: /mention-legale
     controller: App\Controller\Help::mentionlegal
+
+motdepasseoublie:
+    path: /mot-de-passe-oublie
+    controller: App\Controller\Help::motdepasseoublie
     
 cgu:
     path: /cgu

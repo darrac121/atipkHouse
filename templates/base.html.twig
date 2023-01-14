@@ -2,7 +2,7 @@
 <html lang="fr" xml:lang="fr" xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Atypik House{% endblock %}</title>
         
         <link rel="icon" type="image/png" href="{{ asset('img_website/favicon.png') }}" />
         {# <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>"> #}
@@ -101,7 +101,7 @@ fill="#000000" stroke="none">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="bi bi-person-gear"></i> {{ app.user.userIdentifier }}  </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/account">Compte</a></li>
-            <li><a class="dropdown-item" href="{{ path('app_logout') }}"><i class="bi bi-box-arrow-right"></i> Deconnection</a></li>
+            <li><a class="dropdown-item" href="{{ path('app_logout') }}"><i class="bi bi-box-arrow-right"></i> Deconnexion</a></li>
           </ul>
         </span>
 
@@ -188,7 +188,7 @@ fill="#000000" stroke="none">
             <i class="fas fa-gem me-3"></i>Atipik House
           </h2>
           <p>
-            Les habitats les plus Atipik de France
+            Les habitats les plus Atipiques de France
           </p>
         </div>
         <!-- Grid column -->
@@ -236,11 +236,11 @@ fill="#000000" stroke="none">
           </p>
       {% endif %}
           <p>
-            <a href="/help" class="text-reset">Help</a>
+            <a href="/help" class="text-reset">Aide</a>
           </p>
           
           <p>
-            <a href="/mention-legale" class="text-reset">mention legale</a>
+            <a href="/mention-legale" class="text-reset">Mentions legale</a>
           </p>
         </div>
         <!-- Grid column -->
