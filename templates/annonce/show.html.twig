@@ -99,7 +99,27 @@
 {{ annonce.prix }} € / par nuit
     </div>
     </div>
-    
+
+<div class="accordion" id="accordionPanelsStayOpenExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+        Contacter le proprietaire
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+      <div class="accordion-body">
+        {% for usee in user %}
+        {% if usee ==  annonce.idUser %}
+        Mail: <a href="mailto:{{ usee.email }}">{{ usee.email }}</a><br>
+        Telephone :{{ usee.telephone }}
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
 {% if app.user %}
 <div class="p-2"></div>
 <a href="/reservation/new?idannonce={{ annonce.id }}" class="btn btn-outline-success">Reserver maintenant</a>
@@ -107,6 +127,8 @@
 
 {# {{ app.user }}
 {{ annonce.idUser }} #}
+
+
 {% if app.user == annonce.idUser or app.user.roles[0] == 'ROLE_ADMIN'%}
 <div class="btn-group" role="group">
     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
