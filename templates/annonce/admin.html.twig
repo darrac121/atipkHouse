@@ -1,51 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Annonce index{% endblock %}
+{% block title %}Gestion des Hébergements{% endblock %}
 
 {% block body %}
-    <h1>Annonce index</h1>
+    <h1>Gestion des Hébergements</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Titre</th>
                 <th>Description</th>
                 <th>Adresse</th>
-                <th>Ville</th>
-                <th>CodePostal</th>
+                <th>Ville<br>CodePostal<br>Pays</th>
                 <th>Prix</th>
-                <th>Datecreation</th>
-                <th>Status</th>
+                <th>Date debut</th>
+                <th>Date fin</th>
                 <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for annonce in annonces %}
             <tr>
-                <td>{{ annonce.id }}</td>
                 <td>{{ annonce.titre }}</td>
                 <td>{{ annonce.description }}</td>
                 <td>{{ annonce.adresse }}</td>
-                <td>{{ annonce.Ville }}</td>
-                <td>{{ annonce.CodePostal }}</td>
+                <td>{{ annonce.Ville }}<br>{{ annonce.CodePostal }}<br>{{ annonce.Pays }}</td>
                 <td>{{ annonce.prix }}</td>
-                <td>{{ annonce.datecreation ? annonce.datecreation|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ annonce.status }}</td>
+                <td>{{ annonce.datedebut ? annonce.datedebut|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ annonce.dateFin ? annonce.dateFin|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
                 {% if annonce.status == 0 %}
-                    <a href="{{ path('app_annonce_active', {'id': annonce.id}) }}">activer</a>
+                    <a class="btn btn-outline-success" href="{{ path('app_annonce_active', {'id': annonce.id}) }}">activer</a>
                     {% else %}
-                    <a href="{{ path('app_annonce_desactive', {'id': annonce.id}) }}">desactiver</a>
+                    <a class="btn btn-outline-secondary" href="{{ path('app_annonce_desactive', {'id': annonce.id}) }}">desactiver</a>
                 {% endif %}
                     
-                    <a href="{{ path('app_annonce_show', {'id': annonce.id}) }}">show</a>
-                    <a href="{{ path('app_annonce_edit', {'id': annonce.id}) }}">edit</a>
+                    <a class="btn btn-outline-dark" href="{{ path('app_annonce_show', {'id': annonce.id}) }}">voir</a>
+                    <a class="btn btn-outline-dark" href="{{ path('app_annonce_edit', {'id': annonce.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_annonce_new') }}">Create new</a>
+    {# <a href="{{ path('app_annonce_new') }}">Create new</a> #}
 {% endblock %}

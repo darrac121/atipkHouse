@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Annonce index{% endblock %}
+{% block title %}Annonce en attente{% endblock %}
 
 {% block body %}
-    <h1>Annonce index</h1>
+    <h1>Annonce en attente</h1>
 
     <table class="table">
         <thead>
@@ -12,11 +12,10 @@
                 <th>Titre</th>
                 <th>Description</th>
                 <th>Adresse</th>
-                <th>Ville</th>
-                <th>CodePostal</th>
+                <th>Ville<br>CodePostal<br>Pays</th>
                 <th>Prix</th>
-                <th>Datecreation</th>
-                <th>Status</th>
+                <th>Date de debut</th>
+                <th>Date de fin</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -27,13 +26,12 @@
                 <td>{{ annonce.titre }}</td>
                 <td>{{ annonce.description }}</td>
                 <td>{{ annonce.adresse }}</td>
-                <td>{{ annonce.Ville }}</td>
-                <td>{{ annonce.CodePostal }}</td>
+                <td>{{ annonce.Ville }}<br>{{ annonce.CodePostal }}<br>{{ annonce.Pays }}</td>
                 <td>{{ annonce.prix }}</td>
-                <td>{{ annonce.datecreation ? annonce.datecreation|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ annonce.status }}</td>
+                <td>{{ annonce.datedebut ? annonce.datedebut|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ annonce.dateFin ? annonce.dateFin|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_annonce_attente', {'id': annonce.id}) }}">activer</a>
+                    <a class="btn btn-outline-success" href="{{ path('app_annonce_attente', {'id': annonce.id}) }}">activer</a>
                     <a href="{{ path('app_annonce_show', {'id': annonce.id}) }}">show</a>
                     <a href="{{ path('app_annonce_edit', {'id': annonce.id}) }}">edit</a>
                 </td>
