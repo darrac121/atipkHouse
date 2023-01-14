@@ -5,9 +5,8 @@
         <tbody>
         {% for avis_annonce in avis_annonces %}
             <tr>
-                <td>{{ avis_annonce.message }}</td>
-                <td>{{ avis_annonce.rating }}</td>
-                
+                <td><i class="bi bi-star-fill"></i> {{ avis_annonce.rating }}</td>
+                <td>{{ avis_annonce.message }}</td>                
                 {#% if avis_annonce.id_user == app.user %}
                 <td>
                       <a href="{{ path('app_avis_annonce_edit', {'id': avis_annonce.id}) }}">edit</a>

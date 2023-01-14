@@ -29,8 +29,9 @@
             <td id="prix">{{ annonce.prix }}</td>
         </tr>
         <tr>
-            <th>Date de fin de disponibiliter</th>
-            <td id='dateofmax'>{{ annonce.datecreation ? annonce.datecreation|date('Y-m-d') : '' }}</td>
+            <td id='dateofmin'>{{ annonce.datedebut ? annonce.datedebut|date('d/m/Y') : '' }}</td>
+            <th>-></th>
+            <td id='dateofmax'>{{ annonce.dateFin ? annonce.dateFin|date('d/m/Y') : '' }}</td>
         </tr>
     </tbody>
 </table>

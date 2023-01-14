@@ -47,9 +47,8 @@ class Help extends AbstractController
         $img3 = '/img_website/image_info_page/image3.webp';
         
         return $this->render('info/index.html.twig', [
-            'img1' => $img1,
+            'img1' => $img3,
             'img2' => $img2,
-            'img3' => $img3,
         ]);
     }
 }

@@ -1,11 +1,13 @@
 {{ form_start(form) }}
-    
-    {# {{ form_widget(form.prix) }} #}
+        {# {{ form_widget(form.prix) }} #}
 
     <div class="col-auto">
     {{ form_widget(form) }}
     </div>
     {% set catcont = 0 %}
+<label for="selection">
+categorie
+</label>
 <select name='categorie' id="selection">
     {% for cat in CategoryRepository %}
       {# {{ cat.libelle }} #}
@@ -22,7 +24,7 @@
       <div class="id-{{ LebelleOptionAnnonceRepos.idCategory }}" {% if first != LebelleOptionAnnonceRepos.idCategory %} style="display:none"{% endif %}>
       <label>
       {{ LebelleOptionAnnonceRepos.value }} {% if LebelleOptionAnnonceRepos.status == 1 %} * {% endif %}
-      <input type="text" id="values" class="form-control" name="values[{{ LebelleOptionAnnonceRepos.id }}]" placeholder="Saisissez encore une valeur">
+      <input type="text" id="values" class="form-control" name="values[{{ LebelleOptionAnnonceRepos.id }}]" placeholder="{{ LebelleOptionAnnonceRepos.value }}">
       </label>
       
       </div>
@@ -57,19 +59,6 @@ function te(){
 
  
 }
-/*
-function add_15_prix(){
-var selectElement = document.getElementById('annonce2_prix');
-
-selectElement.value = selectElement.value * 1.15;
-
-}
-
-var input = document.getElementById('annonce2_prix');
-input.onchange = function() {
-  add_15_prix();
-}
-*/
 
 var tot = document.querySelector('#tot');
 var catcount = document.querySelector('#catcount');
@@ -81,5 +70,5 @@ selectElement.addEventListener('change', () => {
 <br>
       {# <input type="file" id="files" name="files" multiple> #}
       
-    <button class="btn btn-outline-success">{{ button_label|default('Save') }}</button>
+    <button class="btn btn-outline-success">{{ button_label|default('Ajouter') }}</button>
 {{ form_end(form) }}

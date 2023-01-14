@@ -11,51 +11,26 @@
 <div style="margin-top: 5px;margin-bottom: 5px;"></div>
 <div class="container">
 
-<div class="card border-1  shadow-lg">
+<div class="card border-0">
 <div class="card-body px-3 pt-grid-gutter pb-0">
 <p class="text-center">
-Les logements atipik offrent de nombreux avantages pour ceux qui cherchent quelque chose de différent et de original. Tout d'abord, ils ont souvent des caractéristiques uniques et personnalisées qui les distinguent des logements traditionnels. Par exemple, ils peuvent avoir des formes et des tailles inhabituelles, des matériaux de construction originaux ou des caractéristiques architecturales surprenantes.
+Les logements atipik offrent de nombreux avantages pour ceux qui cherchent quelque chose de différent et de original. Tout d'abord, ils ont souvent des caractéristiques uniques et personnalisées qui les distinguent des logements traditionnels.
+</p>
+<div style="margin-top: 5px;margin-bottom: 5px;"></div>
+<p class="text-center">
+Par exemple, ils peuvent avoir des formes et des tailles inhabituelles, des matériaux de construction originaux ou des caractéristiques architecturales surprenantes.
+</p>
+
+<div style="margin-top: 5px;margin-bottom: 5px;"></div>
+<p class="text-center">
 De plus, les logements atipik sont souvent situés dans des emplacements exceptionnels, comme des maisons sur pilotis ou des maisons flottantes, ce qui en fait des endroits idéaux pour ceux qui cherchent à se déconnecter de la ville et à profiter de la nature.
+</p>
+<div style="margin-top: 5px;margin-bottom: 5px;"></div>
+<p class="text-center">
 Vivre dans un logement atipik peut être une expérience très gratifiante pour ceux qui cherchent à sortir de leur zone de confort et à vivre de manière plus originale et créative. En choisissant un logement atipik, vous pourrez vous faire plaisir en vous offrant un lieu de vie unique et sur mesure qui vous ressemble.
 </p>
 </div>
 </div>
-<section id="features">
-    <div id="container" class="container-fluid">
-        <div id="row" class="row">
-            <div class="col-lg-8 offset-lg-4">
-                <div class="ection-header wow fadeIn" style="visibility: visible;animation-duration: 1s;animation-name: fadeIn;" data-wow-duration="1s">
-                    <h3 class="text-center section-title" style="color: #000000;">Product Features</h3><span class="section-divider"></span>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-5 features-img"><img src="features.png" /></div>
-            <div class="col-lg-8 col-md-7">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6 box wow fadeInRight" style="visibility: visible;animation-name: fadeInRight;">
-                        <div><i class="icon ion-android-contacts" style="font-size: 98px;"></i></div>
-                        <h4 class="title"><strong>Group</strong><br /></h4>
-                        <p class="description">A <strong>group</strong> is a collection of individuals who coordinate their individual efforts.<br /></p>
-                    </div>
-                    <div class="col-lg-6 col-md-6 box wow fadeInRight" style="visibility: visible;animation-delay: 0.1s;animation-name: fadeInRight;" data-wow-delay="0.1s">
-                        <div><i class="icon ion-ios-football" style="font-size: 98px;"></i></div>
-                        <h4 class="title"><strong>Team</strong><br /></h4>
-                        <p class="description">At <strong>team</strong> is a<strong>group</strong> of people who share a common <strong>team</strong> purpose and a number of challenging goals. Members of the<strong>team</strong> are mutually committed to the goals and to each other.<br /></p>
-                    </div>
-                    <div class="col-lg-6 col-md-6 box wow fadeInRight" data-wow-delay="0.2s" style="visibility: visible;animation-name: fadeInRight;">
-                        <div><i class="icon ion-android-person" style="font-size: 98px;"></i></div>
-                        <h4 class="title"><strong>Foreman </strong><br /></h4>
-                        <p class="description"><strong>Foreman</strong> is basically an instructor who provides guidelines to the operators concerning their routine tasks.<br /></p>
-                    </div>
-                    <div class="col-lg-6 col-md-6 box wow fadeInRight">
-                        <div><i class="icon ion-android-contact" style="font-size: 98px;"></i></div>
-                        <h4 class="title"><strong>Supervisor</strong><br /></h4>
-                        <p class="description"><strong>Supervisor</strong> is a middle line level manager whose role includes checking on the operations of the subordinates which includes that of <strong>foreman</strong> also.<br /></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 <div style="margin-top: 5px;margin-bottom: 5px;"></div>
 
 {# {{ last_username }} #}
@@ -68,8 +43,13 @@ Vivre dans un logement atipik peut être une expérience très gratifiante pour 
         
     {% endfor %}
      #}
-    {% for annonce in annonces %}
+        {% set count_bis = 0 %}
+
+    {% for annonce in annonces |slice('0', '4') %}
+    
     {% if annonce.status == '1' %}
+
+        {% set count_bis = count_bis + 1 %}
         {# <div class="col-sm-6 col-md-4"> #}
         <div class="col">
                 <a href="{{ path('app_annonce_show', {'id': annonce.id}) }}" class="btn">
@@ -87,14 +67,14 @@ Vivre dans un logement atipik peut être une expérience très gratifiante pour 
             {% set annoce_id = annonce.id %}
             {% if count == 0 %}
                 {% if id_annn == annoce_id %}
-                    <img src="{{  imag.lien }}" class="card-img-top" alt="Photo {{ annonce.titre }}">
+                    <img src="{{  imag.lien }}" class="card-img-top" height="100%" alt="Photo {{ annonce.titre }}">
                     {% set count = 1 %}
                 {% endif %} 
             {% endif %} 
         
         {% endfor %}
         {% if count == 0%}
-                <img src="\img_website\home-outline.svg" class="card-img-top" height="114" alt="Pas d'image sur cette annnonces">
+                <img src="\img_website\home-outline.svg" class="card-img-top" height="100%" alt="Pas d'image sur cette annnonces">
         {% endif %} 
                     <div class="card-body">
                         <div class="card-title text-center h1">{{ annonce.titre }}</div>
@@ -127,15 +107,17 @@ Vivre dans un logement atipik peut être une expérience très gratifiante pour 
 <div style="margin-top: 5px;margin-bottom: 5px;"></div>
 
 <div class="text-center">
-<a class="btn btn-outline-primary" href="/annonce">Voir Toute les annonces </a>
+<a class="btn btn-outline-primary" href="/annonce">Voir Toute les habitation </a>
+</div>
 </div>
 <div style="margin-top: 5px;margin-bottom: 5px;"></div>
-
     <div class="row">
         <div class="col-sm-12 col-md-6 align-items-center" style="margin-top: 80px;">
         Si vous cherchez à vivre une expérience de vacances originale et inoubliable, pourquoi ne pas opter pour un logement atipik ? Ces logements uniques offrent tout ce qu'il faut pour des vacances inoubliables : emplacements exceptionnels, caractéristiques architecturales surprenantes et ambiance chaleureuse et accueillante.
+<div style="margin-top: 5px;margin-bottom: 5px;"></div>
 
         Que vous cherchiez une maison sur pilotis, une cabane dans les arbres ou une roulotte vintage, vous trouverez certainement le logement atipik de vos rêves. Et avec leur caractère unique et leur décor personnalisé, ces logements vous permettront de vous déconnecter de la vie quotidienne et de vous ressourcer en toute tranquillité.
+<div style="margin-top: 5px;margin-bottom: 5px;"></div>
 
         Alors pourquoi attendre ? Faites de vos prochaines vacances une expérience inoubliable en choisissant un logement atipik !
         </div>
@@ -145,7 +127,7 @@ Vivre dans un logement atipik peut être une expérience très gratifiante pour 
     </div>
 
 
-</div>
+<div style="margin-top: 15px;margin-bottom: 5px;"></div>
 
 
   {% endblock %}

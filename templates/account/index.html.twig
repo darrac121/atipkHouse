@@ -1,18 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AccountController!{% endblock %}
+{% block title %}espace personnel{% endblock %}
 
 {% block body %}
 
 
 <div class="example-wrapper">
-    <h1>Vos information personnel ✅</h1>
-    {{ app.user.firstname}}</br>
-    {{ app.user.name }}</br>
-    {{ app.user.telephone }}</br>
-    {{ app.user.email }}</br>
-    {{ app.user.adresse }}</br>
-    <a href="{{ path('app_user_edit', {'id': app.user.id }) }}">edit</a>
+    <h1>Bienvenue dans votre espace personnel</h1>
+    Votre prenom :{{ app.user.firstname}}</br>
+    Votre nom :{{ app.user.name }}</br>
+    Votre telephone :{{ app.user.telephone }}</br>
+    Votre email :{{ app.user.email }}</br>
+    Votre adresse :{{ app.user.adresse }}</br>
+    <a href="{{ path('app_user_edit', {'id': app.user.id }) }}">Modifier</a>
 
 </div>
 {% endblock %}

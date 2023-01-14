@@ -24,13 +24,13 @@
         {% set annoce_id = annonce.id %}
         {% if count == 0 %}
             {% if id_annn == annoce_id %}
-                <img src="{{  imag.lien }}" class="card-img-top" alt="...">
+                <img src="{{  imag.lien }}" class="card-img-top" alt="{{ annonce.titre }}" height="114">
                 {% set count = 1 %}
             {% endif %} 
         {% endif %} 
     {% endfor %}
         {% if count == 0%}
-                <img src="\img_website\home-outline.svg" class="card-img-top" height="114" alt="...">
+                <img src="\img_website\home-outline.svg" class="card-img-top" height="114" alt="image annonce manquante">
         {% endif %} 
                     <div class="card-body">
                         <div class="card-title">{{ annonce.titre }}</div>

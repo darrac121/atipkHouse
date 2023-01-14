@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Page de connexion{% endblock %}
 
 {% block body %}
 <form method="post">
@@ -10,46 +10,23 @@
 
     {% if app.user %}
         <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+            Vous etes connecter en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% else %}
 
 <div id="main_connection">
     <div id="info" class="text-center container">
-        <h3 class="text-center">Connection</h3>
+        <h3 class="text-center">connexion</h3>
             {# <p class="text-center">Ingrese usuario y contraseña</p> #}
-                <div class="mb-3 p-3"><label id="lbl-usuario" class="form-label" for="username">Email</label><input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus/></div>
-                <div class="mb-3 p-3"><label id="lbl-password" class="form-label" for="inputPassword">Password</label><input type="password" name="_password" id="inputPassword" class="form-control" autocomplete="current-password" required /></div>
+                <div class="mb-3 p-3"><label id="lbl-usuario" class="form-label" for="username">Identifiant</label><input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus/></div>
+                <div class="mb-3 p-3"><label id="lbl-password" class="form-label" for="inputPassword">Mot de passe</label><input type="password" name="_password" id="inputPassword" class="form-control" autocomplete="current-password" required /></div>
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-           
-            <button id="btn-sesion" class="btn btn-primary p-3" type="submit" style="--bs-primary: #256db4;--bs-primary-rgb: 37,109,180;background: #256db4;">Connection</button>
+            <button id="btn-sesion" class="btn btn-info" type="submit" >Se connecter</button>
+            <a href="/register" class="btn btn-primary">S'inscrire</a>
     </div>
 </div>
     {% endif %}
 
-{#
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="username">Email</label>
-    <input type="email" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="_password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-#}
-
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
-
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" name="_remember_me"> Remember me
-            </label>
-        </div>
-
-
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
-    #}
 
 </form>
 {% endblock %}

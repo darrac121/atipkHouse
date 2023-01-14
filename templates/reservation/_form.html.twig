@@ -251,6 +251,8 @@ var date1 = new Date(debut_yaer, debut_month, debut_day);
 var date2 = new Date(Fin_yaer, Fin_month, Fin_day);
 
 var dateofmax = document.getElementById('dateofmax');
+var dateofmin = document.getElementById('dateofmin');
+
 var datejour=new Date();
 
 
@@ -263,7 +265,7 @@ if(date1 > date2){
   message.textContent ="la date n'est pas valide"; 
   btn_valide.disabled = true;
 }
-else if(dateofmax <= date2){
+else if((dateofmax <= date2) OR (dateofmin <= date1)){
   message.style.display ="block";
   message.textContent ="la date n'est plus disponible pour se bien"; 
   btn_valide.disabled = true;
@@ -330,9 +332,6 @@ var selectElement = document.querySelector('#reservation_DateFin_year');
 selectElement.addEventListener('change', () => {
 te();
 });
-
-
-
 </script>
 
 

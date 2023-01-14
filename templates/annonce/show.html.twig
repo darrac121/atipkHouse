@@ -16,40 +16,41 @@
         {# {% if count == 0 %} #}
             {% if id_annn == annoce_id %}
             <div class="col{% if count == 0 %}-12{% endif %} ">
-                <img src="{{  imag.lien }}" class="card-img-top"  alt="{{ annonce.titre }}" height="114" onclick="window.open(this.src)">
+                <img src="{{  imag.lien }}" class="card-img-top"  alt="{{ annonce.titre }}" onclick="window.open(this.src)">
             </div>
                 {% set count = 1 %}
             {% endif %} 
         {# {% endif %}  #}
     {% endfor %}
         {% if count == 0%}
-                <img src="\img_website\home-outline.svg" class="card-img-top" height="114" alt="image annonce">
+                <img src="\img_website\home-outline.svg" class="card-img-top" alt="image annonce">
         {% endif %} 
 </div>
+{{ annonce.description }}
+
+{{ render(controller(
+        'App\\Controller\\AvisAnnonceController::avisannonce', {id: annonce.id }
+    )) }}
+
+<a href="{{ path('app_avis_annonce_new')}}?idannonce={{ annonce.id }}">ajouter avis</a>
+
 </div>
 {# </div> #}
 <div class="col-md-6">
 <div class="row">
 <div class="col-md-6">
     <table class="table">
-        <tbody>
             <tr>
-                <td>{{ annonce.description }}</td>
-            </tr>
-            <tr>
-                <td>{{ annonce.adresse }}  {{ annonce.Ville }}  {{ annonce.CodePostal }}</td>
+                <td>{{ annonce.adresse }}  {{ annonce.Ville }}  {{ annonce.CodePostal }} {{ annonce.Pays }}</td>
             </tr>
             <tr>
                 <td><i class="bi bi-person-fill"></i> {{ annonce.nbmax }}</td>
             </tr>
-            
             <tr>
-                <td>Debu de disponibiliter {{ annonce.datedebut ? annonce.datedebut|date('Y-m-d') : '' }}</td>
-            </tr>     
-            <tr>
-                <td>Fin de disponibiliter {{ annonce.dateFin ? annonce.dateFin|date('Y-m-d') : '' }}</td>
+                <td>Debut Disponibiliter {{ annonce.datedebut ? annonce.datedebut|date('d/m/Y') : '' }}</td>
+                <td> ==> </td>
+                <td>Fin Disponibiliter {{ annonce.dateFin ? annonce.dateFin|date('d/m/Y') : '' }}</td>
             </tr>
-        </tbody>
     </table>
     <table class="table">
     {% set count_for_cat = 0 %}
@@ -120,12 +121,6 @@
   </div>
     
 {% endif %}
-{{ render(controller(
-        'App\\Controller\\AvisAnnonceController::avisannonce', {id: annonce.id }
-    )) }}
-
-    <a href="{{ path('app_avis_annonce_new')}}?idannonce={{ annonce.id }}">ajouter avis</a>
-
 {% else %}
 <a href="/login" class="btn btn-outline-success">Reserver maintenant</a>
 
