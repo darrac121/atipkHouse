@@ -39,7 +39,7 @@ class AnnonceType extends AbstractType
             ->add('adresse',TextType::class,['attr' => ['class' => 'form-control']])
             ->add('Ville',TextType::class,['attr' => ['class' => 'form-control']])
             ->add('CodePostal',TextType::class,['attr' => ['class' => 'form-control']])
-            ->add('prix',TextType::class,['attr' => ['class' => 'form-control prix'],'label' => 'Prix ( 15% sera ajouter pour la comition )'])
+            ->add('prix',TextType::class,['attr' => ['class' => 'form-control prix'],'label' => 'Prix'])
             ->add('nbmax',TextType::class,['attr' => ['class' => 'form-control']])
             ->add('datedebut',DateType::class)
             ->add('dateFin',DateType::class)
