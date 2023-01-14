@@ -12,7 +12,7 @@ categorie
     {% for cat in CategoryRepository %}
       {# {{ cat.libelle }} #}
    <option value="{{ cat.id }}">{{ cat.libelle }}</option>
-      {% set catcont = catcont + 1 %}
+      {% set catcont = cat.id %}
 
     {% endfor %}
 </select>
@@ -40,7 +40,8 @@ categorie
 <script>
 
 function te(){
-   for (let cat = 1; cat <= catcount.textContent; cat++) {
+  for (let cat = 1; cat <= catcount.textContent; cat++) {
+  //for (let cat = 1; cat <= 10; cat++) {
   if(selectElement.value != cat){
   var elements = document.querySelectorAll(".id-"+cat);
   elements.forEach(element => {

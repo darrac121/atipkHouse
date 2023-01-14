@@ -26,9 +26,9 @@
                 <td>{{ user.status }}</td>
                 <td>{{ user.commentaire }}</td>
                 <td>
-                    <a href="{{ path('app_user_active', {'id': user.id}) }}">active</a>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                    <a class="btn btn-outline-success" href="{{ path('app_user_active', {'id': user.id}) }}">active</a>
+                    <a class="btn btn-outline-info" href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
+                    <a class="btn btn-outline-info" href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
