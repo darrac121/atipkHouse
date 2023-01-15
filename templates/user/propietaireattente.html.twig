@@ -30,8 +30,6 @@
                     <td>{{ user.commentaire }}</td>
                     <td>
                         <a class="btn btn-outline-success" href="{{ path('app_user_active', {'id': user.id}) }}">active</a>
-                        <a class="btn btn-outline-dark" href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-                        <a class="btn btn-outline-dark" href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
                     </td>
                 </tr>
             {% endif %}
