@@ -9,7 +9,7 @@
         {% for annonce in annonces %}
             {% if annonce.iduser == app.user %}
                 {% if annonce.status == 1 %}
-                    <h2>{{ annonce.titre }}</h2>
+                    <h2>Biens : {{ annonce.titre }}</h2>
                     {{ render(controller(
                         'App\\Controller\\ReservationController::commande', {id: annonce.id }
                     )) }}

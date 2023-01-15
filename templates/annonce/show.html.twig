@@ -60,7 +60,7 @@
                 {% if CategoryRepositorys == loannonces.idCategory %}
                     {% if count_for_cat == 0 %}
                     <tr>
-                        <td>Category</td>
+                        <td>Categorie</td>
                         <td>{{ CategoryRepositorys.libelle }}</td>
                     </tr>
                     {% else %}
@@ -75,7 +75,7 @@
             <td>{{ opts.valeur }}</td>
             {% if app.user %}
                 {% if app.user == annonce.idUser or app.user.roles[0] == 'ROLE_ADMIN'%}
-                <td><a href="{{ path('app_option_annonce_edit', {'id': opts.id}) }}">modifier</a></td>
+                <td><a class="btn btn-warning" href="{{ path('app_option_annonce_edit', {'id': opts.id}) }}">modifier</a></td>
                 {% endif %}
             {% endif %}
     </tr>
@@ -91,7 +91,7 @@
     </table>
     </div>
     <div class="col-md-6 text-center h2">
-{{ annonce.prix }} € / par nuit
+{{ annonce.prix }} € / nuit
     </div>
     </div>
 
@@ -149,9 +149,10 @@
 </div>
 
 
-<div>
+<div class="container">
+<h2>Habitations susceptible de vous plaire </h2>
     {{ render(controller(
         'App\\Controller\\AnnonceController::sugestion', {id: annonce.idCategory }
     )) }}
-
+</div>
 {% endblock %}

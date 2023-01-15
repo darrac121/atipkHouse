@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Enregistrement{% endblock %}
 
 
 {% block body %}
@@ -47,20 +47,28 @@
         {{ form_row(registrationForm.Name, {label: 'Votre nom '}) }}
     </div>
     <div class="col-auto">
-        {{ form_row(registrationForm.firstname) }}
+        {{ form_row(registrationForm.firstname, {
+            label: 'Prenom'
+        }) }}
     </div>
     <div class="col-auto">
-        {{ form_row(registrationForm.adresse) }}
+        {{ form_row(registrationForm.adresse, {
+            label: 'Adresse'
+        }) }}
     </div>
     <div class="col-auto">
-        {{ form_row(registrationForm.telephone) }}
+        {{ form_row(registrationForm.telephone, {
+            label: 'Telephone'
+        }) }}
     </div>
     <div class="col-auto">
-        {{ form_row(registrationForm.email) }}
+        {{ form_row(registrationForm.email, {
+            label: 'Mail'
+        }) }}
     </div>
     <div class="col-auto">
         {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
+            label: 'Mot de passe'
         }) }}
         </div>
 
@@ -70,4 +78,5 @@
     {{ form_end(registrationForm) }}
     </div>
     </div>
+<div class="p-2"></div>
 {% endblock %}
