@@ -8,20 +8,16 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ newsletter.id }}</td>
-            </tr>
-            <tr>
                 <th>Email</th>
                 <td>{{ newsletter.email }}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('app_newsletter_index') }}">back to list</a>
+    {# <a href="{{ path('app_newsletter_index') }}">back to list</a>
 
     <a href="{{ path('app_newsletter_edit', {'id': newsletter.id}) }}">edit</a>
 
-    {{ include('newsletter/_delete_form.html.twig') }}
+    {{ include('newsletter/_delete_form.html.twig') }} #}
     
 {% endblock %}
