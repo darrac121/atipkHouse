@@ -105,7 +105,7 @@ class ReservationController extends AbstractController
     public function annuller(Request $request, Reservation $reservation, ReservationRepository $reservationRepository, EntityManagerInterface $em): Response
     {
 
-        $reservation->setStatue(0);
+        $reservation->setStatue(3);
         $em->flush();
         return $this->redirectToRoute('app_annonce_commande', [], Response::HTTP_SEE_OTHER);
 
