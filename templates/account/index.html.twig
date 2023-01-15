@@ -12,7 +12,7 @@
     Votre telephone :{{ app.user.telephone }}</br>
     Votre email :{{ app.user.email }}</br>
     Votre adresse :{{ app.user.adresse }}</br>
-    <a href="{{ path('app_user_edit', {'id': app.user.id }) }}">Modifier</a>
+    <a class="btn btn-warning" href="{{ path('app_user_edit', {'id': app.user.id }) }}">Modifier</a>
 
 </div>
 {% endblock %}

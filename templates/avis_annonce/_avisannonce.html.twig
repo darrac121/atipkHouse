@@ -1,6 +1,8 @@
 {% block body %}
-    <h1>Avis</h1>
-
+    <h1>Avis ({{ avis_annonces|length }})</h1>
+    {% if avis_annonces|length == 0 %}
+    Il y a pas d'avis pour cette annonce
+    {% else %} 
     <table class="table">
         <tbody>
         {% for avis_annonce in avis_annonces %}
@@ -17,6 +19,6 @@
         {% endfor %}
         </tbody>
     </table>
-
+    {% endif %}
     
 {% endblock %}
