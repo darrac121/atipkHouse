@@ -83,7 +83,7 @@ class UserController extends AbstractController
                 )
             );
             $user->setRoles(["ROLE_PRO"]);
-            $user->setStatus(3);
+            $user->setStatus(0);
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email
@@ -211,7 +211,7 @@ class UserController extends AbstractController
     public function desactive(Request $request, User $user, UserRepository $userRepository, EntityManagerInterface $em): Response
     {
 
-        $user->setStatus(0);
+        $user->setStatus(3);
         $em->flush();
         return $this->redirectToRoute('app_logout', [], Response::HTTP_SEE_OTHER);
 
