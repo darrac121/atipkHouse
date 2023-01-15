@@ -101,6 +101,6 @@ class LebelleOptionAnnonceController extends AbstractController
             $lebelleOptionAnnonceRepository->remove($lebelleOptionAnnonce, true);
         }
 
-        return $this->redirectToRoute('app_lebelle_option_annonce_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
     }
 }
