@@ -4,6 +4,7 @@
 
 {% block body %}
 
+{% if app.user %}
 
 <div class="example-wrapper">
     <h1>Bienvenue dans votre espace personnel</h1>
@@ -15,4 +16,5 @@
     <a class="btn btn-warning" href="{{ path('app_user_edit', {'id': app.user.id }) }}">Modifier</a>
 
 </div>
+{% endif %}
 {% endblock %}
