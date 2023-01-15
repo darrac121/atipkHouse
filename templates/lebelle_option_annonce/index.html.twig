@@ -1,15 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}LebelleOptionAnnonce index{% endblock %}
+{% block title %}Nom de champs personnalisé{% endblock %}
 
 {% block body %}
-    <h1>LebelleOptionAnnonce index</h1>
+<div class="container">
+    <h1>Nom de champs personnalisé</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Value</th>
+                <th>Valeur</th>
                 <th>Status</th>
                 <th>actions</th>
             </tr>
@@ -17,21 +17,21 @@
         <tbody>
         {% for lebelle_option_annonce in lebelle_option_annonces %}
             <tr>
-                <td>{{ lebelle_option_annonce.id }}</td>
                 <td>{{ lebelle_option_annonce.value }}</td>
                 <td>{{ lebelle_option_annonce.status }}</td>
                 <td>
-                    <a href="{{ path('app_lebelle_option_annonce_show', {'id': lebelle_option_annonce.id}) }}">show</a>
-                    <a href="{{ path('app_lebelle_option_annonce_edit', {'id': lebelle_option_annonce.id}) }}">edit</a>
+                    <a class="btn btn-success" href="{{ path('app_lebelle_option_annonce_show', {'id': lebelle_option_annonce.id}) }}">Voir</a>
+                    <a class="btn btn-warning" href="{{ path('app_lebelle_option_annonce_edit', {'id': lebelle_option_annonce.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">Pas de champs personnalisé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_lebelle_option_annonce_new') }}">Create new</a>
+    <a class="btn btn-success" href="{{ path('app_lebelle_option_annonce_new') }}">Create new</a>
+</div>
 {% endblock %}
