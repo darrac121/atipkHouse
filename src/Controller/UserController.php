@@ -143,7 +143,8 @@ class UserController extends AbstractController
                 //->replyTo('fabien@example.com')
                 //->priority(Email::PRIORITY_HIGH)
                 ->subject('Compte Propriétaire activé')
-                ->html('<p>Votre compte a été créé.</br>Allez sur le site <a href="dev3-g3-lz-es-zt-fb.go.yj.fr">AtipikHouse</p></br></br>Bien à vous,</br>AtipikHouse');
+                ->html('<p>Votre compte a été activé.</br>Allez sur le site <a href="dev3-g3-lz-es-zt-fb.go.yj.fr">AtipikHouse</p></br></br>Bien à vous,</br>AtipikHouse');
+        $mailer->send($email);
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
 
 
