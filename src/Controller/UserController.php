@@ -213,7 +213,7 @@ class UserController extends AbstractController
 
         $user->setStatus(0);
         $em->flush();
-        return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_logout', [], Response::HTTP_SEE_OTHER);
 
 
     }
