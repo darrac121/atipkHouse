@@ -1,11 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New LebelleOptionAnnonce{% endblock %}
+{% block title %}Nouveau champs personnalisé{% endblock %}
 
 {% block body %}
-    <h1>Create new LebelleOptionAnnonce</h1>
+    <div class="container">
+    <h1>Nouveau champs personnalisé</h1>
 
     {{ include('lebelle_option_annonce/_form.html.twig') }}
 
-    <a href="{{ path('app_category_index') }}">back to list</a>
+    <a class="btn btn-dark" href="{{ path('app_category_index') }}">Retour</a>
+</div>
 {% endblock %}
+
