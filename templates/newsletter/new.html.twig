@@ -3,9 +3,11 @@
 {% block title %}S'inscrire a la newsletter{% endblock %}
 
 {% block body %}
+<div class="container">
     <h1>S'inscrire a la newsletter</h1>
 
     {{ include('newsletter/_form.html.twig') }}
 
-    <a href="{{ path('app_newsletter_index') }}">back to list</a>
+    <a class="btn btn-danger" href="/">Quitter</a>
+</div>
 {% endblock %}
