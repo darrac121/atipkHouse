@@ -2,7 +2,6 @@
 <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Value</th>
                 <th>Status</th>
                 <th>actions</th>
@@ -11,17 +10,16 @@
         <tbody>
         {% for lebelle_option_annonce in lebelle_option_annonces %}
             <tr>
-                <td>{{ lebelle_option_annonce.id }}</td>
                 <td>{{ lebelle_option_annonce.value }}</td>
-                <td>{{ lebelle_option_annonce.status }}</td>
+                <td>{% if lebelle_option_annonce.status == 1 %}Obligatoire{% else %} non Obligatoire {% endif %}</td>
                 <td>
-                    <a href="{{ path('app_lebelle_option_annonce_show', {'id': lebelle_option_annonce.id}) }}">show</a>
-                    <a href="{{ path('app_lebelle_option_annonce_edit', {'id': lebelle_option_annonce.id}) }}">edit</a>
+                    <a class="btn btn-success" href="{{ path('app_lebelle_option_annonce_show', {'id': lebelle_option_annonce.id}) }}">show</a>
+                    <a class="btn btn-info" href="{{ path('app_lebelle_option_annonce_edit', {'id': lebelle_option_annonce.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">Pas de champs personnalisé</td>
             </tr>
         {% endfor %}
         </tbody>

@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Category index{% endblock %}
+{% block title %}Categorie{% endblock %}
 
 {% block body %}
-    <h1>Category index</h1>
+    <h1>Categorie</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Libelle</th>
+                <th>Nom de la categorie</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -19,17 +19,17 @@
                 <td>{{ category.libelle }}</td>
                 {# <td>{{ category.status }}</td> #}
                 <td>
-                    <a href="{{ path('app_category_show', {'id': category.id}) }}">show</a>
-                    <a href="{{ path('app_category_edit', {'id': category.id}) }}">edit</a>
+                    <a class="btn btn-success" href="{{ path('app_category_show', {'id': category.id}) }}">show</a>
+                    <a class="btn btn-info" href="{{ path('app_category_edit', {'id': category.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">Pas de categorie</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_category_new') }}">Create new</a>
+    <a class="btn btn-success" href="{{ path('app_category_new') }}">Create new</a>
 {% endblock %}

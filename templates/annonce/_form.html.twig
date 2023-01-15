@@ -8,7 +8,7 @@
 <label for="selection">
 categorie
 </label>
-<select name='categorie' id="selection">
+<select name='categorie' class="form-control" id="selection">
     {% for cat in CategoryRepository %}
       {# {{ cat.libelle }} #}
    <option value="{{ cat.id }}">{{ cat.libelle }}</option>
