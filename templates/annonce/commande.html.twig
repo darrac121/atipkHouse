@@ -3,6 +3,7 @@
 {% block title %}Reservation en attente{% endblock %}
 
 {% block body %}
+{% if app.user %}
     <h1>Reservation en attente</h1>
 
 
@@ -16,4 +17,5 @@
                 {% endif %}
             {% endif %}
         {% endfor %}
+{% endif %}
 {% endblock %}

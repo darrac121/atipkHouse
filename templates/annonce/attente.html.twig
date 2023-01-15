@@ -3,6 +3,10 @@
 {% block title %}Annonce en attente{% endblock %}
 
 {% block body %}
+
+{% if app.user %}
+{% if app.user.roles[0] == 'ROLE_PRO' or app.user.roles[0] == 'ROLE_ADMIN'%}
+
     <h1>Annonce en attente</h1>
 
     <table class="table">
@@ -15,7 +19,7 @@
                 <th>Prix</th>
                 <th>Date de debut</th>
                 <th>Date de fin</th>
-                <th>actions</th>
+                <th>Option</th>
             </tr>
         </thead>
         <tbody>
@@ -41,5 +45,6 @@
         {% endfor %}
         </tbody>
     </table>
-
+{% endif %}
+{% endif %}
 {% endblock %}

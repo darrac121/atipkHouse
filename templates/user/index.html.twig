@@ -10,7 +10,6 @@
         <thead>
             <tr>
                 <th>Email</th>
-                <th>Roles</th>
                 <th>Telephone</th>
                 <th>Status</th>
                 <th>Commentaire</th>
@@ -21,19 +20,18 @@
         {% for user in users %}
             <tr>
                 <td>{{ user.email }}</td>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                {# <td>{{ user.roles ? user.roles|json_encode : '' }}</td> #}
                 <td>{{ user.telephone }}</td>
-                <td>{{ user.status }}</td>
+                <td>{% if user.status == 1 %}Activer{% elseif user.status == 3 %}Bloquer{% else %}compte suspendue{% endif %}</td>
                 <td>{{ user.commentaire }}</td>
                 <td>
                     <a class="btn btn-outline-success" href="{{ path('app_user_active', {'id': user.id}) }}">active</a>
-                    <a class="btn btn-outline-info" href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-                    <a class="btn btn-outline-info" href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+                    <a class="btn btn-outline-info" href="{{ path('app_user_show', {'id': user.id}) }}">Afficher</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="10">no records found</td>
+                <td colspan="10">Pas d'utilisateur</td>
             </tr>
         {% endfor %}
         </tbody>
