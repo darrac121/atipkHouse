@@ -26,7 +26,7 @@
 
 
     <h1>Liste des champs personnalisé</h1><br>
-    <a href="{{ path('app_lebelle_option_annonce_new') }}?idcategory={{ category.id }}">Cree un nouveaux champs personnalisé</a>
+    <a class="btn btn-success" href="{{ path('app_lebelle_option_annonce_new') }}?idcategory={{ category.id }}">Cree un nouveaux champs personnalisé</a>
     {{ render(controller(
         'App\\Controller\\LebelleOptionAnnonceController::showlebelle', {id: category.id }
     )) }}
