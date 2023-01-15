@@ -53,6 +53,7 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
+        - { path: ^/user/mot-de-passe-oublie, roles: PUBLIC_ACCESS }
         - { path: ^/user, roles: ROLE_ADMIN }
         - { path: ^/annonce/admin, roles: ROLE_ADMIN }
         - { path: ^/category, roles: ROLE_ADMIN }
@@ -64,6 +65,7 @@ security:
         - { path: ^/annonce/new, roles: [ROLE_ADMIN, ROLE_PRO] }
         - { path: ^/reservation, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
+        
         #- { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
 
 when@test:

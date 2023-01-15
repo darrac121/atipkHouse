@@ -20,6 +20,7 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
 
 #[Route('/user')]
 class UserController extends AbstractController
@@ -124,70 +125,10 @@ class UserController extends AbstractController
         }
 
         return $this->renderForm('user/edit.html.twig', [
-            'user' => $user,
             'form' => $form,
         ]);
     }
-
-    public function passwordforget(Request $request, User $user, UserRepository $userRepository): Response
-    {
-        $form = $this->createForm(TokenType::class, $user);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $Token = $form->getData('token');
-            
-            $user = $userRepository->findOneBy(["recup_mdp"=> $Token]);
-            //render new form password with id in parrameters
-            
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('user/edit.html.twig', [
-            'user' => $user,
-            'form' => $form,
-        ]);
-    }
-    public function emailcheck(Request $request, User $user, UserRepository $userRepository, MailerInterface $mailer): Response
-    {
-        
-        $form = $this->createForm(EmailType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $email = $form->getData('email');
-            
-            $user = $userRepository->findOneBy(["email"=> $email]);
-            if( $user != null){
-                //$userRepository->save($user, true);
-                //create token
-                $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                $randstring = '';
-                for ($i = 0; $i < 10; $i++) {
-                    $randstring = $characters[rand(0, strlen($characters))];
-                }
-                $user->setRecupMdp($randstring);
-                //send by mail
-                $email = (new Email())
-                ->from('atipikhouse@dev3-g3-lz-es-zt-fb.go.yj.fr')
-                ->to($email)
-                //->cc('cc@example.com')
-                //->bcc('bcc@example.com')
-                //->replyTo('fabien@example.com')
-                //->priority(Email::PRIORITY_HIGH)
-                ->subject('Réinitialisation de votre mot de passe')
-                ->html('<h1>Boujour'.$user->getFirstname().'</h1></br><p>Vous avez demandé la réinitialisation de votre mot de passe.<br>Veuiller copier le code suivant dans le formulaire:</br>'.$randstring.'</br></br>Pour accéddé au formulaire cliquer sur le lien suivant : <a href="dev3-g3-lz-es-zt-fb.go.yj.fr/token">Formulaire</p></br></br>Bien à vous,</br>AtipikHouse');
-
-                $mailer->send($email);
-            }
-            
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('user/edit.html.twig', [
-            'user' => $user,
-            'form' => $form,
-        ]);
-    }
+    
     #[Route('/{id}/active', name: 'app_user_active', methods: ['GET', 'POST'])]
     public function active(Request $request, User $user, UserRepository $userRepository, EntityManagerInterface $em, MailerInterface $mailer): Response
     {
