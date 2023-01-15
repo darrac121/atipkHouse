@@ -31,7 +31,7 @@ class NewsletterController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $newsletterRepository->save($newsletter, true);
 
-            return $this->redirectToRoute('app_newsletter_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_home_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('newsletter/new.html.twig', [

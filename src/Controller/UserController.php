@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\EmailType;
 use App\Form\User1Type;
 use App\Security\EmailVerifier;
 use App\Form\RegistrationFormType;
@@ -16,7 +17,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
+use Symfony\Component\Mime\Email;
 
 #[Route('/user')]
 class UserController extends AbstractController
@@ -126,21 +129,57 @@ class UserController extends AbstractController
         ]);
     }
 
+    public function passwordforget(Request $request, User $user, UserRepository $userRepository): Response
+    {
+        $form = $this->createForm(TokenType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $Token = $form->getData('token');
+            
+            $user = $userRepository->findOneBy(["recup_mdp"=> $Token]);
+            //render new form password with id in parrameters
 
-    public function emailcheck(Request $request, User $user, UserRepository $userRepository): Response
+            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('user/edit.html.twig', [
+            'user' => $user,
+            'form' => $form,
+        ]);
+    }
+    public function emailcheck(Request $request, User $user, UserRepository $userRepository, MailerInterface $mailer): Response
     {
         
-        $form = $this->createForm(TokenType::class, $user);
+        $form = $this->createForm(EmailType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $email = $form->getData('email');
             
             $user = $userRepository->findOneBy(["email"=> $email]);
-            //$userRepository->save($user, true);
-            //create token
-            
+            if( $user != null){
+                //$userRepository->save($user, true);
+                //create token
+                $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                $randstring = '';
+                for ($i = 0; $i < 10; $i++) {
+                    $randstring = $characters[rand(0, strlen($characters))];
+                }
+                $user->setRecupMdp($randstring);
+                //send by mail
+                $email = (new Email())
+                ->from('atipikhouse@dev3-g3-lz-es-zt-fb.go.yj.fr')
+                ->to('atipikdev3g3@gmail.com')
+                //->cc('cc@example.com')
+                //->bcc('bcc@example.com')
+                //->replyTo('fabien@example.com')
+                //->priority(Email::PRIORITY_HIGH)
+                ->subject('Nouvelle annonce en attente')
+                ->html('<p>Une nouvelle annonce a été créé.</br>Allez sur le site <a href="dev3-g3-lz-es-zt-fb.go.yj.fr">AtipikHouse</p></br></br>Bien à vous,</br>AtipikHouse');
 
+                $mailer->send($email);
+            }
+            
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
 

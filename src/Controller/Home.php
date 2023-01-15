@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/home')]
 class Home extends AbstractController
 {
-    #[Route('/')]
+    #[Route('/', name:'app_home_index')]
     public function home(AuthenticationUtils $authenticationUtils,AnnonceRepository $annonceRepository,ImageAnnonceRepository $im,AvisAnnonceRepository $avis): Response
     {
         $number = random_int(0, 100);
