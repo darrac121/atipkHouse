@@ -13,8 +13,8 @@
                 <td>{{ lebelle_option_annonce.value }}</td>
                 <td>{% if lebelle_option_annonce.status == 1 %}Obligatoire{% else %} non Obligatoire {% endif %}</td>
                 <td>
-                    <a class="btn btn-success" href="{{ path('app_lebelle_option_annonce_show', {'id': lebelle_option_annonce.id}) }}">show</a>
-                    <a class="btn btn-info" href="{{ path('app_lebelle_option_annonce_edit', {'id': lebelle_option_annonce.id}) }}">edit</a>
+                    <a class="btn btn-success" href="{{ path('app_lebelle_option_annonce_show', {'id': lebelle_option_annonce.id}) }}">Voir</a>
+                    <a class="btn btn-info" href="{{ path('app_lebelle_option_annonce_edit', {'id': lebelle_option_annonce.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}

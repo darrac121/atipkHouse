@@ -3,9 +3,11 @@
 {% block title %}Cree categorie{% endblock %}
 
 {% block body %}
+<div class="container">
     <h1>Cree une categorie</h1>
 
     {{ include('category/_form.html.twig') }}
 
     <a class="btn btn-dark" href="{{ path('app_category_index') }}">< Retour en arrière</a>
+</div>
 {% endblock %}
