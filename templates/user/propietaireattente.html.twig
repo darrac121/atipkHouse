@@ -1,18 +1,17 @@
 {% extends 'base.html.twig' %}
 
 
-{% block title %}Utilisateurs{% endblock %}
+{% block title %}Compte proprietaire a activer{% endblock %}
 
 {% block body %}
 {% if app.user and app.user.roles[0] == 'ROLE_ADMIN' %}
 
-    <h1>Utilisateurs</h1>
+    <h1>Compte proprietaire a activer</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Email</th>
-                <th>Roles</th>
                 <th>Telephone</th>
                 <th>Status</th>
                 <th>Adresse</th>
@@ -25,9 +24,8 @@
             {% if user.status == 0 %}
                 <tr>
                     <td>{{ user.email }}</td>
-                    <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                     <td>{{ user.telephone }}</td>
-                    <td>{{ user.status }}</td>
+                    <td>{% if user.status == 0 %}A activer{% else %}Activer{% endif %}</td>
                     <td>{{ user.adresse }}</td>
                     <td>{{ user.commentaire }}</td>
                     <td>

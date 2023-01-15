@@ -272,7 +272,6 @@ var dateofmin = document.getElementById('dateofmin');
 
 var datejour=new Date();
 
-
 // btn-outline-success
 var btn_valide = document.getElementById('success');
 var message = document.getElementById('message');
@@ -282,12 +281,12 @@ if(date1 > date2){
   message.textContent ="La date n'est pas valide"; 
   btn_valide.disabled = true;
 }
-else if(dateofmax <= date2 ){
+else if(dateofmax.textContent > date2 ){
   message.style.display ="block";
   message.textContent ="La date n'est plus disponible pour ce bien"; 
   btn_valide.disabled = true;
 }
-else if (dateofmin <= date1){
+else if (dateofmin.textContent <= date1){
   message.style.display ="block";
   message.textContent ="La date n'est plus disponible pour ce bien"; 
   btn_valide.disabled = true;

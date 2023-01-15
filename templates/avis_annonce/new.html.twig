@@ -1,13 +1,13 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New AvisAnnonce{% endblock %}
+{% block title %}Ajouter un avis{% endblock %}
 
 {% block body %}
 <div class="container">
-    <h1>Create new AvisAnnonce</h1>
+    <h1>Ajouter un avis</h1>
 
     {{ include('avis_annonce/_form.html.twig') }}
 
-    <a href="javascript:history.back()">retour a l'annonce</a>
+    <a  class="btn btn-info" href="javascript:history.back()">retour a l'annonce</a>
 </div>
 {% endblock %}
