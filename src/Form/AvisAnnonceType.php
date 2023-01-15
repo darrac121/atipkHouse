@@ -14,8 +14,8 @@ class AvisAnnonceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('message',TextareaType::class,['attr' => ['class' => 'form-control'],'label' => 'Donnee nous votre avis'])
-            ->add('rating',IntegerType::class,['attr' => ['class' => 'form-control','value' => '1','max'=>'10','min'=>'1'],'label' => 'Donnee une notes'])
+        ->add('rating',IntegerType::class,['attr' => ['class' => 'form-control','value' => '1','max'=>'10','min'=>'1'],'label' => 'Donnee une notes'])
+        ->add('message',TextareaType::class,['attr' => ['class' => 'form-control'],'label' => 'Donnee nous votre avis'])
         ;
     }
 
