@@ -26,7 +26,9 @@ class ApiLoginController extends AbstractController
             'id' => $user->getId(),
             'role' => $user->getRoles(),
             'nom' => $user->getName(),
-            'prenom' => $user->getFirstname()
+            'prenom' => $user->getFirstname(),
+            'addresse' => $user->getAdresse(),
+            'telephone' => $user->getTelephone(),
             
         ]);
     }
