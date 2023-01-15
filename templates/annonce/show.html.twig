@@ -31,9 +31,10 @@
 {{ render(controller(
         'App\\Controller\\AvisAnnonceController::avisannonce', {id: annonce.id }
     )) }}
+{% if app.user %}
 
 <a href="{{ path('app_avis_annonce_new')}}?idannonce={{ annonce.id }}">ajouter avis</a>
-
+{% endif %}
 </div>
 {# </div> #}
 <div class="col-md-6">

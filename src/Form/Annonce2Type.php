@@ -26,16 +26,16 @@ class Annonce2Type extends AbstractType
         
         $builder
             // ->add('titre',TextType::class,['data_class'=>'form-control'],['attr' => ['class' => 'form-control']])
-            ->add('titre',TextType::class,['attr' => ['class' => 'form-control '],'label' => 'Nom'])
+            ->add('titre',TextType::class,['attr' => ['class' => 'form-control '],'label' => 'Titre de l\'annonce'])
             ->add('imageFile', FileType::class, [
                 'mapped' => false,
                 'multiple'=>true,
                 'attr' => ['class' => 'form-control'],
                 'label' => 'Selectioner une ou plusieurs photos',
             ])
-            ->add('description',TextareaType::class,['attr' => ['class' => 'form-control']])
-            ->add('adresse',TextType::class,['attr' => ['class' => 'form-control']])
-            ->add('Ville',TextType::class,['attr' => ['class' => 'form-control']])
+            ->add('description',TextareaType::class,['attr' => ['class' => 'form-control'],'label' => 'Description de l\'annonce'])
+            ->add('adresse',TextType::class,['attr' => ['class' => 'form-control'],'label' => 'Adresse'])
+            ->add('Ville',TextType::class,['attr' => ['class' => 'form-control'],'label' => 'Ville'])
             ->add('CodePostal',TextType::class,['attr' => ['class' => 'form-control'],'label' => 'Code postal'])
             ->add('pays',TextType::class,['attr' => ['class' => 'form-control','value' => 'France'],'label' => 'Pays'])
             ->add('prix',TextType::class,['attr' => ['class' => 'form-control prix'],'label' => 'Prix'])
@@ -45,9 +45,6 @@ class Annonce2Type extends AbstractType
             ->add('datecreation',DateTimeType::class,['attr' => ['class' => 'invisible'],'label' =>' '])
             ->add('status',HiddenType::class,['data' => 1,'attr' => ['class' => 'invisible','value' => '1'],'label' =>' '])
             // ->add('lien',FileType::class)
-            
-            
-            
             // form-control
         ;
     }
