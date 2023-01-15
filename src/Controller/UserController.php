@@ -69,7 +69,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/proprietaire', methods: ['GET', 'POST'])]
-    public function addProprietaire(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager,EmailVerifier $emailVerifier): Response
+    public function addProprietaire(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager,EmailVerifier $emailVerifier, MailerInterface $mailer): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -96,6 +96,14 @@ class UserController extends AbstractController
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
+
+            $email = (new Email())
+            ->from('atipikhouse@dev3-g3-lz-es-zt-fb.go.yj.fr')
+            ->to('atipikdev3g3@gmail.com')
+            ->subject('Nouvelle créé')
+            ->html("<p>Vous avez créé votre compte AtipikHouse</br>Si ce compte n'a pas été créé par vous, veuillez nous contacter à <a href='mailto:atipikdev3g3@gmail.com'>atipikdev3g3@gmail.com</a>, et nous serons heureux de vous aider.</br>Pour rappel, penser à ajouter les documents nécessaire pour validé votre compte proprietaire.<br>.Pour cela utiliser le lien suivant : <a href='dev3-g3-lz-es-zt-fb.go.yj.fr/document/new'>Documents</a></br> ou en vous connectant sur <a href='dev3-g3-lz-es-zt-fb.go.yj.fr'>AtipikHouse</a> puis allez dans la rebrique document sur votre profile. </br>Bien à vous,</br>AtipikHouse");
+
+            $mailer->send($email);
 
             return $this->redirectToRoute('home');
         }

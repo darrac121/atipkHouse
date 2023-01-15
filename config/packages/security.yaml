@@ -62,6 +62,7 @@ security:
         - { path: ^/annonce/mesannonces, roles: [ROLE_ADMIN, ROLE_PRO] }
         - { path: ^/desactive, roles: [ROLE_ADMIN, ROLE_PRO] }
         - { path: ^/annonce/commande, roles: [ROLE_ADMIN, ROLE_PRO] }
+        - { path: ^/document, roles: [ROLE_ADMIN, ROLE_PRO] }
         - { path: ^/annonce/new, roles: [ROLE_ADMIN, ROLE_PRO] }
         - { path: ^/reservation, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/api/login, roles: PUBLIC_ACCESS }

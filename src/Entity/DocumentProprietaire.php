@@ -16,9 +16,11 @@ class DocumentProprietaire
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[ORM\JoinColumn(nullable: false)]
     private ?string $lien = null;
 
     #[ORM\Column(length: 255)]
+    #[ORM\JoinColumn(nullable: false)]
     private ?string $status = null;
 
     #[ORM\ManyToOne(inversedBy: 'documentProprietaires')]

@@ -153,11 +153,11 @@ class AnnonceController extends AbstractController
             $destination = $this->getParameter('kernel.project_dir').'/public/img_annonces/';
             $bdddes = "/img_annonces/";
 
-            // var_dump($uploadedFiles);
+            
             foreach($uploadedFiles as $uploadedFile){
-                // var_dump($);
+                
                 $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
-                // var_dump($originalFilename);
+                
                 $cat = array(" ", "_", "-", "1", "2", "3", "4", "5", "6", "7", "8", "9");
                 $name = str_replace($cat,'',$originalFilename);
                 $newFilename = $name.'-'.uniqid().'.'.$uploadedFile->guessExtension();

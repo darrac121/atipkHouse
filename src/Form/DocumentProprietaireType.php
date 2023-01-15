@@ -16,8 +16,6 @@ class DocumentProprietaireType extends AbstractType
     {
         $builder
             // ->add('lien')
-            ->add('status')
-            ->add('idUser')
             ->add('lien', FileType::class, [
                 'label' => 'Brochure (PDF file)',
 
@@ -32,7 +30,6 @@ class DocumentProprietaireType extends AbstractType
                 // in the associated entity, so you can use the PHP constraint classes
                 'constraints' => [
                     new File([
-                        'maxSize' => '1024k',
                         'mimeTypes' => [
                             'application/pdf',
                             'application/x-pdf',

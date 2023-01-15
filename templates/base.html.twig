@@ -113,6 +113,10 @@ fill="#000000" stroke="none">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false"><i class="bi bi-person-gear"></i> {{ app.user.userIdentifier }}  </a>
           <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/account">Compte</a></li>
+            {% if (app.user.roles[0] == 'ROLE_PRO') or (app.user.roles[0] == 'ROLE_ADMIN')   %}
+              <a class="dropdown-item" href="{{ path('app_document_proprietaire_pro', {'id': app.user.id}) }}">Documents</a>
+            {% endif %}
+            
             <li><a class="dropdown-item" href="{{ path('app_logout') }}"><i class="bi bi-box-arrow-right"></i> Deconnexion</a></li>
           </ul>
         </span>

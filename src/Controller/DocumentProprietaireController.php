@@ -3,12 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\DocumentProprietaire;
+use App\Entity\User;
 use App\Form\DocumentProprietaireType;
 use App\Repository\DocumentProprietaireRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry as DoctrineManagerRegistry;
 
 
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -26,36 +29,36 @@ class DocumentProprietaireController extends AbstractController
             'document_proprietaires' => $documentProprietaireRepository->findAll(),
         ]);
     }
+    #[Route('/docs', name: 'app_document_proprietaire_pro', methods: ['GET'])]
+    public function showspro(DocumentProprietaireRepository $documentProprietaireRepository,UserRepository $userRepository, int $id): Response
+    {
+        $user = $userRepository->find($id);
+        return $this->render('document_proprietaire/index.html.twig', [
+            'document_proprietaires' => $documentProprietaireRepository->findBy(['user' => $user]),
+        ]);
+    }
 
     #[Route('/new', name: 'app_document_proprietaire_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, DocumentProprietaireRepository $documentProprietaireRepository): Response
+    public function new(Request $request, DocumentProprietaireRepository $documentProprietaireRepository, DoctrineManagerRegistry $doctrine, SluggerInterface $slugger): Response
     {
         $documentProprietaire = new DocumentProprietaire();
         $form = $this->createForm(DocumentProprietaireType::class, $documentProprietaire);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // var_dump($documentProprietaire);
-            // die();
             
-            /** @var UploadedFile $brochureFile */
-            $brochureFile = $form->get('lien')->getData();
-
-            // this condition is needed because the 'brochure' field is not required
-            // so the PDF file must be processed only when a file is uploaded
-            if ($brochureFile) {
-                $originalFilename = pathinfo($brochureFile->getClientOriginalName(), PATHINFO_FILENAME);
+            $uploadedFile = $form['lien']->getData();
+            $bdddes = "/document/";
+            if ($uploadedFile) {
+                $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
-                // var_dump($originalFilename);
-                // die;
-                // $safeFilename = $slugger->slug($originalFilename);
-                $safeFilename = $originalFilename;
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$brochureFile->guessExtension();
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$uploadedFile->guessExtension();
 
                 // Move the file to the directory where brochures are stored
                 try {
-                    $brochureFile->move(
-                        $this->getParameter('brochures_directory'),
+                    $uploadedFile->move(
+                        $this->getParameter('document_directory'),
                         $newFilename
                     );
                 } catch (FileException $e) {
@@ -64,17 +67,17 @@ class DocumentProprietaireController extends AbstractController
 
                 // updates the 'brochureFilename' property to store the PDF file name
                 // instead of its contents
-                // var_dump($newFilename);
-                // die;
-                // $documentProprietaire->setLien($newFilename);
-                // $product->setBrochureFilename($newFilename);
-                // $lien = $newFilename;
-                // $documentProprietaire->setLien($this->getParameter('brochures_directory').$newFilename);
-                $documentProprietaire->setLien($this->getParameter('brochures_directory_for_bdd').$newFilename);
-                // var_dump($documentProprietaire);
-                // die();
-                $documentProprietaireRepository->save($documentProprietaire, true);
+                $documentProprietaire->setLien($newFilename);
 
+                $documentProprietaire->setStatus(0);
+                $repository = $doctrine->getRepository(User::class);
+        
+                $email = $this->getUser()->getUserIdentifier();
+                $user = $repository->findOneBy(array('email' => $email));
+                $documentProprietaire->setIdUser($user);
+
+                $documentProprietaireRepository->save($documentProprietaire, true);
+                
             }
 
             return $this->redirectToRoute('app_document_proprietaire_index', [], Response::HTTP_SEE_OTHER);

@@ -4,7 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-    brochures_directory: '%kernel.project_dir%\public\uploads\docpro\'
+    document_directory: '%kernel.project_dir%\public\public\\uploads\docpro\'
     brochures_directory_for_bdd: '\uploads\docpro\'
     imageAnnonce: '%kernel.project_dir%\public\uploads\img_arcticle\'
     imageAnnonce_bdd: '\uploads\img_arcticle\'
