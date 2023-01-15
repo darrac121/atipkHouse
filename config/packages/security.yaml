@@ -58,6 +58,7 @@ security:
         - { path: ^/lebelle, roles: ROLE_ADMIN }
         - { path: ^/article, roles: ROLE_USER }
         - { path: ^/annonce/mesannonces, roles: [ROLE_ADMIN, ROLE_PRO] }
+        - { path: ^/desactive, roles: [ROLE_ADMIN, ROLE_PRO] }
         - { path: ^/annonce/commande, roles: [ROLE_ADMIN, ROLE_PRO] }
         - { path: ^/annonce/new, roles: [ROLE_ADMIN, ROLE_PRO] }
         - { path: ^/reservation, roles: IS_AUTHENTICATED_FULLY }

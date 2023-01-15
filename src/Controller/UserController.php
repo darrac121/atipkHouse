@@ -169,13 +169,13 @@ class UserController extends AbstractController
                 //send by mail
                 $email = (new Email())
                 ->from('atipikhouse@dev3-g3-lz-es-zt-fb.go.yj.fr')
-                ->to('atipikdev3g3@gmail.com')
+                ->to($email)
                 //->cc('cc@example.com')
                 //->bcc('bcc@example.com')
                 //->replyTo('fabien@example.com')
                 //->priority(Email::PRIORITY_HIGH)
-                ->subject('Nouvelle annonce en attente')
-                ->html('<p>Une nouvelle annonce a été créé.</br>Allez sur le site <a href="dev3-g3-lz-es-zt-fb.go.yj.fr">AtipikHouse</p></br></br>Bien à vous,</br>AtipikHouse');
+                ->subject('Réinitialisation de votre mot de passe')
+                ->html('<h1>Boujour'.$user->getFirstname().'</h1></br><p>Vous avez demandé la réinitialisation de votre mot de passe.<br>Veuiller copier le code suivant dans le formulaire:</br>'.$randstring.'</br></br>Pour accéddé au formulaire cliquer sur le lien suivant : <a href="dev3-g3-lz-es-zt-fb.go.yj.fr/token">Formulaire</p></br></br>Bien à vous,</br>AtipikHouse');
 
                 $mailer->send($email);
             }
@@ -189,11 +189,20 @@ class UserController extends AbstractController
         ]);
     }
     #[Route('/{id}/active', name: 'app_user_active', methods: ['GET', 'POST'])]
-    public function active(Request $request, User $user, UserRepository $userRepository, EntityManagerInterface $em): Response
+    public function active(Request $request, User $user, UserRepository $userRepository, EntityManagerInterface $em, MailerInterface $mailer): Response
     {
 
         $user->setStatus(1);
         $em->flush();
+        $email = (new Email())
+                ->from('atipikhouse@dev3-g3-lz-es-zt-fb.go.yj.fr')
+                ->to($user->getEmail())
+                //->cc('cc@example.com')
+                //->bcc('bcc@example.com')
+                //->replyTo('fabien@example.com')
+                //->priority(Email::PRIORITY_HIGH)
+                ->subject('Compte Propriétaire activé')
+                ->html('<p>Votre compte a été créé.</br>Allez sur le site <a href="dev3-g3-lz-es-zt-fb.go.yj.fr">AtipikHouse</p></br></br>Bien à vous,</br>AtipikHouse');
         return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
 
 
