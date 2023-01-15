@@ -83,7 +83,7 @@ class UserController extends AbstractController
                 )
             );
             $user->setRoles(["ROLE_PRO"]);
-            $user->setStatus(0);
+            $user->setStatus(3);
             $entityManager->persist($user);
             $entityManager->flush();
             // do anything else you need here, like send an email
@@ -138,7 +138,7 @@ class UserController extends AbstractController
             
             $user = $userRepository->findOneBy(["recup_mdp"=> $Token]);
             //render new form password with id in parrameters
-
+            
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
 

@@ -28,7 +28,7 @@
                 <td>{% if user.status == 1 %}Activer{% elseif user.status == 3 %}Bloquer{% else %}compte suspendue{% endif %}</td>
                 <td>{{ user.commentaire }}</td>
                 <td>
-                {% if user.status == 0 %}
+                {% if user.status == 3 or user.status == 0 %}
                     <a class="btn btn-outline-success" href="{{ path('app_user_active', {'id': user.id}) }}">active</a>
                     {% else %}
                     <a class="btn btn-outline-success" href="{{ path('app_user_desactive', {'id': user.id}) }}">desactive</a>
