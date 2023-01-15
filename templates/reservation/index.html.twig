@@ -69,7 +69,7 @@
                 <td>{% if reservation.Statue == 1 %}<i class="bi bi-bag-check"></i>{% elseif reservation.Statue == 2 %}<i class="bi bi-bag-x"></i>{% else %}<i class="bi bi-bag"></i>{% endif %}</td>
                 <td>
                     <a class='btn btn-success' href="{{ path('app_reservation_show', {'id': reservation.id}) }}">Afficher</a>
-                    <a class='btn btn-warning' href="{{ path('app_reservation_edit', {'id': reservation.id}) }}">Modifier</a>
+                    <a class="btn btn-outline-success" href="{{ path('app_reservation_annuler', {'id': reservation.id}) }}">Annulé</a>
                 </td>
     {% endif %}
 
