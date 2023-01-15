@@ -8,6 +8,7 @@ use App\Entity\Reservation;
 use App\Form\ReservationType;
 use App\Repository\AnnonceRepository;
 use App\Repository\ReservationRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -56,7 +57,7 @@ class ReservationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $reservationRepository->save($reservation, true);
 
-            return $this->redirectToRoute('app_reservation_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('annonce', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('reservation/new.html.twig', [
@@ -89,6 +90,26 @@ class ReservationController extends AbstractController
             'reservation' => $reservation,
             'form' => $form,
         ]);
+    }
+    #[Route('/{id}/accepte', name: 'app_reservation_accepte', methods: ['GET', 'POST'])]
+    public function accepte(Request $request, Reservation $reservation, ReservationRepository $reservationRepository, EntityManagerInterface $em): Response
+    {
+
+        $reservation->setStatue(1);
+        $em->flush();
+        return $this->redirectToRoute('app_annonce_commande', [], Response::HTTP_SEE_OTHER);
+
+
+    }
+    #[Route('/{id}/annuller', name: 'app_reservation_annuler', methods: ['GET', 'POST'])]
+    public function annuller(Request $request, Reservation $reservation, ReservationRepository $reservationRepository, EntityManagerInterface $em): Response
+    {
+
+        $reservation->setStatue(0);
+        $em->flush();
+        return $this->redirectToRoute('app_annonce_commande', [], Response::HTTP_SEE_OTHER);
+
+
     }
 
     #[Route('/{id}', name: 'app_reservation_delete', methods: ['POST'])]

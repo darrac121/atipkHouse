@@ -10,6 +10,14 @@
                 <td>{{ reservation.Total }} € </td>
                 <td>{% if reservation.StatuePayment == 1 %}<i class="bi bi-bag-fill"></i>{% else %}<i class="bi bi-bag-plus"></i>{% endif %}</td>
                 <td>{% if reservation.Statue == 1 %}<i class="bi bi-bag-check"></i>{% elseif reservation.Statue == 2 %}<i class="bi bi-bag-x"></i>{% else %}<i class="bi bi-bag"></i>{% endif %}</td>
+                <td>
+                {% if reservation.Statue == 0 %}
+                    <a class="btn btn-outline-success" href="{{ path('app_reservation_accepte', {'id': reservation.id}) }}">Accepter</a>
+                    {% else %}
+                    <a class="btn btn-outline-success" href="{{ path('app_reservation_annuler', {'id': reservation.id}) }}">Annulé</a>
+                {% endif %}
+                    <a class="btn btn-outline-info" href="{{ path('app_reservation_show', {'id': reservation.id}) }}">Afficher</a>
+                </td>
     {% endif %}
 
             </tr>

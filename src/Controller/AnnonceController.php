@@ -60,7 +60,7 @@ class AnnonceController extends AbstractController
             'annonces' => $annonceRepository->findAll(),
         ]);
     }
-    #[Route('/commande')]
+    #[Route('/commande', name:'app_annonce_commande')]
     public function commande(AnnonceRepository $annonceRepository): Response
     {
         return $this->render('annonce/commande.html.twig', [
