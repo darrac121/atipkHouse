@@ -159,7 +159,7 @@ class UserController extends AbstractController
 
 
     }
-    #[Route('/{id}/active', name: 'app_user_desactive', methods: ['GET', 'POST'])]
+    #[Route('/{id}/desactive', name: 'app_user_desactive', methods: ['GET', 'POST'])]
     public function desactive(Request $request, User $user, UserRepository $userRepository, EntityManagerInterface $em): Response
     {
 
