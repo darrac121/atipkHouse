@@ -13,10 +13,10 @@
                 <td>
                 {% if reservation.Statue == 0 %}
                     <a class="btn btn-outline-success" href="{{ path('app_reservation_accepte', {'id': reservation.id}) }}">Accepter</a>
-                   <a class="btn btn-outline-success" href="{{ path('app_reservation_annuler', {'id': reservation.id}) }}">Refuser</a>
+                   <a class="btn btn-outline-warning" href="{{ path('app_reservation_annuler', {'id': reservation.id}) }}">Refuser</a>
                 {% endif %}
                 {% if reservation.Statue == 1 %}
-                    <a class="btn btn-outline-success" href="{{ path('app_reservation_annuler', {'id': reservation.id}) }}">Refuser / Annulé</a>
+                    <a class="btn btn-outline-danger" href="{{ path('app_reservation_annuler', {'id': reservation.id}) }}">Refuser / Annulé</a>
                 {% endif %}
                     
                     <a class="btn btn-outline-info" href="{{ path('app_reservation_show', {'id': reservation.id}) }}">Afficher</a>
