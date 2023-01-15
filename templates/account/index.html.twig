@@ -14,7 +14,7 @@
     Votre email :{{ app.user.email }}</br>
     Votre adresse :{{ app.user.adresse }}</br>
     <a class="btn btn-warning" href="{{ path('app_user_edit', {'id': app.user.id }) }}">Modifier</a>
-
+{# <a class="btn btn-outline-danger" href="{{ path('app_user_desactive', {'id': app.user.id}) }}"></a> #}
 </div>
 {% endif %}
 {% endblock %}

@@ -36,5 +36,5 @@
 
     <a href="{{ path('app_reservation_index') }}">Retour en arrière</a>
 
-    <a class="btn btn-outline-success" href="{{ path('app_reservation_annuler', {'id': reservation.id}) }}">Annulé</a>
+    <a class="btn btn-outline-danger" href="{{ path('app_reservation_annuler', {'id': reservation.id}) }}">Annulé</a>
 {% endblock %}
