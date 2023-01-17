@@ -48,7 +48,7 @@ class DocumentProprietaireController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             
             $uploadedFile = $form['lien']->getData();
-            $bdddes = "/public/uploads/docpro/";
+            $bdddes = "/uploads/docpro/";
             if ($uploadedFile) {
                 $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
