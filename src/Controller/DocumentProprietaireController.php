@@ -29,12 +29,12 @@ class DocumentProprietaireController extends AbstractController
             'document_proprietaires' => $documentProprietaireRepository->findAll(),
         ]);
     }
-    #[Route('/docs', name: 'app_document_proprietaire_pro', methods: ['GET'])]
+    #[Route('/{id}/docs', name: 'app_document_proprietaire_pro', methods: ['GET'])]
     public function showspro(DocumentProprietaireRepository $documentProprietaireRepository,UserRepository $userRepository, int $id): Response
     {
         $user = $userRepository->find($id);
         return $this->render('document_proprietaire/index.html.twig', [
-            'document_proprietaires' => $documentProprietaireRepository->findBy(['user' => $user]),
+            'document_proprietaires' => $documentProprietaireRepository->findBy(['idUser' => $user]),
         ]);
     }
 
@@ -48,7 +48,7 @@ class DocumentProprietaireController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             
             $uploadedFile = $form['lien']->getData();
-            $bdddes = "/document/";
+            $bdddes = "/public/uploads/docpro/";
             if ($uploadedFile) {
                 $originalFilename = pathinfo($uploadedFile->getClientOriginalName(), PATHINFO_FILENAME);
                 // this is needed to safely include the file name as part of the URL
@@ -67,7 +67,7 @@ class DocumentProprietaireController extends AbstractController
 
                 // updates the 'brochureFilename' property to store the PDF file name
                 // instead of its contents
-                $documentProprietaire->setLien($newFilename);
+                $documentProprietaire->setLien($bdddes.$newFilename);
 
                 $documentProprietaire->setStatus(0);
                 $repository = $doctrine->getRepository(User::class);

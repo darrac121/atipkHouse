@@ -8,22 +8,13 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Lien</th>
-                <th>Status</th>
-                <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for document_proprietaire in document_proprietaires %}
             <tr>
-                <td>{{ document_proprietaire.id }}</td>
-                <td>{{ document_proprietaire.lien }}</td>
-                <td>{{ document_proprietaire.status }}</td>
-                <td>
-                    <a href="{{ path('app_document_proprietaire_show', {'id': document_proprietaire.id}) }}">show</a>
-                    <a href="{{ path('app_document_proprietaire_edit', {'id': document_proprietaire.id}) }}">edit</a>
-                </td>
+                <td><a href="/{{ document_proprietaire.lien }}" >{{ document_proprietaire.lien }}</a></td>
             </tr>
         {% else %}
             <tr>
