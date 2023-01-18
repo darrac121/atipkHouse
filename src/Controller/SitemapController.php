@@ -6,6 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\Annonce;
+use App\Repository\AnnonceRepository;
+
 
 class SitemapController extends AbstractController
 {
@@ -14,22 +17,18 @@ class SitemapController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function index(Request $request)
+    public function index(Request $request,AnnonceRepository $annonceRepository)
     {
         // Nous récupérons le nom d'hôte depuis l'URL
         $hostname = $request->getSchemeAndHttpHost();
-
-        // On initialise un tableau pour lister les URLs
-        $urls = [];
-
         // On ajoute les URLs "statiques"
-        $urls[] = ['loc' => $this->generateUrl('website.index')];
-
+        $date = date('Y-m-d');
         // Fabrication de la réponse XML
         $response = new Response(
             $this->renderView('sitemap/index.html.twig', [
-                    'urls' => $urls,
-                    'hostname' => $hostname]
+                'annonces' => $annonceRepository->findAll(),
+                'date'=>$date,
+                'hostname' => $hostname]
             )
         );
 
