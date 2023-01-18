@@ -46,7 +46,7 @@ class DocumentProprietaireController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
+            $destination = $this->getParameter('kernel.project_dir').'/public/uploads/docpro/';
             $uploadedFile = $form['lien']->getData();
             $bdddes = "/uploads/docpro/";
             if ($uploadedFile) {
@@ -58,7 +58,7 @@ class DocumentProprietaireController extends AbstractController
                 // Move the file to the directory where brochures are stored
                 try {
                     $uploadedFile->move(
-                        $this->getParameter('document_directory'),
+                        $destination,
                         $newFilename
                     );
                 } catch (FileException $e) {

@@ -59,6 +59,31 @@ class AnnonceControllerTest extends WebTestCase
 
         self::assertSame($originalNumObjectsInRepository + 1, count($this->repository->findAll()));
     }
+    public function testNewechec(): void
+    {
+        $originalNumObjectsInRepository = count($this->repository->findAll());
+
+        $this->markTestIncomplete();
+        $this->client->request('GET', sprintf('%snew', $this->path));
+
+        self::assertResponseStatusCodeSame(200);
+
+        $this->client->submitForm('Save', [
+            //'annonce[titre]' => '',
+            'annonce[description]' => 'Testing',
+            'annonce[adresse]' => 'Testing',
+            'annonce[Ville]' => 'Testing',
+            'annonce[CodePostal]' => 'Testing',
+            'annonce[prix]' => 'Testing',
+            'annonce[datecreation]' => 'Testing',
+            'annonce[status]' => 'Testing',
+            //'annonce[idUser]' => 'Testing',
+        ]);
+
+        self::assertResponseRedirects('/annonce/');
+
+        self::assertSame($originalNumObjectsInRepository + 1, count($this->repository->findAll()));
+    }
 
     public function testShow(): void
     {
@@ -83,6 +108,47 @@ class AnnonceControllerTest extends WebTestCase
 
         // Use assertions to check that the properties are properly displayed.
     }
+    
+    public function testActiver():void
+    {
+        $this->markTestIncomplete();
+        $fixture = new Annonce();
+        $fixture->setTitre('My Title');
+        $fixture->setDescription('My Title');
+        $fixture->setAdresse('My Title');
+        $fixture->setVille('My Title');
+        $fixture->setCodePostal('My Title');
+        $fixture->setPrix('My Title');
+        $fixture->setDatecreation('My Title');
+        $fixture->setStatus(0);
+        $fixture->setIdUser('My Title');
+
+        $this->repository->add($fixture, true);
+
+        $this->client->request('GET', sprintf('%s%s/active', $this->path, $fixture->getId()));
+
+
+    }
+    public function testDesactiver():void
+    {
+        $this->markTestIncomplete();
+        $fixture = new Annonce();
+        $fixture->setTitre('My Title');
+        $fixture->setDescription('My Title');
+        $fixture->setAdresse('My Title');
+        $fixture->setVille('My Title');
+        $fixture->setCodePostal('My Title');
+        $fixture->setPrix('My Title');
+        $fixture->setDatecreation('My Title');
+        $fixture->setStatus(1);
+        $fixture->setIdUser('My Title');
+
+        $this->repository->add($fixture, true);
+
+        $this->client->request('GET', sprintf('%s%s/desactive', $this->path, $fixture->getId()));
+
+
+    }
 
     public function testEdit(): void
     {
@@ -96,7 +162,7 @@ class AnnonceControllerTest extends WebTestCase
         $fixture->setPrix('My Title');
         $fixture->setDatecreation('My Title');
         $fixture->setStatus('My Title');
-        $fixture->setIdUser('My Title');
+        $fixture->setIdUser('1');
 
         $this->repository->add($fixture, true);
 
@@ -111,7 +177,7 @@ class AnnonceControllerTest extends WebTestCase
             'annonce[prix]' => 'Something New',
             'annonce[datecreation]' => 'Something New',
             'annonce[status]' => 'Something New',
-            'annonce[idUser]' => 'Something New',
+            'annonce[idUser]' => '1',
         ]);
 
         self::assertResponseRedirects('/annonce/');
