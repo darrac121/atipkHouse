@@ -43,6 +43,6 @@ Install dependencies
 Start the server
 
 ```bash
-  symphony server:start
+  symfony server:start
 ```
 
